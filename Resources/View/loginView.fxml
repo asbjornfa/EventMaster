@@ -93,7 +93,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="301.0" layoutY="278.0" prefHeight="55.0" prefWidth="134.0" AnchorPane.bottomAnchor="90.80000000000001" AnchorPane.leftAnchor="301.0" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="278.0">
                      <children>
-                        <Button fx:id="cancleBtn" mnemonicParsing="false" onAction="#cancleBtnHandle" prefHeight="14.0" prefWidth="126.0" style="-fx-background-radius: 5; -fx-background-color: linear-gradient(to right bottom,#FBBB2C,#81AD85,#009FE3);" text="Cancle" textFill="WHITE">
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelBtnHandle" prefHeight="14.0" prefWidth="126.0" style="-fx-background-radius: 5; -fx-background-color: linear-gradient(to right bottom,#FBBB2C,#81AD85,#009FE3);" text="Cancel" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

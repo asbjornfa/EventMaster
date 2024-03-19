@@ -2,7 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -28,15 +29,6 @@
                               <Insets bottom="55.0" top="41.0" />
                            </HBox.margin>
                            <children>
-                              <MenuButton contentDisplay="BOTTOM" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" popupSide="TOP" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: #FBBB2C;" text="☰" AnchorPane.bottomAnchor="6.800000000000004" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="233.20000000000002" AnchorPane.topAnchor="2.0">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" style="-fx-background-color: #FBBB2C;" text="Home" />
-                                  <MenuItem mnemonicParsing="false" style="-fx-background-color: #FBBB2C;" text="Authorised Login" />
-                                </items>
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </MenuButton>
                               <AnchorPane layoutX="148.0" layoutY="4.0" prefHeight="33.0" prefWidth="151.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="4.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="8.0" text="Home" AnchorPane.bottomAnchor="4.799999999999997" AnchorPane.rightAnchor="111.59999999999994" AnchorPane.topAnchor="8.0">
@@ -46,11 +38,21 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
+                              <MenuBar layoutX="14.0" layoutY="8.0" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #FBBB2C;" AnchorPane.bottomAnchor="12.800000000000004" AnchorPane.leftAnchor="13.999999999999972" AnchorPane.rightAnchor="277.20000000000005" AnchorPane.topAnchor="8.0">
+                                <menus>
+                                  <Menu mnemonicParsing="false" text="☰">
+                                    <items>
+                                      <MenuItem fx:id="menuHome" mnemonicParsing="false" onAction="#handleHome" text="Home" />
+                                          <MenuItem fx:id="menuAuthorisedLogin" mnemonicParsing="false" onAction="#handleAuthorisedLogin" text="Authorised Login" />
+                                    </items>
+                                  </Menu>
+                                </menus>
+                              </MenuBar>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="146.0" prefWidth="246.0">
+                        <AnchorPane prefHeight="143.0" prefWidth="226.0">
                            <children>
-                              <AnchorPane layoutY="16.0" prefHeight="92.0" prefWidth="245.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="16.0">
+                              <AnchorPane layoutX="-17.0" layoutY="16.0" prefHeight="96.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="-17.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="16.0">
                                  <children>
                                     <ImageView fitHeight="86.0" fitWidth="233.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="9.0">
                                        <image>
