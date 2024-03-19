@@ -1,5 +1,5 @@
 package GUI.Controller;
 
-public class loginViewController {
+public class LoginViewController {
     //primaryStage.setResizable(false);
 }
