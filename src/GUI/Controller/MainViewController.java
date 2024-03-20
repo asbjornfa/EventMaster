@@ -28,7 +28,7 @@ public class MainViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        OriginalCenter = mainBorderPane.getCenter();
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
@@ -50,7 +50,6 @@ public class MainViewController implements Initializable {
         }
 
     public void handleHome(ActionEvent actionEvent) {
-        OriginalCenter = mainBorderPane.getCenter();
         mainBorderPane.setCenter(OriginalCenter);
 
     }
