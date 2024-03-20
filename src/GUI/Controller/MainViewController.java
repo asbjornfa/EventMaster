@@ -4,13 +4,17 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +23,8 @@ public class MainViewController implements Initializable {
     public MenuItem menuAuthorisedLogin;
     public MenuItem menuHome;
     public Button loginBtn;
+    public BorderPane mainBorderPane;
+    private Node OriginalCenter;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -44,5 +50,13 @@ public class MainViewController implements Initializable {
         }
 
     public void handleHome(ActionEvent actionEvent) {
+        OriginalCenter = mainBorderPane.getCenter();
+        mainBorderPane.setCenter(OriginalCenter);
+
+    }
+
+    public void testHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/Test.fxml")));
+        mainBorderPane.setCenter(testView);
     }
 }
