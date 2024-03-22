@@ -55,7 +55,7 @@ public class MainViewController implements Initializable {
     }
 
     public void testHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/Test.fxml")));
+        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateEventView.fxml")));
         mainBorderPane.setCenter(testView);
     }
 }

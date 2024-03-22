@@ -18,7 +18,7 @@ public class BarcodeWrite {
         String dest = "src/barcode.png"; // stedet vi lagrer det
 
         try {
-            BitMatrix bm = new MultiFormatWriter().encode(data, BarcodeFormat.CODE_128, 400, 200);
+            BitMatrix bm = new MultiFormatWriter().encode(data, BarcodeFormat.CODE_39, 400, 200);
             Path path = FileSystems.getDefault().getPath(dest);
             MatrixToImageWriter.writeToPath(bm, "png", path);
             System.out.println("Barcode has been generated successfully.");
