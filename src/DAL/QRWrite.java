@@ -1,4 +1,4 @@
-package ticketsystem.DAL;
+package DAL;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
