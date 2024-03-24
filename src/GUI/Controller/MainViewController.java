@@ -58,4 +58,9 @@ public class MainViewController implements Initializable {
         AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateEventView.fxml")));
         mainBorderPane.setCenter(testView);
     }
+
+    public void usersHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/UsersView.fxml")));
+        mainBorderPane.setCenter(testView);
+    }
 }

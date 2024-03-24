@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="490.0" prefWidth="737.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventPageView">
+   <children>
+      <Text fill="WHITE" layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffff;" text="Rave party" wrappingWidth="112.53668594360352">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="202.0" fitWidth="390.0" layoutX="15.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="23.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Description" wrappingWidth="93.85198974609375" AnchorPane.bottomAnchor="186.666015625" AnchorPane.leftAnchor="22.451989746093744" AnchorPane.rightAnchor="620.1480102539062" AnchorPane.topAnchor="283.591796875">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Button alignment="TOP_LEFT" layoutX="441.0" layoutY="437.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="101.0" style="-fx-background-radius: 5; -fx-background-color: FBBB2C;" text="Show more ▼" AnchorPane.leftAnchor="441.0" AnchorPane.topAnchor="437.0">
+         <font>
+            <Font name="Arial Black" size="11.0" />
+         </font>
+      </Button>
+      <Label alignment="CENTER" layoutX="435.0" layoutY="54.0" prefHeight="112.0" prefWidth="286.0" style="-fx-background-color: #6a6a6a; -fx-background-radius: 6;" text="From 50 DK" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="54.0">
+         <padding>
+            <Insets bottom="60.0" />
+         </padding>
+         <font>
+            <Font name="Arial Black" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="506.0" layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: #009FE3;" text="Buy tickets" AnchorPane.rightAnchor="88.60000000000002" AnchorPane.topAnchor="110.0">
+         <font>
+            <Font name="Arial Black" size="13.0" />
+         </font>
+      </Button>
+      <VBox layoutX="435.0" layoutY="184.0" prefHeight="215.0" prefWidth="286.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Place" wrappingWidth="93.85198974609375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <Label prefHeight="91.0" prefWidth="286.0" text="Label" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Date" wrappingWidth="93.85198974609375">
+               <font>
+                  <Font name="Arial Black" size="14.0" />
+               </font>
+            </Text>
+            <Label prefHeight="84.0" prefWidth="286.0" text="Label" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

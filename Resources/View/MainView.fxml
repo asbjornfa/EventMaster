@@ -16,12 +16,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="mainBorderPane" prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainViewController">
    <top>
-      <AnchorPane prefHeight="144.0" prefWidth="910.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="118.0" prefWidth="910.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" layoutX="4.0" layoutY="3.0" prefHeight="179.0" prefWidth="904.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="3.0">
+            <HBox alignment="CENTER" layoutX="4.0" layoutY="3.0" prefHeight="19.0" prefWidth="904.0" AnchorPane.bottomAnchor="0.19999999999998863" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="2.3999999999999773" AnchorPane.topAnchor="3.0">
                <children>
                   <AnchorPane prefHeight="47.0" prefWidth="257.0" style="-fx-background-color: #FBBB2C;" HBox.hgrow="ALWAYS">
                      <HBox.margin>
@@ -44,6 +43,7 @@
                                 <MenuItem fx:id="menuHome" mnemonicParsing="false" onAction="#handleHome" text="Home" />
                                     <MenuItem fx:id="menuAuthorisedLogin" mnemonicParsing="false" onAction="#handleAuthorisedLogin" text="Authorised Login" />
                                     <MenuItem fx:id="btnTest" mnemonicParsing="false" onAction="#testHandle" text="Test" />
+                                    <MenuItem mnemonicParsing="false" onAction="#usersHandle" text="Users" />
                               </items>
                             </Menu>
                           </menus>
