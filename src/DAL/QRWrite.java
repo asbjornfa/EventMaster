@@ -15,7 +15,7 @@ public class QRWrite {
     public static void main(String[] args) {
 
         String data= "https://www.youtube.com/watch?v=U3sAkAWfxLY";
-        String dest= "src/qrcode.jpeg";
+        String dest= "Resources/QRcodes/qrcode.jpeg";
 
         try {
             BitMatrix bm = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 600, 600);
