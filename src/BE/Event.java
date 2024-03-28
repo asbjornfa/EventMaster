@@ -32,6 +32,10 @@ public class Event {
         this.dateApproval = dateApproval;
     }
 
+    public Event(String title) {
+        this.title = title;
+    }
+
     public int getId() {
         return id;
     }
