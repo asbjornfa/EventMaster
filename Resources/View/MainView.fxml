@@ -44,6 +44,7 @@
                                     <MenuItem fx:id="menuAuthorisedLogin" mnemonicParsing="false" onAction="#handleAuthorisedLogin" text="Authorised Login" />
                                     <MenuItem fx:id="btnTest" mnemonicParsing="false" onAction="#testHandle" text="Test" />
                                     <MenuItem mnemonicParsing="false" onAction="#usersHandle" text="Users" />
+                                    <MenuItem mnemonicParsing="false" onAction="#createUserHandle" text="Create user" />
                               </items>
                             </Menu>
                           </menus>
