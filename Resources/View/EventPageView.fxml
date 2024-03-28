@@ -6,55 +6,142 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="490.0" prefWidth="737.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventPageView">
+
+<AnchorPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventPageView">
    <children>
-      <Text fill="WHITE" layoutX="29.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffff;" text="Rave party" wrappingWidth="112.53668594360352">
-         <font>
-            <Font name="Arial Black" size="18.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="202.0" fitWidth="390.0" layoutX="15.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="23.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Description" wrappingWidth="93.85198974609375" AnchorPane.bottomAnchor="186.666015625" AnchorPane.leftAnchor="22.451989746093744" AnchorPane.rightAnchor="620.1480102539062" AnchorPane.topAnchor="283.591796875">
-         <font>
-            <Font name="Arial Black" size="14.0" />
-         </font>
-      </Text>
-      <Button alignment="TOP_LEFT" layoutX="441.0" layoutY="437.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="101.0" style="-fx-background-radius: 5; -fx-background-color: FBBB2C;" text="Show more ▼" AnchorPane.leftAnchor="441.0" AnchorPane.topAnchor="437.0">
-         <font>
-            <Font name="Arial Black" size="11.0" />
-         </font>
-      </Button>
-      <Label alignment="CENTER" layoutX="435.0" layoutY="54.0" prefHeight="112.0" prefWidth="286.0" style="-fx-background-color: #6a6a6a; -fx-background-radius: 6;" text="From 50 DK" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="54.0">
-         <padding>
-            <Insets bottom="60.0" />
-         </padding>
-         <font>
-            <Font name="Arial Black" size="16.0" />
-         </font>
-      </Label>
-      <Button layoutX="506.0" layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: #009FE3;" text="Buy tickets" AnchorPane.rightAnchor="88.60000000000002" AnchorPane.topAnchor="110.0">
-         <font>
-            <Font name="Arial Black" size="13.0" />
-         </font>
-      </Button>
-      <VBox layoutX="435.0" layoutY="184.0" prefHeight="215.0" prefWidth="286.0">
+      <AnchorPane prefHeight="491.0" prefWidth="827.0" style="-fx-background-color: #373737;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Place" wrappingWidth="93.85198974609375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <Label prefHeight="91.0" prefWidth="286.0" text="Label" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: ffff;" text="Date" wrappingWidth="93.85198974609375">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Text>
-            <Label prefHeight="84.0" prefWidth="286.0" text="Label" />
+            <VBox prefHeight="232.0" prefWidth="442.0" AnchorPane.leftAnchor="0.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="18.0" prefWidth="122.0" text="Rave party" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="198.0" fitWidth="428.0" pickOnBounds="true" preserveRatio="true" style="-fx-padding: 20;" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="261.0" prefHeight="218.0" prefWidth="430.0" style="-fx-background-color: #4C4B4B; -fx-background-radius: 5;" AnchorPane.bottomAnchor="11.599999999999994" AnchorPane.leftAnchor="10.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="110.13671684265137" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Black" size="14.0" />
+                     </font>
+                  </Text>
+                  <Label alignment="TOP_LEFT" prefHeight="118.0" prefWidth="400.0" text="Hello" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="20.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #FBBB2C;" text="Show more" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="160.0" top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox layoutX="450.0" layoutY="14.0" prefHeight="184.0" prefWidth="370.0" spacing="10.0" AnchorPane.rightAnchor="6.600000000000023">
+               <children>
+                  <AnchorPane prefHeight="127.0" prefWidth="345.0" style="-fx-background-color: #4C4B4B; -fx-background-radius: 5;" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="15.0" top="30.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label alignment="TOP_CENTER" layoutX="110.0" layoutY="24.0" prefHeight="30.0" prefWidth="122.0" text="From 50 DKK" textFill="WHITE" AnchorPane.rightAnchor="112.4" AnchorPane.topAnchor="24.0">
+                           <font>
+                              <Font name="Arial Black" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button alignment="TOP_CENTER" layoutX="100.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Buy tickets" AnchorPane.rightAnchor="100.80000000000001" AnchorPane.topAnchor="70.0">
+                           <font>
+                              <Font name="Arial Black" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_RIGHT" layoutX="460.0" layoutY="202.0" prefHeight="200.0" prefWidth="346.0" style="-fx-background-color: #4C4B4B; -fx-background-radius: 5;" AnchorPane.rightAnchor="20.600000000000023" AnchorPane.topAnchor="202.0">
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <children>
+                  <VBox prefHeight="90.0" prefWidth="346.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="-5.0" />
+                     </VBox.margin>
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Place" wrappingWidth="132.53671264648438">
+                           <font>
+                              <Font name="Arial Black" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Erhvervsakademi Sydvest, Spangsbjerg &#10;Kirkevej 103, 6700 Esbjerg" wrappingWidth="274.34568786621094">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Italic" size="13.0" />
+                           </font>
+                        </Text>
+                        <Line endX="210.0" fill="WHITE" startX="-100.0" stroke="WHITE">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                        </Line>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="101.0" prefWidth="346.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Black" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="23 March 2024 kl. 20:00 - 24 March 2024 kl. 02:00" wrappingWidth="306.9366760253906">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Arial Italic" size="13.0" />
+                           </font>
+                        </Text>
+                        <Line endX="210.0" fill="WHITE" startX="-100.0" stroke="WHITE">
+                           <VBox.margin>
+                              <Insets left="15.0" top="10.0" />
+                           </VBox.margin>
+                        </Line>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>
