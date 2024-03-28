@@ -17,10 +17,9 @@ public class Event {
     private String assignedBy;
     private LocalDateTime dateApproval;
 
-    public Event(int id, int statusId, String title, LocalDateTime startDate, LocalDateTime endDate
-            , Time startTime, Time endTime, String description, String createdBy, String assignedBy, LocalDateTime dateApproval) {
+    public Event(int id, String title, LocalDateTime startDate, LocalDateTime endDate
+            , Time startTime, Time endTime, String description, String createdBy) {
         this.id = id;
-        this.statusId = statusId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -28,11 +27,10 @@ public class Event {
         this.endTime = endTime;
         this.description = description;
         this.createdBy = createdBy;
-        this.assignedBy = assignedBy;
-        this.dateApproval = dateApproval;
     }
 
     public Event(String title) {
+
         this.title = title;
     }
 
@@ -108,23 +106,4 @@ public class Event {
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
-
-    public String getAssignedBy() {
-        return assignedBy;
-    }
-
-    public void setAssignedBy(String assignedBy) {
-        this.assignedBy = assignedBy;
-    }
-
-    public LocalDateTime getDateApproval() {
-        return dateApproval;
-    }
-
-    public void setDateApproval(LocalDateTime dateApproval) {
-        this.dateApproval = dateApproval;
-    }
-
-
-
 }

@@ -30,7 +30,6 @@ public class EventDAO_DB implements IEventDataAccess {
             while (rs.next()) {
                 // Map DB row to Event object
                 int id = rs.getInt("id");
-                int statusId = rs.getInt("statusId");
                 String title = rs.getString("title");
                 LocalDateTime startDate = rs.getTimestamp("startDate").toLocalDateTime();
                 LocalDateTime endDate = rs.getTimestamp("endDate").toLocalDateTime();
@@ -38,11 +37,10 @@ public class EventDAO_DB implements IEventDataAccess {
                 Time endTime = rs.getTime("endTime");
                 String description = rs.getString("description");
                 String createdBy = rs.getString("createdBy");
-                String assignedBy = rs.getString("assignedBy");
-                LocalDateTime dateApproval = rs.getTimestamp("dateApproval").toLocalDateTime();
+
 
                 // Create an Event object and add it to the list
-                Event event = new Event(id, statusId, title, startDate, endDate, startTime, endTime, description, createdBy, assignedBy, dateApproval);
+                Event event = new Event(id, title, startDate, endDate, startTime, endTime, description, createdBy);
                 allEvents.add(event);
             }
 
@@ -60,14 +58,14 @@ public class EventDAO_DB implements IEventDataAccess {
     @Override
     public Event createEvent(Event event) throws IOException {
         // SQL statement to insert a new event into the events table
-        String sql = "INSERT INTO Event (statusId, title, startDate, endDate, startTime, endTime, description, createdBy, assignedBy, dateApproval) " +
+        String sql = "INSERT INTO Event (id, title, startDate, endDate, startTime, endTime, description, createdBy) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             // Bind parameters
-            stmt.setInt(1, event.getStatusId());
+            stmt.setInt(1, event.getId());
             stmt.setString(2, event.getTitle());
             stmt.setTimestamp(3, Timestamp.valueOf(event.getStartDate()));
             stmt.setTimestamp(4, Timestamp.valueOf(event.getEndDate()));
@@ -75,8 +73,6 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setTime(6, event.getEndTime());
             stmt.setString(7, event.getDescription());
             stmt.setString(8, event.getCreatedBy());
-            stmt.setString(9, event.getAssignedBy());
-            stmt.setTimestamp(10, Timestamp.valueOf(event.getDateApproval()));
 
             // Execute the SQL statement to insert the new event
             stmt.executeUpdate();
@@ -105,23 +101,20 @@ public class EventDAO_DB implements IEventDataAccess {
     @Override
     public Event updateEvent(Event event) throws IOException {
 // SQL statement to update an event in the events table
-        String sql = "UPDATE Event SET statusId = ?, title = ?, startDate = ?, endDate = ?, startTime = ?, endTime = ?, description = ?, createdBy = ?, assignedBy = ?, dateApproval = ? WHERE id = ?";
+        String sql = "UPDATE Event SET title = ?, startDate = ?, endDate = ?, startTime = ?, endTime = ?, description = ?, createdBy = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Bind parameters
-            stmt.setInt(1, event.getStatusId());
-            stmt.setString(2, event.getTitle());
-            stmt.setTimestamp(3, Timestamp.valueOf(event.getStartDate()));
-            stmt.setTimestamp(4, Timestamp.valueOf(event.getEndDate()));
-            stmt.setTime(5, event.getStartTime());
-            stmt.setTime(6, event.getEndTime());
-            stmt.setString(7, event.getDescription());
-            stmt.setString(8, event.getCreatedBy());
-            stmt.setString(9, event.getAssignedBy());
-            stmt.setTimestamp(10, Timestamp.valueOf(event.getDateApproval()));
-            stmt.setInt(11, event.getId());
+            stmt.setString(1, event.getTitle());
+            stmt.setTimestamp(2, Timestamp.valueOf(event.getStartDate()));
+            stmt.setTimestamp(3, Timestamp.valueOf(event.getEndDate()));
+            stmt.setTime(4, event.getStartTime());
+            stmt.setTime(5, event.getEndTime());
+            stmt.setString(6, event.getDescription());
+            stmt.setString(7, event.getCreatedBy());
+            stmt.setInt(8, event.getId());
 
             // Execute the SQL statement to update the event
             int rowsAffected = stmt.executeUpdate();
