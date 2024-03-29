@@ -1,0 +1,11 @@
+.table-row-cell:selected {
+    -fx-background-color: #0093ff;
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: #ff0000; /* Change this color as needed */
+}
+
+.table-view:focused .table-row-cell:selected .text {
+    -fx-fill: #ff0000; /* Ensures text color is consistent even when focused */
+}
