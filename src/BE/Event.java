@@ -8,6 +8,7 @@ public class Event {
     private int id;
     private int statusId;
     private String title;
+    private String location;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Time startTime;
@@ -17,10 +18,12 @@ public class Event {
     private String assignedBy;
     private LocalDateTime dateApproval;
 
-    public Event(int id, String title, LocalDateTime startDate, LocalDateTime endDate
-            , Time startTime, Time endTime, String description, String createdBy) {
+    public Event(int id, int statusId, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
+                 Time startTime, Time endTime, String description, String createdBy) {
         this.id = id;
+        this.statusId = statusId;
         this.title = title;
+        this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
@@ -29,9 +32,15 @@ public class Event {
         this.createdBy = createdBy;
     }
 
-    public Event(String title) {
-
+    public Event(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
+                 Time startTime, Time endTime, String description) {
         this.title = title;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
     }
 
     public int getId() {

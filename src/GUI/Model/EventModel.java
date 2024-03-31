@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.time.LocalDateTime;
 
 public class EventModel {
 
@@ -22,8 +24,9 @@ public class EventModel {
         return eventsToBeViewed;
     }
 
-    public void createEvent(String title) throws IOException {
-        Event event = new Event(title);
+    public void createEvent(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
+                            Time startTime, Time endTime, String description) throws IOException {
+        Event event = new Event(title, location, startDate, endDate, startTime, endTime, description);
 
         eventManager.createEvent(event);
 

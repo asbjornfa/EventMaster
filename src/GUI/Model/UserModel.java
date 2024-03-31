@@ -21,6 +21,7 @@ public class UserModel {
     }
 
     public ObservableList<User> getObservableUsers() {
+
         return userToBeViewed;
     }
 

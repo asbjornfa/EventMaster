@@ -30,7 +30,9 @@ public class EventDAO_DB implements IEventDataAccess {
             while (rs.next()) {
                 // Map DB row to Event object
                 int id = rs.getInt("id");
+                int statusId = rs.getInt("statusId");
                 String title = rs.getString("title");
+                String location = rs.getString("location");
                 LocalDateTime startDate = rs.getTimestamp("startDate").toLocalDateTime();
                 LocalDateTime endDate = rs.getTimestamp("endDate").toLocalDateTime();
                 Time startTime = rs.getTime("startTime");
@@ -40,7 +42,7 @@ public class EventDAO_DB implements IEventDataAccess {
 
 
                 // Create an Event object and add it to the list
-                Event event = new Event(id, title, startDate, endDate, startTime, endTime, description, createdBy);
+                Event event = new Event(id, statusId, title, location, startDate, endDate, startTime, endTime, description, createdBy);
                 allEvents.add(event);
             }
 
