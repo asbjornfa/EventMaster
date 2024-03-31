@@ -29,6 +29,11 @@ public class User {
         this.username = username;
     }
 
+    public User(String username, String storedPassword) {
+        this.username = username;
+        this.password = storedPassword;
+    }
+
     public int getId() {
         return id;
     }

@@ -33,32 +33,34 @@ public class LoginViewController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void loginBtnHandle(ActionEvent actionEvent) throws IOException {
         String username = enterUsername.getText().trim();
         String password = enterPassword.getText().trim();
 
-        User authenticatedUser = userModel.authenticateUser(username, password);
+            User authenticatedUser = userModel.authenticateUser(username, password);
 
-        if (authenticatedUser != null) {
-            // User authenticated successfully
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Login Completed");
-            alert.setHeaderText(null); // No header
-            alert.setContentText("Welcome");
+            if (authenticatedUser != null) {
+                // User authenticated successfully
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Login Completed");
+                alert.setHeaderText(null); // No header
+                alert.setContentText("Welcome");
 
-            alert.showAndWait(); // Show the dialog and wait for it to be closed
+                alert.showAndWait(); // Show the dialog and wait for it to be closed
 
-        } else {
-            // Authentication failed, show an error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText(null); // No header
-            alert.setContentText("Invalid username or password");
+            } else {
+                // Authentication failed, show an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText(null); // No header
+                alert.setContentText("Invalid username or password");
 
-            alert.showAndWait(); // Show the dialog and wait for it to be closed
-        }
+                alert.showAndWait(); // Show the dialog and wait for it to be closed
+            }
     }
+
+
 
     public void cancelBtnHandle(ActionEvent event) {
 

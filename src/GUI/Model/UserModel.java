@@ -4,6 +4,7 @@ import BE.User;
 import BLL.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
 
@@ -42,8 +43,13 @@ public class UserModel {
 
     }
 
-    public User authenticateUser(String username, String password) {
+    public User authenticateUser(String username,String password) {
         return userManager.authenticateUser(username, password);
     }
+
+    public void updatePassword(String username, String newPassword) {
+        userManager.updatePassword(username, newPassword);
+    }
+
 
 }
