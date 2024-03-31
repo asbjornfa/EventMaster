@@ -14,4 +14,5 @@ public interface IUser {
 
     public void updateUser(User user);
 
+   public User getUserByUsernameAndPassword(String username, String password);
 }

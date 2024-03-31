@@ -42,4 +42,8 @@ public class UserModel {
 
     }
 
+    public User authenticateUser(String username, String password) {
+        return userManager.authenticateUser(username, password);
+    }
+
 }
