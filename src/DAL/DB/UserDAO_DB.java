@@ -44,6 +44,7 @@ public class UserDAO_DB implements IUser {
 
     @Override
     public User createUser(User user) {
+
         String sql =
                 "INSERT INTO dbo.Users (name, email, password, username) VALUES (?,?,?,?)";
 
@@ -80,6 +81,7 @@ public class UserDAO_DB implements IUser {
             // Run the specified SQL statement
             stmt.executeUpdate();
 
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,4 +90,32 @@ public class UserDAO_DB implements IUser {
     @Override
     public void updateUser(User user) {
     }
+
+    public User getUserByUsernameAndPassword(String username, String password) {
+        String sql = "SELECT * FROM dbo.Users WHERE username = ? AND password = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Bind parameters
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+
+                return new User(id, name, email, username, password);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null; // Return null if user not found
+    }
+
+
 }

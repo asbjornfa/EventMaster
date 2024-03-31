@@ -29,4 +29,8 @@ public class UserManager {
 
     public void updateUser(User user){}
 
+    public User authenticateUser(String username, String password) {
+        return userDAO.getUserByUsernameAndPassword(username, password);
+    }
+
 }
