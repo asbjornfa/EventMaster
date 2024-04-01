@@ -19,37 +19,25 @@ public class CreateEventView {
     @FXML
     private TextField eventLocationField;
     @FXML
-    private MFXDatePicker eventStartDateField;
-    @FXML
-    private MFXDatePicker eventEndDateField;
-    @FXML
-    private MenuButton eventStartTimeField;
-    @FXML
-    private MenuButton eventEndTimeField;
-    @FXML
     private TextArea eventDescriptionField;
     @FXML
     private TextField eventTitleField;
     private EventModel eventModel;
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
-       /* String title = eventTitleField.getText();
+        String title = eventTitleField.getText();
         String location = eventLocationField.getText();
-        LocalDateTime startDate = eventStartDateField.getValue().atStartOfDay();
-        LocalDateTime endDate = eventEndDateField.getValue().atStartOfDay();
-        LocalTime startTime = eventStartTimeField.getValue;
-        LocalTime endTime = eventEndTimeField.getItems();
         String description = eventDescriptionField.getText();
 
 
 
-        Event newEvent = new Event(title, location, startDate)
+        //Event newEvent = new Event(title, location,)
 
 
 
         //Event newEvent = new Event(title);
 
 
-        eventModel.createEvent(title, location, startDate);
-*/
+        //eventModel.createEvent(title, location, startDate);
+
     }
 }
