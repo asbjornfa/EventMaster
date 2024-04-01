@@ -48,6 +48,7 @@ public class UserModel {
         return userManager.authenticateUser(username, password);
     }
 
+
     public void updatePassword(String username, String newPassword) {
         userManager.updatePassword(username, newPassword);
     }
