@@ -52,7 +52,7 @@ public class CreateUserController implements Initializable {
         String password = txtFieldPassword.getText();
         String username = txtFieldUsername.getText();
 
-        if (!firstName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !username.isEmpty()) {
+        if (!firstName.isEmpty() && !email.isEmpty() && !username.isEmpty()) {
             User user = new User(fullName, email, password, username);
 
             userModel.createUser(fullName, email, password, username);

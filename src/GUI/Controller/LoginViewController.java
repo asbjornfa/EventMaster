@@ -38,28 +38,45 @@ public class LoginViewController implements Initializable {
         String username = enterUsername.getText().trim();
         String password = enterPassword.getText().trim();
 
-            User authenticatedUser = userModel.authenticateUser(username, password);
+        User authenticatedUser = userModel.authenticateUser(username, password);
 
-            if (authenticatedUser != null) {
-                // User authenticated successfully
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Login Completed");
-                alert.setHeaderText(null); // No header
-                alert.setContentText("Welcome");
-
-                alert.showAndWait(); // Show the dialog and wait for it to be closed
-
+        if (authenticatedUser != null) {
+            if (authenticatedUser.getPassword() == null) {
+                // User has no password, open NewPasswordView
+                openNewPasswordView(username);
             } else {
-                // Authentication failed, show an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login Failed");
-                alert.setHeaderText(null); // No header
-                alert.setContentText("Invalid username or password");
-
-                alert.showAndWait(); // Show the dialog and wait for it to be closed
+                // User has a password, show login completed message
+                showAlert("Login Completed", "Welcome");
             }
+        } else {
+            // Authentication failed, show error message
+            showAlert("Login Failed", "Invalid username or password");
+        }
     }
 
+    private void openNewPasswordView(String username) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/NewPasswordView.fxml"));
+        Parent root = loader.load();
+        NewPasswordViewController newPasswordController = loader.getController();
+        newPasswordController.setUser(username); // Pass the username to the NewPasswordViewController
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+
+        // Set stage properties
+        stage.setResizable(false); // Make the stage not resizable
+        stage.centerOnScreen(); // Center the stage on the screen
+
+        stage.show();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // No header
+        alert.setContentText(content);
+        alert.showAndWait(); // Show the dialog and wait for it to be closed
+    }
 
 
     public void cancelBtnHandle(ActionEvent event) {
