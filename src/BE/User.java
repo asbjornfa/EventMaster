@@ -34,6 +34,12 @@ public class User {
         this.password = storedPassword;
     }
 
+    public User(String name, String email, String username) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+    }
+
     public int getId() {
         return id;
     }

@@ -31,12 +31,14 @@ public class UserManager {
     public void updateUser(User user){}
 
     public User authenticateUser(String username, String password) {
-        User user = userDAO.getUserByUsername(username, password);
+        User user= userDAO.getPasswordByUsername(username);
 
         if (user != null) {
-            String storedHashedPassword = user.getPassword();
-
-            if (BCrypt.checkpw(password, storedHashedPassword)) {
+            String storedPassword = user.getPassword();
+            if (storedPassword == null) {
+                // User has no password, return the user
+                return user;
+            } else if (BCrypt.checkpw(password, storedPassword)) {
                 // Passwords match, return the authenticated user
                 return user;
             }
@@ -45,6 +47,8 @@ public class UserManager {
         // Authentication failed
         return null;
     }
+
+
 
     public void updatePassword(String username, String newPassword) {
         userDAO.updatePassword(username, newPassword);

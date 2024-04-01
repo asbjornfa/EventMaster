@@ -46,10 +46,8 @@ public class UserDAO_DB implements IUser {
     @Override
     public User createUser(User user) {
 
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-
         String sql =
-                "INSERT INTO dbo.Users (name, email, password, username) VALUES (?,?,?,?)";
+                "INSERT INTO dbo.Users (name, email, username) VALUES (?,?,?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -57,13 +55,12 @@ public class UserDAO_DB implements IUser {
             // Bind parameters
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
-            stmt.setString(3, hashedPassword);
-            stmt.setString(4, user.getUsername());
+            stmt.setString(3, user.getUsername());
 
             // Execute the SQL statement to delete the movie
             stmt.executeUpdate();
 
-            User createdUser = new User(user.getName(), user.getEmail(), hashedPassword, user.getUsername());
+            User createdUser = new User(user.getName(), user.getEmail(), user.getUsername());
 
             return createdUser;
         } catch (SQLException e) {
@@ -94,7 +91,7 @@ public class UserDAO_DB implements IUser {
     public void updateUser(User user) {
     }
 
-    public User getUserByUsername(String username, String password) {
+    public User getPasswordByUsername(String username) {
         String sql = "SELECT password FROM dbo.Users WHERE username = ?";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -108,9 +105,9 @@ public class UserDAO_DB implements IUser {
             if (rs.next()) {
                 String storedPassword = rs.getString("password");
 
-                return new User(username, storedPassword);
-            }
-        } catch (SQLException e) {
+                return new User(username,storedPassword);
+                }
+            } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
