@@ -26,8 +26,8 @@ public class UserModel {
         return userToBeViewed;
     }
 
-    public void createUser(String name, String email, String password, String username){
-        User user = new User(name, email, password, username);
+    public void createUser(String name, String email, String username){
+        User user = new User(name, email, username);
 
         userManager.createUser(user);
 
