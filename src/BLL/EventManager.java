@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Event;
+import BE.User;
 import DAL.DB.EventDAO_DB;
 import DAL.IEventDataAccess;
 
@@ -34,5 +35,11 @@ public class EventManager {
         }catch (Exception e) {
             throw new IOException(e);
         }
+
+    }
+
+    public void deleteEvent(Event event) throws IOException {
+
+        eventDAO.deleteEvent(event);
     }
 }

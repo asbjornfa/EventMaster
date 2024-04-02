@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import GUI.Model.EventModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,11 @@ public class MainViewController implements Initializable {
     public Button loginBtn;
     public BorderPane mainBorderPane;
     private Node OriginalCenter;
+    private EventModel eventModel;
 
+    public void setEventModel(EventModel eventModel) {
+        this.eventModel = eventModel;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
@@ -55,7 +60,10 @@ public class MainViewController implements Initializable {
     }
 
     public void testHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateEventView.fxml")));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateEventView.fxml"));
+        AnchorPane testView = loader.load();
+        CreateEventView createEventView = loader.getController();
+        createEventView.setEventModel(eventModel);
         mainBorderPane.setCenter(testView);
     }
 

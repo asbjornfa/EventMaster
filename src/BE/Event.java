@@ -2,6 +2,7 @@ package BE;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Event {
 
@@ -11,15 +12,15 @@ public class Event {
     private String location;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private Time startTime;
-    private Time endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String description;
     private String createdBy;
     private String assignedBy;
     private LocalDateTime dateApproval;
 
     public Event(int id, int statusId, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 Time startTime, Time endTime, String description, String createdBy) {
+                 LocalTime startTime, LocalTime endTime, String description, String createdBy) {
         this.id = id;
         this.statusId = statusId;
         this.title = title;
@@ -33,7 +34,7 @@ public class Event {
     }
 
     public Event(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 Time startTime, Time endTime, String description) {
+                 LocalTime startTime, LocalTime endTime, String description) {
         this.title = title;
         this.location = location;
         this.startDate = startDate;
@@ -67,6 +68,12 @@ public class Event {
     public void setTitle(String title) {
         this.title = title;
     }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public LocalDateTime getStartDate() {
         return startDate;
@@ -84,19 +91,19 @@ public class Event {
         this.endDate = endDate;
     }
 
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 

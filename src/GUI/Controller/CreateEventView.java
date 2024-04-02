@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Event;
 import GUI.Model.EventModel;
+import com.browniebytes.javafx.control.DateTimePicker;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class CreateEventView {
+    public DateTimePicker DTPickerEnd;
+    @FXML
+    private DateTimePicker DTPickerStart;
     @FXML
     private TextField eventLocationField;
     @FXML
@@ -23,21 +27,34 @@ public class CreateEventView {
     @FXML
     private TextField eventTitleField;
     private EventModel eventModel;
+
+    public void setEventModel(EventModel eventModel) {
+        this.eventModel = eventModel;
+    }
+
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
         String title = eventTitleField.getText();
         String location = eventLocationField.getText();
         String description = eventDescriptionField.getText();
 
 
-
-        //Event newEvent = new Event(title, location,)
-
-
-
-        //Event newEvent = new Event(title);
+        LocalDateTime selectedDateTimeStart = DTPickerStart.dateTimeProperty().get();
+        LocalDateTime selectedDateTimeEnd = DTPickerEnd.dateTimeProperty().get();
 
 
-        //eventModel.createEvent(title, location, startDate);
+        LocalDate startDate = selectedDateTimeStart.toLocalDate();
+        LocalTime startTime = selectedDateTimeStart.toLocalTime();
+
+
+        LocalDate endDate = selectedDateTimeEnd.toLocalDate();
+        LocalTime endTime = selectedDateTimeEnd.toLocalTime();
+
+
+        eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
+                startTime, endTime, description);
+        System.out.println("Controller works");
 
     }
+
+
 }
