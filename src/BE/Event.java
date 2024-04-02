@@ -19,7 +19,7 @@ public class Event {
     private String assignedBy;
     private LocalDateTime dateApproval;
 
-    public Event(int id, int statusId, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
+    public Event(int id, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
                  LocalTime startTime, LocalTime endTime, String description, String createdBy) {
         this.id = id;
         this.statusId = statusId;
