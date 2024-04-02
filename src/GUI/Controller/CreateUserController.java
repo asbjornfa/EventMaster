@@ -49,13 +49,12 @@ public class CreateUserController implements Initializable {
         String lastName = txtFieldLastName.getText();
         String fullName = firstName + " " + lastName;
         String email = txtFieldEmail.getText();
-        String password = txtFieldPassword.getText();
         String username = txtFieldUsername.getText();
 
         if (!firstName.isEmpty() && !email.isEmpty() && !username.isEmpty()) {
-            User user = new User(fullName, email, password, username);
+            User user = new User(fullName, email, username);
 
-            userModel.createUser(fullName, email, password, username);
+            userModel.createUser(fullName, email, username);
 
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("User Created");
@@ -66,7 +65,6 @@ public class CreateUserController implements Initializable {
             txtFieldFirstName.clear();
             txtFieldLastName.clear();
             txtFieldEmail.clear();
-            txtFieldPassword.clear();
             txtFieldUsername.clear();
 
         } else {
