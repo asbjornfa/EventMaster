@@ -14,8 +14,10 @@ import java.util.ResourceBundle;
 
 public class CreateUserController implements Initializable {
 
+    // Declare a UserModel object to interact with the database
     private UserModel userModel;
 
+    // Declare TextField objects for each input field
     @FXML
     private TextField txtFieldEmail;
 
@@ -31,42 +33,72 @@ public class CreateUserController implements Initializable {
     @FXML
     private TextField txtFieldUsername;
 
-    public CreateUserController() {
-    }
-
+    // Initialize method called when the controller is loaded
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            // Initialize the UserModel object
             userModel = new UserModel();
         } catch (SQLException e) {
+            // Throw a runtime exception if there is an error initializing the UserModel
             throw new RuntimeException(e);
         }
     }
 
+    // Method called when the "Create User" button is clicked
     @FXML
     void onClickBtnCreateUser(ActionEvent event) {
+        // Get the values from the input fields
         String firstName = txtFieldFirstName.getText();
         String lastName = txtFieldLastName.getText();
         String fullName = firstName + " " + lastName;
         String email = txtFieldEmail.getText();
-        String password = txtFieldPassword.getText();
         String username = txtFieldUsername.getText();
 
+        // Initialize a StringBuilder object to store error messages
+        StringBuilder errorMessage = new StringBuilder();
+
+        // Check if all the required fields are filled in
         if (!firstName.isEmpty() && !email.isEmpty() && !username.isEmpty()) {
-            User user = new User(fullName, email, password, username);
+            // Check if the username already exists
+            if (userModel.usernameExists(username)) {
+                errorMessage.append("   - " + "The username already exists.\n\n");
+            }
 
-            userModel.createUser(fullName, email, password, username);
+            // Check if the email already exists
+            if (userModel.emailExists(email)) {
+                errorMessage.append("   - " + "The email already exists.\n\n");
+            }
 
+            // Check if the email is in a valid format
+            if (!isValidEmail(email)) {
+                errorMessage.append("   - " + "Please enter a valid email address.\n\n");
+            }
+
+            // If there are any error messages, display them
+            if (errorMessage.length() > 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("User Creation Failed");
+                alert.setHeaderText(null);
+                alert.setContentText(errorMessage.toString());
+                alert.showAndWait();
+                return; // Exit the method if there are errors
+            }
+
+            // Create the user in the database
+            userModel.createUser(fullName, email, username);
+
+            // Show a success alert
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("User Created");
             successAlert.setHeaderText(null);
             successAlert.setContentText("User has been created successfully.");
             successAlert.showAndWait();
 
+            // Clear the input fields
             txtFieldFirstName.clear();
             txtFieldLastName.clear();
             txtFieldEmail.clear();
-            txtFieldPassword.clear();
             txtFieldUsername.clear();
 
         } else {
@@ -79,6 +111,12 @@ public class CreateUserController implements Initializable {
         }
     }
 
+    // Method to validate email format using regex
+    private boolean isValidEmail(String email) {
+        // Regular expression pattern for a valid email address
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        // Test the email against the regex pattern and return the result
+        return email.matches(regex);
+    }
+
 }
-
-

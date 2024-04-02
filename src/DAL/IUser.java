@@ -16,6 +16,10 @@ public interface IUser {
 
     public User getPasswordByUsername(String username);
 
+    public boolean usernameExists(String username);
+
+    public boolean emailExists(String email);
+
     public void updatePassword(String username, String newPassword);
 
 

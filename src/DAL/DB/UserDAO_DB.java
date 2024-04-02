@@ -52,12 +52,11 @@ public class UserDAO_DB implements IUser {
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Bind parameters
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getUsername());
 
-            // Execute the SQL statement to delete the movie
+
             stmt.executeUpdate();
 
             User createdUser = new User(user.getName(), user.getEmail(), user.getUsername());
@@ -91,13 +90,13 @@ public class UserDAO_DB implements IUser {
     public void updateUser(User user) {
     }
 
+    @Override
     public User getPasswordByUsername(String username) {
         String sql = "SELECT password FROM dbo.Users WHERE username = ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            // Bind parameters
             stmt.setString(1, username);
 
             ResultSet rs = stmt.executeQuery();
@@ -114,7 +113,45 @@ public class UserDAO_DB implements IUser {
         return null; // Return null if user not found
     }
 
+    @Override
+    public boolean usernameExists(String username){
 
+        String sql = "SELECT username FROM dbo.Users WHERE username = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public boolean emailExists(String email){
+
+        String sql = "SELECT email FROM dbo.Users WHERE email = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
     public void updatePassword(String username, String newPassword){
 
         String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());

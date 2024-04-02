@@ -83,7 +83,7 @@
                         <Font name="Arial Black" size="17.0" />
                      </font>
                   </Label>
-                  <CheckBox mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #fffff;" text="   Regular" textFill="WHITE">
+                  <CheckBox mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #ffff;" text="   Regular" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
