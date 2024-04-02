@@ -2,6 +2,8 @@ package GUI.Controller;
 
 import BE.User;
 import GUI.Model.UserModel;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,8 +22,8 @@ import java.util.ResourceBundle;
 public class LoginViewController implements Initializable {
     public Button cancelBtn;
     public Button logInBtn;
-    public TextField enterPassword;
-    public TextField enterUsername;
+    public MFXPasswordField enterPassword;
+    public MFXTextField enterUsername;
 
     private UserModel userModel;
 
