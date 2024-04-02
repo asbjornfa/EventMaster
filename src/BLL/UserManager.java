@@ -48,7 +48,13 @@ public class UserManager {
         return null;
     }
 
+    public boolean usernameExists(String username){
+       return userDAO.usernameExists(username);
+    }
 
+    public boolean emailExists(String email){
+        return userDAO.emailExists(email);
+    }
 
     public void updatePassword(String username, String newPassword) {
         userDAO.updatePassword(username, newPassword);

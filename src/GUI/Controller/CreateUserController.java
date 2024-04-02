@@ -51,8 +51,33 @@ public class CreateUserController implements Initializable {
         String email = txtFieldEmail.getText();
         String username = txtFieldUsername.getText();
 
+        StringBuilder errorMessage = new StringBuilder();
+
         if (!firstName.isEmpty() && !email.isEmpty() && !username.isEmpty()) {
-            User user = new User(fullName, email, username);
+            // Check if the username already exists
+            if (userModel.usernameExists(username)) {
+                errorMessage.append("   - " + "The username already exists.\n\n");
+            }
+
+            // Check if the email already exists
+            if (userModel.emailExists(email)) {
+                errorMessage.append("   - " + "The email already exists.\n\n");
+            }
+
+            // Check if the email is in a valid format
+            if (!isValidEmail(email)) {
+                errorMessage.append("   - " + "Please enter a valid email address.\n\n");
+            }
+
+            // If there are any error messages, display them
+            if (errorMessage.length() > 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("User Creation Failed");
+                alert.setHeaderText(null);
+                alert.setContentText(errorMessage.toString());
+                alert.showAndWait();
+                return; // Exit the method if there are errors
+            }
 
             userModel.createUser(fullName, email, username);
 
@@ -75,6 +100,12 @@ public class CreateUserController implements Initializable {
             alert.setContentText("Please fill in all the required fields.");
             alert.showAndWait();
         }
+    }
+
+    // Method to validate email format using regex
+    private boolean isValidEmail(String email) {
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        return email.matches(regex);
     }
 
 }

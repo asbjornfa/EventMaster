@@ -48,6 +48,13 @@ public class UserModel {
         return userManager.authenticateUser(username, password);
     }
 
+    public boolean usernameExists(String username){
+        return userManager.usernameExists(username);
+    }
+
+    public boolean emailExists(String email){
+        return userManager.emailExists(email);
+    }
 
     public void updatePassword(String username, String newPassword) {
         userManager.updatePassword(username, newPassword);
