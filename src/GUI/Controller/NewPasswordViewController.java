@@ -14,32 +14,36 @@ import java.sql.SQLException;
 
 public class NewPasswordViewController {
 
+    // Password input fields
     public MFXPasswordField txtFieldPassword;
     public MFXPasswordField txtFieldReEnterPassword;
 
+    // UserModel instance to handle password update
     private UserModel userModel;
+    // Current user's username
     private String currentUser;
 
+    // Initialize the controller and set up the UserModel instance
     public NewPasswordViewController() throws SQLException {
         userModel = new UserModel();
     }
 
+    // Set the current user's username
     public void setUser(String username){
         this.currentUser = username;
     }
 
+    // Handle the save password button click event
     @FXML
     void onClickSavePassword(ActionEvent event) {
+        // Get the new password and re-entered password
         String newPassword = txtFieldPassword.getText().trim();
         String reEnteredPassword = txtFieldReEnterPassword.getText().trim();
 
-        // Check if passwords match
+        // Check if the passwords match
         if (!newPassword.equals(reEnteredPassword)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Passwords Mismatch");
-            alert.setHeaderText(null);
-            alert.setContentText("The entered passwords do not match.");
-            alert.showAndWait();
+            // Show an error alert if the passwords do not match
+            showErrorAlert("Passwords Mismatch", "The entered passwords do not match.");
             return; // Exit method if passwords do not match
         }
 
@@ -69,12 +73,8 @@ public class NewPasswordViewController {
         }
 
         // Show the alert with the constructed message if password doesn't meet requirements
-        if (!hasUppercase || !hasLowercase || !hasDigit || !hasSpecialChar || !isLongEnough) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Password");
-            alert.setHeaderText("Password does not meet the requirements");
-            alert.setContentText(alertMessage.toString());
-            alert.showAndWait();
+        if (!hasUppercase ||!hasLowercase ||!hasDigit ||!hasSpecialChar ||!isLongEnough) {
+            showErrorAlert("Invalid Password", "Password does not meet the requirements", alertMessage.toString());
         } else {
             // If the password meets all requirements, update the password
             userModel.updatePassword(currentUser, newPassword);
@@ -83,13 +83,34 @@ public class NewPasswordViewController {
             ((Stage) txtFieldPassword.getScene().getWindow()).close();
 
             // Show success message
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Success");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("Password has been updated successfully.");
-            successAlert.showAndWait();
+            showAlert("Success", "Password has been updated successfully.");
         }
     }
 
-}
+    // Show an error alert with the specified title and message
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
+    // Show an alert with the specified title, header, and message
+    private void showErrorAlert(String title, String header, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Show an alert with the specified title and message
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+}

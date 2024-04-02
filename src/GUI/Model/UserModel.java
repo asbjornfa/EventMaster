@@ -4,7 +4,6 @@ import BE.User;
 import BLL.UserManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.SQLException;
 
@@ -30,18 +29,15 @@ public class UserModel {
         User user = new User(name, email, username);
 
         userManager.createUser(user);
-
         userToBeViewed.add(user);
     }
 
     public void deleteUser(User user){
         userManager.deleteUser(user);
-
         userToBeViewed.remove(user);
     }
 
     public void updateUser(User user){
-
     }
 
     public User authenticateUser(String username,String password) {
