@@ -22,7 +22,6 @@ public class Event {
     public Event(int id, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
                  LocalTime startTime, LocalTime endTime, String description, String createdBy) {
         this.id = id;
-        this.statusId = statusId;
         this.title = title;
         this.location = location;
         this.startDate = startDate;
@@ -42,6 +41,10 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+    }
+    public Event(String title, LocalDateTime startDate) {
+        this.title = title;
+        this.startDate = startDate;
     }
 
     public int getId() {

@@ -23,6 +23,7 @@ public class EventModel {
     }
 
     public ObservableList<Event> getEventsToBeViewed() {
+
         return eventsToBeViewed;
     }
 

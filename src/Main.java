@@ -1,4 +1,5 @@
 
+import GUI.Controller.ActiveEventController;
 import GUI.Controller.MainViewController;
 import GUI.Model.EventModel;
 import javafx.application.Application;
@@ -15,10 +16,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         EventModel eventModel = new EventModel();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Mainview.fxml"));
         Parent root = loader.load();
 
 
+        //  ActiveEventController activeEventController = loader.getController();
+        //activeEventController.setEventModel(eventModel);
         MainViewController controller = loader.getController();
         controller.setEventModel(eventModel);
 

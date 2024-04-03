@@ -28,9 +28,11 @@ public class CreateEventView {
     private TextField eventTitleField;
     private EventModel eventModel;
 
+
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
     }
+
 
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
         String title = eventTitleField.getText();
@@ -52,6 +54,7 @@ public class CreateEventView {
 
         eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
                 startTime, endTime, description);
+
         System.out.println("Controller works");
 
     }
