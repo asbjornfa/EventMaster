@@ -64,7 +64,7 @@ public class EventDAO_DB implements IEventDataAccess {
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Bind parameters
             stmt.setString(1, event.getTitle());
@@ -79,7 +79,7 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.executeUpdate();
 
             // Get the generated ID from the database (if applicable)
-            ResultSet rs = stmt.getGeneratedKeys();
+            /*ResultSet rs = stmt.getGeneratedKeys();
             int id = 0;
 
             if (rs.next()) {
@@ -90,7 +90,10 @@ public class EventDAO_DB implements IEventDataAccess {
             event.setId(id);
 
             // Return the created event
+
+             */
             return event;
+
         } catch (SQLException e) {
             // Handle SQL exceptions
             e.printStackTrace();

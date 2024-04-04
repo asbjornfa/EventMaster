@@ -30,6 +30,7 @@ public class CreateEventController {
     private MFXButton btnCreate;
 
 
+
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
     }
@@ -57,6 +58,15 @@ public class CreateEventController {
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
         if (eventToEdit != null) {
             // Handle editing logic
+            // Populate UI fields with the data from eventToEdit
+            eventTitleField.setText(eventToEdit.getTitle());
+            eventLocationField.setText(eventToEdit.getLocation());
+            eventDescriptionField.setText(eventToEdit.getDescription());
+
+            // Set date and time pickers with the start and end dates/times of the event
+            DTPickerStart.dateTimeProperty().set(eventToEdit.getStartDate().toLocalDate().atStartOfDay());
+            DTPickerEnd.dateTimeProperty().set(LocalDateTime.from(eventToEdit.getEndDate().toLocalTime()));
+
             // You can access the eventToEdit fields and update them accordingly
         } else {
             // Handle creation logic
@@ -75,7 +85,9 @@ public class CreateEventController {
 
             eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
                     startTime, endTime, description);
+
         }
+
 
     }
 
