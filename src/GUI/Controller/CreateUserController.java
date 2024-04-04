@@ -184,12 +184,7 @@ public class CreateUserController implements Initializable {
         txtFieldEmail.clear();
         txtFieldUsername.clear();
     }
-
-    private void changeScene(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Node view = loader.load();
-        mainViewController.setCenterView(view);
-    }
+    
 
 }
 
