@@ -1,8 +1,8 @@
 package GUI.Controller;
 
 import GUI.Model.EventModel;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -59,10 +58,10 @@ public class MainViewController implements Initializable {
 
     }
 
-    public void testHandle(ActionEvent actionEvent) throws IOException {
+    public void createEventHandle(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateEventView.fxml"));
         AnchorPane testView = loader.load();
-        CreateEventView createEventView = loader.getController();
+        CreateEventController createEventView = loader.getController();
         createEventView.setEventModel(eventModel);
         mainBorderPane.setCenter(testView);
     }
@@ -74,6 +73,17 @@ public class MainViewController implements Initializable {
 
     public void createUserHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateUserView.fxml")));
+        mainBorderPane.setCenter(testView);
+    }
+
+    public void eventsHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/ActiveEvent.fxml")));
+        mainBorderPane.setCenter(testView);
+    }
+
+
+    public void pendingEventsHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/PendingEvents.fxml")));
         mainBorderPane.setCenter(testView);
     }
 }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="614.0" prefWidth="910.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventView">
+<AnchorPane prefHeight="614.0" prefWidth="910.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
    <children>
       <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;" />
       <VBox layoutX="304.0" layoutY="23.0" prefHeight="253.0" prefWidth="563.0" spacing="10.0" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="23.0">
@@ -212,7 +212,7 @@
             <Font name="Arial Black" size="18.0" />
          </font>
       </MFXButton>
-      <MFXButton layoutX="735.0" layoutY="552.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
+      <MFXButton fx:id="btnCreate" layoutX="735.0" layoutY="552.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
          <font>
             <Font name="Arial Black" size="18.0" />
          </font>
