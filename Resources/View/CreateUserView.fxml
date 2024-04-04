@@ -85,7 +85,7 @@
       </Label>
       <HBox layoutX="531.0" layoutY="457.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="29.0" AnchorPane.rightAnchor="21.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickBtnCreateUser" prefHeight="28.0" prefWidth="133.0" style="-fx-background-radius: 5; -fx-background-color: #009FE3;" text="Create user" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnCreateUserOrUpdate" mnemonicParsing="false" onAction="#onClickBtnCreateUser" prefHeight="28.0" prefWidth="133.0" style="-fx-background-radius: 5; -fx-background-color: #009FE3;" text="Create user" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

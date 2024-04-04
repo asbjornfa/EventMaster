@@ -38,6 +38,7 @@ public class UserModel {
     }
 
     public void updateUser(User user){
+        userManager.updateUser(user);
     }
 
     public User authenticateUser(String username,String password) {
