@@ -22,7 +22,7 @@ public class EventModel {
         eventsToBeViewed.addAll(eventManager.getAllEvents());
     }
 
-    public ObservableList<Event> getEventsToBeViewed() {
+    public ObservableList<Event> getObservableEvents() {
 
         return eventsToBeViewed;
     }

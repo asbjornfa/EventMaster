@@ -48,7 +48,7 @@ public class ActiveEventController implements Initializable {
     }
 
     private void loadEventsData() {
-        ObservableList<Event> events = eventModel.getEventsToBeViewed();
+        ObservableList<Event> events = eventModel.getObservableEvents();
         tblViewEvents.setItems(events);
     }
 

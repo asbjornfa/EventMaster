@@ -81,6 +81,11 @@
       </Label>
       <MFXButton layoutX="710.0" layoutY="516.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
          <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </MFXButton>
+      <MFXButton fx:id="btnCreate" layoutX="735.0" layoutY="552.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
+         <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </MFXButton>
