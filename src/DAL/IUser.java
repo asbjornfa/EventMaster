@@ -22,5 +22,4 @@ public interface IUser {
 
     public void updatePassword(String username, String newPassword);
 
-
 }

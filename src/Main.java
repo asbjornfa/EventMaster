@@ -17,9 +17,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         EventModel eventModel = new EventModel();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Mainview.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
         Parent root = loader.load();
-
 
         //  ActiveEventController activeEventController = loader.getController();
         //activeEventController.setEventModel(eventModel);

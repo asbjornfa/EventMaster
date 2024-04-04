@@ -23,7 +23,7 @@
       </TableView>
       <HBox alignment="BOTTOM_CENTER" layoutX="48.0" layoutY="417.0" prefHeight="46.0" prefWidth="589.0" AnchorPane.bottomAnchor="26.600000000000023" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="100.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickCreateUser" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Create User" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnCreateUser" mnemonicParsing="false" onAction="#onClickCreateUser" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Create User" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>
@@ -31,7 +31,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onClickEditUser" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Edit User" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnUpdateUser" mnemonicParsing="false" onAction="#onClickEditUser" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Edit User" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="80.0" />
                </HBox.margin>
@@ -39,7 +39,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onClickDeleteUser" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #C82828; -fx-background-radius: 5;" text="Delete User" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnDeleteUser" mnemonicParsing="false" onAction="#onClickDeleteUser" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #C82828; -fx-background-radius: 5;" text="Delete User" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="80.0" />
                </HBox.margin>
