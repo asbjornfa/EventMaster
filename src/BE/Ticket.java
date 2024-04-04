@@ -15,6 +15,11 @@ public class Ticket {
         this.ticket_layout = ticket_layout;
         this.ticket_description = ticket_description;
     }
+    public Ticket( int price, String ticket_layout, String ticket_description) {
+        this.price = price;
+        this.ticket_layout = ticket_layout;
+        this.ticket_description = ticket_description;
+    }
 
     public int getId() {
         return id;
