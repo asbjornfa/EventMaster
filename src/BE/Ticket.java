@@ -1,8 +1,5 @@
 package BE;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
-
 public class Ticket {
         private int id;
         private int price;

@@ -15,6 +15,7 @@ public class TicketDAO_DB implements ITicket {
     public TicketDAO_DB() throws SQLException {
         databaseConnector = new MyDatabaseConnector();
     }
+
     @Override
     public List<Ticket> getAllTickets() throws IOException {
         ArrayList<Ticket> allTickets = new ArrayList();
@@ -22,7 +23,7 @@ public class TicketDAO_DB implements ITicket {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.Event";
+            String sql = "SELECT * FROM dbo.Ticket";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -33,10 +34,8 @@ public class TicketDAO_DB implements ITicket {
                 String ticket_description = rs.getString("ticket_description");
 
 
-
-
                 // Create an Ticket object and add it to the list
-                    Ticket ticket = new Ticket(id, price,ticket_layout,ticket_description);
+                Ticket ticket = new Ticket(id, price, ticket_layout, ticket_description);
                 allTickets.add(ticket);
             }
 
@@ -54,11 +53,11 @@ public class TicketDAO_DB implements ITicket {
     @Override
     public Ticket createTicket(Ticket ticket) throws IOException {
         // SQL statement to insert a new ticket into the tickets table
-        String sql = "INSERT INTO dbo.Event (price, ticket_layout, ticket_description) " +
+        String sql = "INSERT INTO dbo.Ticket (price, ticket_layout, ticket_description) " +
                 "VALUES (?, ?, ?)";
 
         try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Bind parameters
             stmt.setInt(1, ticket.getPrice());
@@ -73,5 +72,22 @@ public class TicketDAO_DB implements ITicket {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Ticket deleteTicket(Ticket ticket) throws IOException {
+        String sql = "DELETE FROM dbo.Ticket WHERE Id =(?);";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+
+            stmt.setInt(1, ticket.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return ticket;
     }
 }
