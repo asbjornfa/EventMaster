@@ -1,3 +1,5 @@
+
+/* Css for MFX tableview, when selecting. */
 .table-row-cell:selected {
     -fx-background-color: #0093ff;
 }

@@ -66,24 +66,37 @@ public class MainViewController implements Initializable {
         mainBorderPane.setCenter(testView);
     }
 
-    public void usersHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/UsersView.fxml")));
-        mainBorderPane.setCenter(testView);
-    }
-
     public void createUserHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateUserView.fxml")));
         mainBorderPane.setCenter(testView);
     }
 
-    public void eventsHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/ActiveEvent.fxml")));
-        mainBorderPane.setCenter(testView);
-    }
+    public void usersHandle(ActionEvent actionEvent) {
+        try {
+            // Load UsersView
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/UsersView.fxml"));
+            Parent usersView = loader.load();
 
+            // Get the UsersViewController and set MainViewController
+            UsersViewController usersViewController = loader.getController();
+            usersViewController.setMainViewController(this);
+
+            // Assume mainBorderPane is the container in MainViewController where you want to set the users view
+            this.mainBorderPane.setCenter(usersView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void pendingEventsHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/PendingEvents.fxml")));
         mainBorderPane.setCenter(testView);
+    }
+
+    public void setCenterView(Node node) {
+        mainBorderPane.setCenter(node);
+    }
+
+    public void eventsHandle(ActionEvent event) {
     }
 }

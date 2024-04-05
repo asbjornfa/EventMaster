@@ -59,9 +59,8 @@ public class UserDAO_DB implements IUser {
 
             stmt.executeUpdate();
 
-            User createdUser = new User(user.getName(), user.getEmail(), user.getUsername());
 
-            return createdUser;
+            return user;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,7 +87,22 @@ public class UserDAO_DB implements IUser {
 
     @Override
     public void updateUser(User user) {
+        String sql = "UPDATE dbo.Users SET name = ?, email = ?, username = ? WHERE id = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getUsername());
+            stmt.setInt(4, user.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     @Override
     public User getPasswordByUsername(String username) {

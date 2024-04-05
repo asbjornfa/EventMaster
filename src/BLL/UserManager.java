@@ -31,7 +31,9 @@ public class UserManager {
         userDAO.deleteUser(user);
     }
 
-    public void updateUser(User user){}
+    public void updateUser(User user){
+        userDAO.updateUser(user);
+    }
 
     public User authenticateUser(String username, String password) {
         User user= userDAO.getPasswordByUsername(username);
