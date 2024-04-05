@@ -30,10 +30,15 @@ public class CreateEventController {
     private MFXButton btnCreate;
 
 
+    public CreateEventController() throws Exception {
+        eventModel = new EventModel();
+    }
 
     public void setEventModel(EventModel eventModel) {
+
         this.eventModel = eventModel;
     }
+
     public void setEventToEdit(Event event) {
         this.eventToEdit = event;
         // Populate UI fields with the data from eventToEdit
