@@ -39,6 +39,10 @@ public class EventModel {
 
     }
 
+    public void updateEvent(Event event) throws IOException {
+        eventManager.updateEvent(event);
+    }
+
     public void deleteEvent(Event event) throws IOException {
         eventManager.deleteEvent(event);
 

@@ -89,8 +89,13 @@ public class MainViewController implements Initializable {
     }
 
     public void pendingEventsHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/PendingEvents.fxml")));
-        mainBorderPane.setCenter(testView);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PendingEvents.fxml"));
+        Parent pendingEventsView = loader.load();
+
+        PendingEventsController pendingEventsController = loader.getController();
+        pendingEventsController.setMainViewController(this);
+
+        mainBorderPane.setCenter(pendingEventsView);
     }
 
     public void setCenterView(Node node) {

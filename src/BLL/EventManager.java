@@ -38,6 +38,10 @@ public class EventManager {
 
     }
 
+    public void updateEvent(Event event) throws IOException {
+        eventDAO.updateEvent(event);
+    }
+
     public void deleteEvent(Event event) throws IOException {
 
         eventDAO.deleteEvent(event);

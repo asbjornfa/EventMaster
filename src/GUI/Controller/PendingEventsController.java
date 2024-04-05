@@ -33,6 +33,7 @@ public class PendingEventsController implements Initializable {
     private TableColumn<Event, String> colAssignedTo;
     private EventManager eventManager;
     private EventModel eventModel;
+    private MainViewController mainViewController;
 
     public PendingEventsController() throws Exception {
     try{
@@ -41,6 +42,7 @@ public class PendingEventsController implements Initializable {
     } catch (IOException e) {
         throw new RuntimeException(e);
     }
+
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,34 +60,21 @@ public class PendingEventsController implements Initializable {
     }
 
     @FXML
-    private void btnEditEvent(ActionEvent actionEvent) {
+    private void btnEditEvent(ActionEvent actionEvent) throws IOException {
         Event selectedEvent = tblPendingEvents.getSelectionModel().getSelectedItem();
 
         if(selectedEvent != null) {
-            openEditEventView(selectedEvent);
-
-        }
-    }
-
-    @FXML
-    private void openEditEventView(Event evenToEdit) {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreateEventView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/createEventView.fxml"));
             Parent root = loader.load();
 
-            CreateEventController controller = loader.getController();
-            controller.setEventModel(eventModel);
-            controller.setEventToEdit(evenToEdit);
+            CreateEventController createEventController = loader.getController();
+            createEventController.setEventToEdit(selectedEvent);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            mainViewController.setCenterView(root);
 
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
+
 
     @FXML
     private void btnDeleteEvent(ActionEvent actionEvent) throws IOException {
@@ -102,5 +91,9 @@ public class PendingEventsController implements Initializable {
 
     public void clearSelection() {
         tblPendingEvents.getSelectionModel().clearSelection();
+    }
+
+    void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 }

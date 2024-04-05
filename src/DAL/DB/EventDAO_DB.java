@@ -120,13 +120,7 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setString(7, event.getCreatedBy());
             stmt.setInt(8, event.getId());
 
-            // Execute the SQL statement to update the event
-            int rowsAffected = stmt.executeUpdate();
-
-            // Check if the event was updated successfully
-            if (rowsAffected == 0) {
-                throw new IOException("Event with ID " + event.getId() + " not found");
-            }
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             // Handle SQL exceptions
