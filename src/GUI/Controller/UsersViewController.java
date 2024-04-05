@@ -97,6 +97,7 @@ public class UsersViewController implements Initializable {
     @FXML
     void onClickEditUser(ActionEvent event) throws IOException {
         User selectedUser = tblViewUsers.getSelectionModel().getSelectedItem();
+
         if (selectedUser != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
             Parent root = loader.load();

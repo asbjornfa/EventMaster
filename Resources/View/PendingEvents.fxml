@@ -39,7 +39,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#btnEditEvent" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Edit event" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnEditEvent" mnemonicParsing="false" onAction="#btnEditEvent" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Edit event" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="90.0" />
                </HBox.margin>

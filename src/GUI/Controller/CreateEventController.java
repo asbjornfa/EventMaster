@@ -46,6 +46,7 @@ public class CreateEventController {
             eventDescriptionField.setText(event.getDescription());
 
             btnCreate.setText("Save");
+            btnCreate.setStyle("-fx-background-color: #FBBB2C");
 
         }
     }

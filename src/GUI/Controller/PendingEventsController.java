@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,8 @@ public class PendingEventsController implements Initializable {
     private EventManager eventManager;
     private EventModel eventModel;
     private MainViewController mainViewController;
+    @FXML
+    private Button btnEditEvent;
 
     public PendingEventsController() throws Exception {
     try{
@@ -72,6 +75,9 @@ public class PendingEventsController implements Initializable {
 
             mainViewController.setCenterView(root);
 
+        } else {
+
+            btnEditEvent.setDisable(true);
         }
     }
 
