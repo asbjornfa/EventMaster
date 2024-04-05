@@ -99,4 +99,9 @@ public class MainViewController implements Initializable {
 
     public void eventsHandle(ActionEvent event) {
     }
+
+    public void createTicketHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane createTicket = FXMLLoader.load(getClass().getResource("/View/CreateTicket.fxml"));
+        mainBorderPane.setCenter(createTicket);
+    }
 }
