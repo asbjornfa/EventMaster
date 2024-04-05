@@ -1,9 +1,9 @@
 package GUI.Model;
 
 import BE.Ticket;
-import BE.User;
+import BE.Ticket_type;
 import BLL.TicketManager;
-import BLL.UserManager;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,15 +21,22 @@ public class TicketModel {
         ticketToBeViewed.addAll(ticketManager.getAllTickets());
     }
 
-    public ObservableList<Ticket> getObservableUsers() {
+    public ObservableList<Ticket> getObservableTicket() {
 
         return ticketToBeViewed;
     }
 
-    public void createTicket(int price, String ticket_layout, String ticket_description) throws IOException {
-        Ticket ticket = new Ticket(price, ticket_layout, ticket_description);
+    public void createTicket(int price, String ticketType, String ticket_description) throws IOException {
+        Ticket ticket = new Ticket(price, ticketType, ticket_description);
 
         ticketManager.createTicket(ticket);
         ticketToBeViewed.add(ticket);
     }
+
+    public void deleteTicket(Ticket ticket) throws IOException {
+        ticketManager.deleteTicket(ticket);
+        ticketToBeViewed.remove(ticket);
+    }
+
+
 }

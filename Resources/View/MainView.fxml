@@ -47,6 +47,7 @@
                                     <MenuItem mnemonicParsing="false" onAction="#eventsHandle" text="Events" />
                                     <MenuItem mnemonicParsing="false" onAction="#usersHandle" text="Users" />
                                     <MenuItem mnemonicParsing="false" onAction="#createUserHandle" text="Create user" />
+                                    <MenuItem mnemonicParsing="false" onAction="#createTicketHandle" text="Create ticket" />
                               </items>
                             </Menu>
                           </menus>
