@@ -20,7 +20,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="474.0" prefWidth="816.0" style="-fx-background-color: #373737;">
                <children>
-                  <AnchorPane prefHeight="474.0" prefWidth="816.0" style="-fx-background-color: #373737;">
+                  <AnchorPane prefHeight="474.0" prefWidth="816.0" style="-fx-background-color: #373737;" stylesheets="@../Css/MyCss.css">
                      <children>
                         <HBox alignment="BOTTOM_LEFT" layoutX="6.0" layoutY="262.0" prefHeight="129.0" prefWidth="184.0" spacing="50.0" AnchorPane.bottomAnchor="103.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="626.0" AnchorPane.topAnchor="262.0">
                            <children>

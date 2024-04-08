@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,9 +14,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class CreateTicketController {
+public class CreateTicketController implements Initializable {
     public TicketViewController ticketViewController;
     public TableView ticketTable;
     public TableColumn ticketTypeTable;
@@ -31,6 +34,15 @@ public class CreateTicketController {
     @FXML
     private TextField ticketType;
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ticketTypeTable.setCellValueFactory(new PropertyValueFactory<>("ticket_layout"));
+        ticketPriceTable.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+
+        ticketTable.setItems(ticketModel.getObservableTicket());
+    }
 
     public CreateTicketController() throws SQLException, IOException {
         ticketModel = new TicketModel();
@@ -50,14 +62,6 @@ public class CreateTicketController {
 
         ticketModel.createTicket(tPrice, tType, tDescription);
 
-        // Opdater tabellen med billetdata
-        ObservableList<Ticket> tickets = ticketModel.getObservableTicket();
-
-        ticketTypeTable.setCellValueFactory(new PropertyValueFactory<>("ticket_layout"));
-        ticketPriceTable.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-
-        ticketTable.setItems(tickets); // Tilføj billetdata til TableView
         ticketTable.refresh();
 
         if (ticketTable != null) {
@@ -96,6 +100,8 @@ public class CreateTicketController {
         }
 
     }
+
+
 }
 
 
