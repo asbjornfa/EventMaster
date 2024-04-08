@@ -116,6 +116,27 @@ public class UserDAO_DB implements IUser {
 
     }
 
+    @Override
+    public String getPositionFromUser(String username) {
+        String position = null; // Declare position outside try block
+
+        String sql = "SELECT p.position FROM Users u JOIN Position p ON u.positionId = p.id WHERE u.username = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                position = rs.getString("position");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return position;
+    }
 
     @Override
     public User getPasswordByUsername(String username) {

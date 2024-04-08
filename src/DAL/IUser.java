@@ -14,6 +14,7 @@ public interface IUser {
 
     public void updateUser(User user);
 
+    public String getPositionFromUser(String username);
     public User getPasswordByUsername(String username);
 
     public boolean usernameExists(String username);

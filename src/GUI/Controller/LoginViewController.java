@@ -30,6 +30,10 @@ public class LoginViewController implements Initializable {
     // UserModel instance
     private UserModel userModel;
 
+    private Stage stage; // Reference to the login stage
+    // Reference to the main controller
+    private MainViewController mainController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -39,6 +43,18 @@ public class LoginViewController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    // Setter method for setting the main controller
+    public void setMainController(MainViewController mainController) {
+        this.mainController = mainController;
+    }
+
+
+    // Set the stage
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 
     // Handle the login button click event
     public void loginBtnHandle(ActionEvent actionEvent) throws IOException {
@@ -51,19 +67,27 @@ public class LoginViewController implements Initializable {
 
         // Check if the user is authenticated
         if (authenticatedUser != null) {
-            // Check if the user has a password
+
             if (authenticatedUser.getPassword() == null) {
                 // User has no password, open the NewPasswordView
                 openNewPasswordView(username);
             } else {
-                // User has a password, show a login completed message
-                showAlert("Login Completed", "Welcome");
+
+                // Set the logged-in username in UserModel
+                userModel.setLoggedInUsername(username);
+                stage.close();
+
+                // Open the main view
+                openMainView(authenticatedUser);
+
             }
+
         } else {
             // Authentication failed, show an error message
             showAlert("Login Failed", "Invalid username or password");
         }
     }
+
 
     // Open the NewPasswordView
     private void openNewPasswordView(String username) throws IOException {
@@ -89,6 +113,21 @@ public class LoginViewController implements Initializable {
         stage.show();
     }
 
+    private void openMainView(User authenticatedUser) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
+        Parent root = loader.load();
+
+        MainViewController mainController = loader.getController();
+        mainController.setUser(authenticatedUser);
+
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.setResizable(true);
+        mainStage.centerOnScreen();
+        mainStage.show();
+    }
+
+
     // Show an alert message
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -102,7 +141,10 @@ public class LoginViewController implements Initializable {
 
     // Handle the cancel button click event
     public void cancelBtnHandle(ActionEvent event) {
-        // TODO: Implement the cancel button logic
-        // Should open the home page
+
+        mainController.reopenHomepage();
+
+        // Close the login stage
+        stage.close();
     }
 }
