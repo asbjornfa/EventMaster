@@ -41,6 +41,7 @@
                             <Menu mnemonicParsing="false" text="☰">
                               <items>
                                 <MenuItem fx:id="menuHome" mnemonicParsing="false" onAction="#handleHome" text="Home" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleTicketInformation" text="Ticket information" />
                                     <MenuItem fx:id="menuAuthorisedLogin" mnemonicParsing="false" onAction="#handleAuthorisedLogin" text="Authorised Login" />
                                     <MenuItem fx:id="menuCreateEvent" mnemonicParsing="false" onAction="#createEventHandle" text="Create event" />
                                     <MenuItem fx:id="menuPendingEvents" mnemonicParsing="false" onAction="#pendingEventsHandle" text="Pending events" />
@@ -50,6 +51,15 @@
                                     <MenuItem fx:id="menuCreateTicket" mnemonicParsing="false" onAction="#createTicketHandle" text="Create ticket" />
                                     <MenuItem fx:id="menuReservations" mnemonicParsing="false" onAction="#reservationsHandle" text="Reservations" />
                                     <MenuItem fx:id="menuLogOut" mnemonicParsing="false" onAction="#logoutHandle" text="Log out" />
+                                    <MenuItem fx:id="btnTest" mnemonicParsing="false" onAction="#createEventHandle" text="Create event" />
+                                    <MenuItem mnemonicParsing="false" onAction="#pendingEventsHandle" text="Pending events" />
+                                    <MenuItem mnemonicParsing="false" onAction="#activeEventsHandle" text="Active events" />
+                                    <MenuItem mnemonicParsing="false" onAction="#usersHandle" text="Users" />
+                                    <MenuItem mnemonicParsing="false" onAction="#createUserHandle" text="Create user" />
+                                    <MenuItem mnemonicParsing="false" onAction="#createTicketHandle" text="Create ticket" />
+                                    <MenuItem mnemonicParsing="false" text="buyTicket" />
+                                    <MenuItem mnemonicParsing="false" onAction="#reservationsHandle" text="Reservations" />
+                                    <MenuItem mnemonicParsing="false" onAction="#logoutHandle" text="Log out" />
                               </items>
                             </Menu>
                           </menus>

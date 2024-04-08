@@ -118,7 +118,7 @@ public class MainViewController implements Initializable {
         }
     }
 
-    private void updateMenuForInitialState(){
+    private void updateMenuForInitialState() {
         menuHome.setVisible(true);
         menuAuthorisedLogin.setVisible(true);
 
@@ -134,33 +134,31 @@ public class MainViewController implements Initializable {
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
 
-            try {
+        try {
 
-                // Close the current scene
-                Stage currentStage = (Stage) mainBorderPane.getScene().getWindow();
-                currentStage.close();
+            // Close the current scene
+            Stage currentStage = (Stage) mainBorderPane.getScene().getWindow();
+            currentStage.close();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Login");
-                stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login");
+            stage.show();
 
-                // Pass the stage to the LoginViewController
-                LoginViewController loginViewController = loader.getController();
-                loginViewController.setStage(stage);
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load loginView.fxml");
-                alert.showAndWait();
-            }
+            // Pass the stage to the LoginViewController
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setStage(stage);
 
 
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load loginView.fxml");
+            alert.showAndWait();
         }
+
+    }
 
     public void handleHome(ActionEvent actionEvent) {
         mainBorderPane.setCenter(OriginalCenter);
@@ -231,6 +229,7 @@ public class MainViewController implements Initializable {
     public void logoutHandle(ActionEvent actionEvent) {
     }
 
+
     // Method to reopen the homepage
     public void reopenHomepage() {
         try {
@@ -250,4 +249,13 @@ public class MainViewController implements Initializable {
         }
     }
 
+    public void buyTicketHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane buyTickets = FXMLLoader.load(getClass().getResource("/View/BuyTicket.fxml"));
+        mainBorderPane.setCenter(buyTickets);
+    }
+
+    public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
+        AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
+        mainBorderPane.setCenter(ticketInformation);
+    }
 }
