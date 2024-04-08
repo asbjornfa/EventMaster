@@ -29,6 +29,11 @@ public class ActiveEventController implements Initializable {
 
     private EventModel eventModel;
 
+    public ActiveEventController() throws Exception {
+        eventModel = new EventModel();
+
+    }
+
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
     }

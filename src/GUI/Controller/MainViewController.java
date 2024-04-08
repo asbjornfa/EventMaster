@@ -122,4 +122,14 @@ public class MainViewController implements Initializable {
 
     public void logoutHandle(ActionEvent actionEvent) {
     }
+
+    public void buyTicketHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane buyTickets = FXMLLoader.load(getClass().getResource("/View/BuyTicket.fxml"));
+        mainBorderPane.setCenter(buyTickets);
+    }
+
+    public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
+        AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
+        mainBorderPane.setCenter(ticketInformation);
+    }
 }

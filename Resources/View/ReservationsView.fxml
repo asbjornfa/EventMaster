@@ -8,16 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="523.0" prefWidth="872.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.ReservationsViewController">
    <children>
-      <TableView layoutX="19.0" layoutY="12.0" prefHeight="441.0" prefWidth="834.0" style="-fx-background-radius: 12;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="12.0">
+      <TableView fx:id="tblReservations" layoutX="19.0" layoutY="12.0" prefHeight="441.0" prefWidth="834.0" style="-fx-background-radius: 12;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="12.0">
         <columns>
-          <TableColumn prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Name" />
-          <TableColumn prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Email" />
-            <TableColumn prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Event" />
-            <TableColumn prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Tickets" />
-            <TableColumn prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Status" />
+          <TableColumn fx:id="colName" prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Name" />
+          <TableColumn fx:id="colEmail" prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Email" />
+            <TableColumn fx:id="colEvent" prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Event" />
+            <TableColumn fx:id="colTickets" prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Tickets" />
+            <TableColumn fx:id="colStatus" prefWidth="75.0" style="-fx-font-size: 15; -fx-background-color: #fff;" text="Status" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="474.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventPageView">
+<AnchorPane prefHeight="474.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EventPageInformationController">
    <children>
       <HBox alignment="CENTER" layoutY="36.0" prefHeight="474.0" prefWidth="816.0" style="-fx-background-color: #373737;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -77,7 +77,7 @@
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Button alignment="TOP_CENTER" layoutX="100.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Buy tickets" AnchorPane.leftAnchor="102.39999999999998" AnchorPane.rightAnchor="100.80000000000001" AnchorPane.topAnchor="70.0">
+                                    <Button alignment="TOP_CENTER" layoutX="100.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Buy tickets" AnchorPane.leftAnchor="102.39999999999998" AnchorPane.rightAnchor="100.80000000000001" AnchorPane.topAnchor="70.0">
                                        <font>
                                           <Font name="Arial Black" size="13.0" />
                                        </font>
