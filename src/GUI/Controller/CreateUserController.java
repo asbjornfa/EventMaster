@@ -77,7 +77,7 @@ public class CreateUserController implements Initializable {
         setUserInformation(user);
     }
 
-    @FXML
+        @FXML
     void onClickBtnCreateUser(ActionEvent event) throws IOException {
 
         String firstName = txtFieldFirstName.getText();
@@ -86,7 +86,8 @@ public class CreateUserController implements Initializable {
         String username = txtFieldUsername.getText();
         String position = menuButton.getText();
 
-        if(editingUser == null) {
+        if(editingUser ==null)
+        {
             // Creating a new user
 
             // Validate input fields
@@ -100,17 +101,19 @@ public class CreateUserController implements Initializable {
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User Created", "User has been created successfully.");
         }else {
+            //Not working ?
             editingUser.setName(firstName + " " + lastName);
             editingUser.setEmail(email);
             editingUser.setUsername(username);
             editingUser.setPositionId(selectedPosition.getId());
+
+
             userModel.updateUser(editingUser);
 
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User updated", "User has been updated successfully.");
 
         }
-
 
         // Clear the input fields
         clearFields();
@@ -129,7 +132,6 @@ public class CreateUserController implements Initializable {
             txtFieldEmail.setText(user.getEmail());
             txtFieldUsername.setText(user.getUsername());
 
-            // Set the selected position
             String positionName = user.getPosition();
             menuButton.setText(positionName);
 
@@ -212,7 +214,7 @@ public class CreateUserController implements Initializable {
     private void loadPositionsIntoMenuButton() {
         ObservableList<Positions> positions = positionModel.getObservablePositions();
         for (Positions position : positions) {
-            String positionName = position.getPosition(); // Assuming getPosition() returns the name.
+            String positionName = position.getPosition();
             MenuItem item = new MenuItem(positionName);
             item.setOnAction(event -> {
                 handlePositionSelection(position); // Call handlePositionSelection method when position is selected.

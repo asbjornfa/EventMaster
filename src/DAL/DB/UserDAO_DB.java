@@ -23,7 +23,7 @@ public class UserDAO_DB implements IUser {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT u.*, p.position FROM dbo.Users u INNER JOIN dbo.Position p ON u.positionId = p.id";
+            String sql = "SELECT * FROM dbo.Users u INNER JOIN dbo.Position p ON u.positionId = p.id";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -89,6 +89,14 @@ public class UserDAO_DB implements IUser {
 
     @Override
     public void updateUser(User user) {
+
+        System.out.println("Received user information for update:");
+        System.out.println("Name: " + user.getName());
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("Username: " + user.getUsername());
+        System.out.println("positionId: " + user.getPositionId());
+        System.out.println("userId: " + user.getId());
+
         String sql = "UPDATE dbo.Users SET name = ?, email = ?, username = ?, positionId = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -97,13 +105,15 @@ public class UserDAO_DB implements IUser {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getUsername());
-            stmt.setInt(4,user.getPositionId());
+            stmt.setInt(4, user.getPositionId());
             stmt.setInt(5, user.getId());
 
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
 

@@ -26,4 +26,6 @@ public class PositionModel {
 
         return positionsToBeViewed;
     }
+
+
 }

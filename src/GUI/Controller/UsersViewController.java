@@ -100,11 +100,14 @@ public class UsersViewController implements Initializable {
         User selectedUser = tblViewUsers.getSelectionModel().getSelectedItem();
 
         if (selectedUser != null) {
+            System.out.println(selectedUser.getId());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
             Parent root = loader.load();
 
+
             CreateUserController createUserController = loader.getController();
-            createUserController.setUserForEditing(selectedUser); // Assuming this method exists and does what's required
+            createUserController.setUserForEditing(selectedUser);
+
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
