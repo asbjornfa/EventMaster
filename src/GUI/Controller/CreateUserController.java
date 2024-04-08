@@ -1,31 +1,41 @@
 package GUI.Controller;
 
+import BE.Positions;
 import BE.User;
+import BLL.PositionManager;
+import GUI.Model.PositionModel;
 import GUI.Model.UserModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateUserController implements Initializable {
 
+
     // Declare a UserModel object to interact with the database
     private UserModel userModel;
+    private PositionModel positionModel;
     private MainViewController mainViewController;
+
+    private Positions selectedPosition;
 
     // Declare TextField objects for each input field
     @FXML
     private Button btnCreateUserOrUpdate;
+
+    @FXML
+    private MenuButton menuButton;
 
     @FXML
     private TextField txtFieldEmail;
@@ -35,9 +45,6 @@ public class CreateUserController implements Initializable {
 
     @FXML
     private TextField txtFieldLastName;
-
-    @FXML
-    private TextField txtFieldPassword;
 
     @FXML
     private TextField txtFieldUsername;
@@ -51,6 +58,9 @@ public class CreateUserController implements Initializable {
         try {
             // Initialize the UserModel object
             userModel = new UserModel();
+            positionModel = new PositionModel();
+
+            loadPositionsIntoMenuButton();
         } catch (SQLException e) {
             // Throw a runtime exception if there is an error initializing the UserModel
             throw new RuntimeException(e);
@@ -74,17 +84,18 @@ public class CreateUserController implements Initializable {
         String lastName = txtFieldLastName.getText();
         String email = txtFieldEmail.getText();
         String username = txtFieldUsername.getText();
+        String position = menuButton.getText();
 
         if(editingUser == null) {
             // Creating a new user
 
             // Validate input fields
-            if (!validateFields(firstName, lastName, email, username)) {
+            if (!validateFields(firstName, lastName, email, username, position)) {
                 return;
             }
 
             // Create the user in the database
-            userModel.createUser(firstName + " " + lastName, email, username);
+            userModel.createUser(firstName + " " + lastName, email, username, selectedPosition.getId());
 
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User Created", "User has been created successfully.");
@@ -92,6 +103,7 @@ public class CreateUserController implements Initializable {
             editingUser.setName(firstName + " " + lastName);
             editingUser.setEmail(email);
             editingUser.setUsername(username);
+            editingUser.setPositionId(selectedPosition.getId());
             userModel.updateUser(editingUser);
 
             // Show success alert
@@ -117,6 +129,10 @@ public class CreateUserController implements Initializable {
             txtFieldEmail.setText(user.getEmail());
             txtFieldUsername.setText(user.getUsername());
 
+            // Set the selected position
+            String positionName = user.getPosition();
+            menuButton.setText(positionName);
+
             // Change the button text and color to indicate update
             btnCreateUserOrUpdate.setText("Update user");
             btnCreateUserOrUpdate.setStyle("-fx-background-color: #FBBB2C;");
@@ -133,11 +149,11 @@ public class CreateUserController implements Initializable {
     }
 
     // Method to validate input fields
-    private boolean validateFields(String firstName, String lastName, String email, String username) {
+    private boolean validateFields(String firstName, String lastName, String email, String username, String position) {
         StringBuilder errorMessage = new StringBuilder();
 
         // Check if all the required fields are filled in
-        if (firstName.isEmpty() || email.isEmpty() || username.isEmpty()) {
+        if (firstName.isEmpty() || email.isEmpty() || username.isEmpty() || position.isEmpty()) {
             errorMessage.append("   - " + "Please fill in all the required fields.\n\n");
         }
 
@@ -183,8 +199,27 @@ public class CreateUserController implements Initializable {
         txtFieldLastName.clear();
         txtFieldEmail.clear();
         txtFieldUsername.clear();
+        String menubuttonText = null;
+        menuButton.setText(menubuttonText);
     }
-    
+
+    // Method to handle position selection
+    private void handlePositionSelection(Positions position) {
+        selectedPosition = position;
+        menuButton.setText(position.getPosition()); // Set the MenuButton text to the selected position's name.
+    }
+
+    private void loadPositionsIntoMenuButton() {
+        ObservableList<Positions> positions = positionModel.getObservablePositions();
+        for (Positions position : positions) {
+            String positionName = position.getPosition(); // Assuming getPosition() returns the name.
+            MenuItem item = new MenuItem(positionName);
+            item.setOnAction(event -> {
+                handlePositionSelection(position); // Call handlePositionSelection method when position is selected.
+            });
+            menuButton.getItems().add(item);
+        }
+    }
 
 }
 

@@ -23,7 +23,7 @@ public class UserDAO_DB implements IUser {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.Users";
+            String sql = "SELECT u.*, p.position FROM dbo.Users u INNER JOIN dbo.Position p ON u.positionId = p.id";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -31,10 +31,11 @@ public class UserDAO_DB implements IUser {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String username = rs.getString("username");
+                String position = rs.getString("position");
                 int id = rs.getInt("id");
 
 
-                User user = new User(id, name, email, username);
+                User user = new User(id, name, email, username, position);
                 allUser.add(user);
             }
             return allUser;
@@ -47,7 +48,7 @@ public class UserDAO_DB implements IUser {
     public User createUser(User user) {
 
         String sql =
-                "INSERT INTO dbo.Users (name, email, username) VALUES (?,?,?)";
+                "INSERT INTO dbo.Users (name, email, username, positionId) VALUES (?,?,?,?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -55,6 +56,7 @@ public class UserDAO_DB implements IUser {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getUsername());
+            stmt.setInt(4,user.getPositionId());
 
 
             stmt.executeUpdate();
@@ -87,7 +89,7 @@ public class UserDAO_DB implements IUser {
 
     @Override
     public void updateUser(User user) {
-        String sql = "UPDATE dbo.Users SET name = ?, email = ?, username = ? WHERE id = ?";
+        String sql = "UPDATE dbo.Users SET name = ?, email = ?, username = ?, positionId = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -95,7 +97,8 @@ public class UserDAO_DB implements IUser {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getUsername());
-            stmt.setInt(4, user.getId());
+            stmt.setInt(4,user.getPositionId());
+            stmt.setInt(5, user.getId());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -183,6 +186,7 @@ public class UserDAO_DB implements IUser {
             throw new RuntimeException(e);
         }
     }
+
 
 
 

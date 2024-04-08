@@ -6,20 +6,25 @@ public class User {
     private String email;
     private String password;
     private String username;
+    private String position;
+    private int positionId;
 
-    public User(int id, String name, String email, String password, String username){
+    public User(int id, String name, String email, String password, String username, int positionId){
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.username = username;
+        this.positionId = positionId;
     }
+
 
     public User(int id, String name, String email, String username){
         this.id = id;
         this.name = name;
         this.email = email;
         this.username = username;
+
     }
 
     public User(String name, String email, String password, String username) {
@@ -34,11 +39,23 @@ public class User {
         this.password = storedPassword;
     }
 
-    public User(String name, String email, String username) {
+    public User(int id, String name, String email, String username, String position) {
         this.name = name;
         this.email = email;
         this.username = username;
+        this.position = position;
     }
+
+    public User(String name, String email, String username, int positionId) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.positionId = positionId;
+    }
+
+
+
+
 
     public int getId() {
         return id;
@@ -74,5 +91,21 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(int positionId) {
+        this.positionId = positionId;
     }
 }

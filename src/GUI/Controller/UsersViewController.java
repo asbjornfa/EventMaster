@@ -63,6 +63,7 @@ public class UsersViewController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
 
         tblViewUsers.setItems(userModel.getObservableUsers());
     }
