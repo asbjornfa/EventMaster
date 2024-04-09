@@ -41,7 +41,7 @@
                             <Menu mnemonicParsing="false" text="☰">
                               <items>
                                 <MenuItem fx:id="menuHome" mnemonicParsing="false" onAction="#handleHome" text="Home" />
-                                    <MenuItem mnemonicParsing="false" onAction="#handleTicketInformation" text="Ticket information" />
+                                    <MenuItem fx:id="menuTicketInformation" mnemonicParsing="false" onAction="#handleTicketInformation" text="Ticket information" />
                                     <MenuItem fx:id="menuAuthorisedLogin" mnemonicParsing="false" onAction="#handleAuthorisedLogin" text="Authorised Login" />
                                     <MenuItem fx:id="menuCreateEvent" mnemonicParsing="false" onAction="#createEventHandle" text="Create event" />
                                     <MenuItem fx:id="menuPendingEvents" mnemonicParsing="false" onAction="#pendingEventsHandle" text="Pending events" />
@@ -51,7 +51,7 @@
                                     <MenuItem fx:id="menuCreateTicket" mnemonicParsing="false" onAction="#createTicketHandle" text="Create ticket" />
                                     <MenuItem fx:id="menuReservations" mnemonicParsing="false" onAction="#reservationsHandle" text="Reservations" />
                                     <MenuItem fx:id="menuLogOut" mnemonicParsing="false" onAction="#logoutHandle" text="Log out" />
-                                    <MenuItem mnemonicParsing="false" text="buyTicket" />
+                                    <MenuItem fx:id="menuBuyTickets" mnemonicParsing="false" text="buyTicket" />
                               </items>
                             </Menu>
                           </menus>
