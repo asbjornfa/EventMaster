@@ -24,6 +24,12 @@ import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
     @FXML
+    private MenuItem menuTicketInformation;
+
+    @FXML
+    private MenuItem menuBuyTickets;
+
+    @FXML
     private MenuItem menuActiveEvents;
 
     @FXML
@@ -101,6 +107,8 @@ public class MainViewController implements Initializable {
             menuCreateTicket.setVisible(false);
             menuCreateEvent.setVisible(false);
             menuReservations.setVisible(false);
+            menuBuyTickets.setVisible(false);
+            menuTicketInformation.setVisible(false);
 
         } else if ("event coordinator".equalsIgnoreCase(role)) {
             // Event Coordinator-specific menu items
@@ -111,6 +119,8 @@ public class MainViewController implements Initializable {
             menuReservations.setVisible(true);
             menuLogOut.setVisible(true);
             menuCreateTicket.setVisible(true);
+            menuBuyTickets.setVisible(true);
+            menuTicketInformation.setVisible(true);
 
             menuAuthorisedLogin.setVisible(false);
             menuUsers.setVisible(false);
@@ -130,6 +140,8 @@ public class MainViewController implements Initializable {
         menuCreateTicket.setVisible(false);
         menuUsers.setVisible(false);
         menuCreateUser.setVisible(false);
+        menuBuyTickets.setVisible(false);
+        menuTicketInformation.setVisible(false);
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
