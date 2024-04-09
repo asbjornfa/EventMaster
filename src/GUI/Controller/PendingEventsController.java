@@ -96,6 +96,7 @@ public class PendingEventsController implements Initializable {
 
 
     public void clearSelection() {
+
         tblPendingEvents.getSelectionModel().clearSelection();
     }
 

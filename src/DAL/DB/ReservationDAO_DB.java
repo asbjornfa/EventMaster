@@ -35,17 +35,14 @@ public class ReservationDAO_DB implements IReservations {
                 int id = rs.getInt("id");
 
                 // Create an Event object and add it to the list
-                Reservations reservations = new Reservations(firstName, lastName, email);
+                Reservations reservations = new Reservations(id, firstName, lastName, email);
                 allReservations.add(reservations);
             }
 
-            // Return the list of events
             return allReservations;
 
         } catch (SQLException ex) {
-            // Handle SQL exceptions
             ex.printStackTrace();
-            // You might want to throw an IOException or a more specific exception related to database operations
             throw new IOException("Could not get reservations from database", ex);
         }
     }
@@ -67,32 +64,34 @@ public class ReservationDAO_DB implements IReservations {
             // Execute the SQL statement to insert the new event
             stmt.executeUpdate();
 
-            // Get the generated ID from the database (if applicable)
-            /*ResultSet rs = stmt.getGeneratedKeys();
-            int id = 0;
-
-            if (rs.next()) {
-                id = rs.getInt(1);
-            }
-
-            // Set the ID of the created event
-            event.setId(id);
-
-            // Return the created event
-
-             */
             return reservations;
 
         } catch (SQLException e) {
-            // Handle SQL exceptions
             e.printStackTrace();
-            // You might want to throw an IOException or a more specific exception related to database operations
             throw new IOException("Could not create reservation in database", e);
         }
     }
 
     @Override
     public Reservations deleteReservation(Reservations reservations) throws IOException {
-        return null;
+        // SQL statement to delete an event from the events table
+        String sql = "DELETE FROM dbo.Reservations WHERE id = (?)";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Bind parameter
+            stmt.setInt(1, reservations.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new IOException("Could not delete reservation in database", e);
+        }
+
+        System.out.println("DAO");
+        return reservations;
+
     }
 }
+

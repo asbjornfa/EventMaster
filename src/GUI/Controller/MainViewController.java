@@ -135,13 +135,13 @@ public class MainViewController implements Initializable {
         menuActiveEvents.setVisible(false);
         menuCreateEvent.setVisible(false);
         menuPendingEvents.setVisible(false);
-        menuReservations.setVisible(false);
+        menuReservations.setVisible(true);
         menuLogOut.setVisible(false);
         menuCreateTicket.setVisible(false);
         menuUsers.setVisible(false);
         menuCreateUser.setVisible(false);
         menuBuyTickets.setVisible(false);
-        menuTicketInformation.setVisible(false);
+        menuTicketInformation.setVisible(true);
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
