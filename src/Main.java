@@ -20,8 +20,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
         Parent root = loader.load();
 
-        //  ActiveEventController activeEventController = loader.getController();
-        //activeEventController.setEventModel(eventModel);
         MainViewController controller = loader.getController();
         controller.setEventModel(eventModel);
 

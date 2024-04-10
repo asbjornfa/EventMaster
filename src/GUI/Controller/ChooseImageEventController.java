@@ -9,34 +9,33 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class ChooseImageEventController {
 
-    private String selectedImagePath;
     @FXML
     private TextField fieldFilePath;
-
+    private String selectedImagePath;
     private CreateEventController createEventController;
 
-    public ChooseImageEventController() throws Exception {
-        createEventController = new CreateEventController();
+    public ChooseImageEventController() {
+
     }
 
+    public void setCreateEventController(CreateEventController createEventController) {
+        this.createEventController = createEventController;
+    }
     @FXML
     private void handleChooseFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Png, jpeg", "*.png", "*.jpeg"));
-
-        File initialDirectory = new File("Resources/EventImages");
-        fileChooser.setInitialDirectory(initialDirectory);
-
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
-
-        if (selectedFile != null) {
-
-            selectedImagePath = selectedFile.toURI().toString();
-            fieldFilePath.setText(selectedImagePath);
-            createEventController.setImagePath(selectedImagePath);
+        fileChooser.setTitle("vælg Billede");
+        File file = fileChooser.showOpenDialog(fieldFilePath.getScene().getWindow());
+        if(file != null) {
+            fieldFilePath.setText(file.getAbsolutePath());
         }
     }
 
@@ -44,10 +43,13 @@ public class ChooseImageEventController {
 
     @FXML
     private void handleSaveFile(ActionEvent actionEvent) throws Exception {
+        selectedImagePath = fieldFilePath.getText();
 
-            Stage stage = (Stage) fieldFilePath.getScene().getWindow();
-            stage.close();
+        createEventController.setImage(selectedImagePath);
 
+        saveImageFile(selectedImagePath);
+
+        createEventController.setSelectedImagePath(selectedImagePath);
     }
 
     @FXML
@@ -55,4 +57,30 @@ public class ChooseImageEventController {
         Stage stage = (Stage) fieldFilePath.getScene().getWindow();
         stage.close();
     }
+
+    public String saveImageFile(String sourceImagePath) {
+        try {
+            // Definer stien til mappen, hvor du vil gemme billedet
+            String targetDirectoryPath = "Resources/EventImages/";
+
+            // Få filnavnet fra den oprindelige sti
+            Path sourcePath = Paths.get(sourceImagePath);
+            String fileName = sourcePath.getFileName().toString();
+
+            // Opret stien til den nye filplacering
+            Path targetPath = Paths.get(targetDirectoryPath + fileName);
+
+            // Kopier filen til den nye placering
+            // Hvis filen allerede eksisterer, vil den blive erstattet (REPLACE_EXISTING)
+            Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Returner den nye sti uden det fulde filsystem sti
+            return targetDirectoryPath + fileName;
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

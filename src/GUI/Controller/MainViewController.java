@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.Event;
 import BE.User;
 import GUI.Model.EventModel;
 import GUI.Model.UserModel;
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,11 +17,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
@@ -65,12 +69,15 @@ public class MainViewController implements Initializable {
     private UserModel userModel;
 
 
+
     public void setEventModel(EventModel eventModel) {
+
         this.eventModel = eventModel;
     }
 
-    public MainViewController() throws SQLException {
+    public MainViewController() throws Exception {
         userModel = new UserModel();
+        eventModel = new EventModel();
     }
 
     public void setUser(User authenticatedUser) {
@@ -89,7 +96,31 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
         updateMenuForInitialState();
+        //loadActiveEvents();
+
     }
+    /*public void loadActiveEvents() {
+        try {
+
+            List<Event> activeEvents = eventModel.getObservableEvents();
+
+            for (int i = 0; i < activeEvents.size(); i++) {
+                Event event = activeEvents.get(i);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EventSample.fxml"));
+                Node eventSampleView = loader.load();
+
+                EventSampleController eventSampleController = loader.getController();
+                eventSampleController.setData(event);
+
+                GridPane.setMargin(eventSampleView, new Insets(15));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
+
+
 
     private void updateMenu(String role) {
 
@@ -134,7 +165,7 @@ public class MainViewController implements Initializable {
 
         menuActiveEvents.setVisible(false);
         menuCreateEvent.setVisible(true);
-        menuPendingEvents.setVisible(false);
+        menuPendingEvents.setVisible(true);
         menuReservations.setVisible(true);
         menuLogOut.setVisible(false);
         menuCreateTicket.setVisible(false);

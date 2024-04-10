@@ -42,40 +42,44 @@ public class CreateEventController implements Initializable {
     private MFXButton btnCreate;
     @FXML
     private ImageView imageEvent;
-    private String imagePath;
+    private String selectedImagePath;
 
 
 
-    public CreateEventController() throws Exception {
-        eventModel = new EventModel();
+    public CreateEventController() {
     }
+
+    /*public CreateEventController(EventModel eventModel) throws Exception {
+        this.eventModel = eventModel;
+    }*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setImage();
+
+        //setImage();
     }
 
     public void setEventModel(EventModel eventModel) {
-
         this.eventModel = eventModel;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-        setImage();
+    public void setSelectedImagePath(String selectedImagePath) {
+        this.selectedImagePath = selectedImagePath;
     }
-
     public void setEventToEdit(Event event) {
         this.eventToEdit = event;
         // Populate UI fields with the data from eventToEdit
         setEventInformation(event);
     }
 
-    public void setImage() {
-        if (imagePath != null && !imagePath.isEmpty()) {
-            Image image = new Image(imagePath);
-            imageEvent.setImage(image);
-        }
+    public void setImage(String imagePath){
+        File file = new File(imagePath);
+        Image image = new Image(file.toURI().toString());
+        imageEvent.setImage(image);
+
+        imageEvent.setPreserveRatio(false);
+        imageEvent.setFitWidth(250);
+        imageEvent.setFitHeight(200);
     }
 
     private void setEventInformation(Event event) {
@@ -124,7 +128,7 @@ public class CreateEventController implements Initializable {
         } else {
 
             eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
-                    startTime, endTime, description, imagePath);
+                    startTime, endTime, description, selectedImagePath);
 
         }
 
@@ -137,6 +141,8 @@ public class CreateEventController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ChooseImageEventView.fxml"));
             Parent root = loader.load();
+            ChooseImageEventController chooseImageEventController = loader.getController();
+            chooseImageEventController.setCreateEventController(this);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Login");
@@ -144,11 +150,12 @@ public class CreateEventController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load BuyTicket2.fxml");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load fxml");
             alert.showAndWait();
         }
 
     }
+
 
 
 }

@@ -18,7 +18,7 @@
    <children>
       <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;">
          <children>
-            <ImageView fx:id="imageEvent" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageEvent" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children></AnchorPane>
       <VBox layoutX="304.0" layoutY="23.0" prefHeight="253.0" prefWidth="563.0" spacing="10.0" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="23.0">
          <children>
