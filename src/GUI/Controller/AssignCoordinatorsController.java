@@ -27,6 +27,7 @@ public class AssignCoordinatorsController implements Initializable {
 
     private ActiveEventController activeEventController;
     private AssignCoordinatorModel assignCoordinatorModel;
+    private PendingEventsController pendingEventsController;
 
     @FXML
     private TableView<User> tblViewEventCoordinators;
@@ -49,6 +50,7 @@ public class AssignCoordinatorsController implements Initializable {
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         tblViewEventCoordinators.setItems(userModel.getObservableUsers());
+
     }
 
     public void setSelectedEvent(Event selectedEvent) {
@@ -59,6 +61,9 @@ public class AssignCoordinatorsController implements Initializable {
         this.activeEventController = activeEventController;
     }
 
+    public void setPendingEventController(PendingEventsController pendingEventController) {
+        this.pendingEventsController = pendingEventController;
+    }
 
     // Set the stage
     public void setStage(Stage stage) {
@@ -76,7 +81,6 @@ public class AssignCoordinatorsController implements Initializable {
 
         if (selectedUser != null) {
             assignCoordinatorModel.assignCoordinators(selectedEvent, selectedUser);
-            activeEventController.updateTableView(); // Update the tableview in the ActiveEventController
             stage.close();
         }
 
