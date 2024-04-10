@@ -26,8 +26,8 @@ public class TicketModel {
         return ticketToBeViewed;
     }
 
-    public void createTicket(int price, String ticketType, String ticket_description) throws IOException {
-        Ticket ticket = new Ticket(price, ticketType, ticket_description);
+    public void createTicket(int price, String ticket_description, int ticket_typeId) throws IOException {
+        Ticket ticket = new Ticket(price,ticket_description, ticket_typeId);
 
         ticketManager.createTicket(ticket);
         ticketToBeViewed.add(ticket);

@@ -23,7 +23,7 @@ public class TicketDAO_DB implements ITicket {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.Ticket";
+            String sql = "SELECT t.*,tt.title FROM dbo.Ticket t INNER JOIN dbo.Ticket_type tt on t.ticket_typeId = tt.id";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -32,10 +32,12 @@ public class TicketDAO_DB implements ITicket {
                 int price = rs.getInt("price");
                 String ticket_layout = rs.getString("ticket_layout");
                 String ticket_description = rs.getString("ticket_description");
+                String title = rs.getString("title");
+
 
 
                 // Create an Ticket object and add it to the list
-                Ticket ticket = new Ticket(id, price, ticket_layout, ticket_description);
+                Ticket ticket = new Ticket(id, price, ticket_layout, ticket_description, title);
                 allTickets.add(ticket);
             }
 
@@ -53,8 +55,8 @@ public class TicketDAO_DB implements ITicket {
     @Override
     public Ticket createTicket(Ticket ticket) throws IOException {
         // SQL statement to insert a new ticket into the tickets table
-        String sql = "INSERT INTO dbo.Ticket (price, ticket_layout, ticket_description) " +
-                "VALUES (?, ?, ?)";
+        String sql = "INSERT INTO dbo.Ticket (price, ticket_layout, ticket_description, ticket_typeId) " +
+                "VALUES (?, ?, ?,?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -63,10 +65,11 @@ public class TicketDAO_DB implements ITicket {
             stmt.setInt(1, ticket.getPrice());
             stmt.setString(2, ticket.getTicket_layout());
             stmt.setString(3, ticket.getTicket_description());
+            stmt.setInt(4, ticket.getTicket_typeId());
 
             stmt.executeUpdate();
 
-            Ticket createdTicket = new Ticket(ticket.getPrice(), ticket.getTicket_layout(), ticket.getTicket_description());
+            Ticket createdTicket = new Ticket(ticket.getPrice(), ticket.getTicket_layout(), ticket.getTicket_typeId());
 
             return createdTicket;
         } catch (SQLException e) {

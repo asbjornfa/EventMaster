@@ -1,5 +1,6 @@
 package BE;
 
+
 public class Ticket_type {
     private int id;
     private String title;
@@ -10,13 +11,26 @@ public class Ticket_type {
         this.title = title;
 
     }
+    public Ticket_type (String title){
+        this.title = title;
+    }
+
+    public Ticket_type(int id) {
+        this.id = id;
+
+    }
 
     public int getId() {
-        return id;
+return id;    }
+
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
     public String getTitle() {
+
         return title;
     }
 
