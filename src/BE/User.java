@@ -40,6 +40,7 @@ public class User {
     }
 
     public User(int id, String name, String email, String username, String position) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.username = username;
@@ -59,6 +60,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

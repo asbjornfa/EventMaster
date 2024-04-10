@@ -53,6 +53,8 @@ public class UserManager {
         return null;
     }
 
+    public String getPositionFromUser(String username){ return userDAO.getPositionFromUser(username);}
+
     public boolean usernameExists(String username){
        return userDAO.usernameExists(username);
     }

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class UserModel {
 
+    private String loggedInUsername;
+
     private ObservableList<User> userToBeViewed;
 
     private UserManager userManager;
@@ -45,6 +47,8 @@ public class UserModel {
         return userManager.authenticateUser(username, password);
     }
 
+    public String getPositionFromUser(String username){ return userManager.getPositionFromUser(username);}
+
     public boolean usernameExists(String username){
         return userManager.usernameExists(username);
     }
@@ -57,5 +61,12 @@ public class UserModel {
         userManager.updatePassword(username, newPassword);
     }
 
+    public void setLoggedInUsername(String username) {
+        this.loggedInUsername = username;
+    }
+
+    public String getLoggedInUsername() {
+        return loggedInUsername;
+    }
 
 }

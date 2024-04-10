@@ -1,6 +1,8 @@
 package GUI.Controller;
 
+import BE.User;
 import GUI.Model.EventModel;
+import GUI.Model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,45 +19,161 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
-    public MenuItem menuAuthorisedLogin;
-    public MenuItem menuHome;
-    public Button loginBtn;
+    @FXML
+    private MenuItem menuTicketInformation;
+
+    @FXML
+    private MenuItem menuBuyTickets;
+
+    @FXML
+    private MenuItem menuActiveEvents;
+
+    @FXML
+    private MenuItem menuAuthorisedLogin;
+
+    @FXML
+    private MenuItem menuCreateEvent;
+
+    @FXML
+    private MenuItem menuCreateTicket;
+
+    @FXML
+    private MenuItem menuCreateUser;
+
+    @FXML
+    private MenuItem menuHome;
+
+    @FXML
+    private MenuItem menuLogOut;
+
+    @FXML
+    private MenuItem menuPendingEvents;
+
+    @FXML
+    private MenuItem menuReservations;
+
+    @FXML
+    private MenuItem menuUsers;
+
     public BorderPane mainBorderPane;
     private Node OriginalCenter;
     private EventModel eventModel;
+    private UserModel userModel;
+
 
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
     }
+
+    public MainViewController() throws SQLException {
+        userModel = new UserModel();
+    }
+
+    public void setUser(User authenticatedUser) {
+        // Check if the authenticated user is not null
+        if (authenticatedUser != null) {
+            String username = authenticatedUser.getUsername();
+            String role = userModel.getPositionFromUser(username);
+            // Update the menu based on the user's role
+            updateMenu(role);
+        } else {
+            // Handle case when authenticatedUser is null
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
+        updateMenuForInitialState();
+    }
+
+    private void updateMenu(String role) {
+
+        // Show additional menu items based on user role
+        if ("admin".equalsIgnoreCase(role)) {
+            // Admin-specific menu items
+            menuUsers.setVisible(true);
+            menuCreateUser.setVisible(true);
+            menuHome.setVisible(true);
+            menuActiveEvents.setVisible(true);
+            menuPendingEvents.setVisible(true);
+            menuLogOut.setVisible(true);
+
+            menuAuthorisedLogin.setVisible(false);
+            menuCreateTicket.setVisible(false);
+            menuCreateEvent.setVisible(false);
+            menuReservations.setVisible(false);
+            menuBuyTickets.setVisible(false);
+            menuTicketInformation.setVisible(false);
+
+        } else if ("event coordinator".equalsIgnoreCase(role)) {
+            // Event Coordinator-specific menu items
+            menuHome.setVisible(true);
+            menuActiveEvents.setVisible(true);
+            menuCreateEvent.setVisible(true);
+            menuPendingEvents.setVisible(true);
+            menuReservations.setVisible(true);
+            menuLogOut.setVisible(true);
+            menuCreateTicket.setVisible(true);
+            menuBuyTickets.setVisible(true);
+            menuTicketInformation.setVisible(true);
+
+            menuAuthorisedLogin.setVisible(false);
+            menuUsers.setVisible(false);
+            menuCreateUser.setVisible(false);
+        }
+    }
+
+    private void updateMenuForInitialState() {
+        menuHome.setVisible(true);
+        menuAuthorisedLogin.setVisible(true);
+
+        menuActiveEvents.setVisible(false);
+        menuCreateEvent.setVisible(false);
+        menuPendingEvents.setVisible(false);
+        menuReservations.setVisible(true);
+        menuLogOut.setVisible(false);
+        menuCreateTicket.setVisible(false);
+        menuUsers.setVisible(false);
+        menuCreateUser.setVisible(false);
+        menuBuyTickets.setVisible(false);
+        menuTicketInformation.setVisible(true);
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
 
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Login");
-                stage.show();
+        try {
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load loginView.fxml");
-                alert.showAndWait();
-            }
+            // Close the current scene
+            Stage currentStage = (Stage) mainBorderPane.getScene().getWindow();
+            currentStage.close();
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login");
+            stage.show();
+
+            // Pass the stage to the LoginViewController
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setStage(stage);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load loginView.fxml");
+            alert.showAndWait();
         }
+
+    }
 
     public void handleHome(ActionEvent actionEvent) {
         mainBorderPane.setCenter(OriginalCenter);
-
     }
 
     public void createEventHandle(ActionEvent actionEvent) throws IOException {
@@ -121,5 +239,35 @@ public class MainViewController implements Initializable {
     }
 
     public void logoutHandle(ActionEvent actionEvent) {
+    }
+
+
+    // Method to reopen the homepage
+    public void reopenHomepage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+            Parent root = loader.load();
+
+            // Get the stage from the main view
+            Stage stage = (Stage) mainBorderPane.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+            // Optional: You may want to update the menu or perform any other initialization here
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle error loading homepage
+        }
+    }
+
+    public void buyTicketHandle(ActionEvent actionEvent) throws IOException {
+        AnchorPane buyTickets = FXMLLoader.load(getClass().getResource("/View/BuyTicket.fxml"));
+        mainBorderPane.setCenter(buyTickets);
+    }
+
+    public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
+        AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
+        mainBorderPane.setCenter(ticketInformation);
     }
 }
