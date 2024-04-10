@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -106,11 +107,15 @@ public class CreateEventController implements Initializable {
         LocalDateTime selectedDateTimeEnd = DTPickerEnd.dateTimeProperty().get();
 
         LocalDate startDate = selectedDateTimeStart.toLocalDate();
-        LocalTime startTime = selectedDateTimeStart.toLocalTime();
-
         LocalDate endDate = selectedDateTimeEnd.toLocalDate();
+
+        // Extract time portion from LocalDateTime
+        LocalTime startTime = selectedDateTimeStart.toLocalTime();
         LocalTime endTime = selectedDateTimeEnd.toLocalTime();
 
+        // Convert LocalTime to Time
+        Time startTimeSql = Time.valueOf(startTime);
+        Time endTimeSql = Time.valueOf(endTime);
 
 
         if (eventToEdit != null) {
@@ -118,21 +123,19 @@ public class CreateEventController implements Initializable {
             eventToEdit.setTitle(title);
             eventToEdit.setLocation(location);
             eventToEdit.setDescription(description);
-            eventToEdit.setStartDate(startDate.atStartOfDay());
-            eventToEdit.setEndDate(endDate.atStartOfDay());
-            eventToEdit.setStartTime(startTime);
-            eventToEdit.setEndTime(endTime);
+            eventToEdit.setStartDate(startDate);
+            eventToEdit.setEndDate(endDate);
+            eventToEdit.setStartTime(startTimeSql);
+            eventToEdit.setEndTime(endTimeSql);
 
 
             eventModel.updateEvent(eventToEdit);
         } else {
 
-            eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
-                    startTime, endTime, description, selectedImagePath);
+            eventModel.createEvent(title, location, startDate, endDate,
+                    startTimeSql, endTimeSql, description, selectedImagePath);
 
         }
-
-
     }
 
 
@@ -155,7 +158,4 @@ public class CreateEventController implements Initializable {
         }
 
     }
-
-
-
 }

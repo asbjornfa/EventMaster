@@ -5,6 +5,7 @@ import DAL.IEventDataAccess;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -37,10 +38,10 @@ public class EventDAO_DB implements IEventDataAccess {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String location = rs.getString("location");
-                LocalDateTime startDate = rs.getTimestamp("startDate").toLocalDateTime();
-                LocalDateTime endDate = rs.getTimestamp("endDate").toLocalDateTime();
-                LocalTime startTime = rs.getTime("startTime").toLocalTime();
-                LocalTime endTime = rs.getTime("endTime").toLocalTime();
+                LocalDate startDate = rs.getDate("startDate").toLocalDate();
+                LocalDate endDate = rs.getDate("endDate").toLocalDate();
+                Time startTime = rs.getTime("startTime");
+                Time endTime = rs.getTime("endTime");
                 String description = rs.getString("description");
                 String createdBy = rs.getString("createdBy");
                 String imagePath = rs.getString("imagePath");
@@ -75,10 +76,10 @@ public class EventDAO_DB implements IEventDataAccess {
             // Bind parameters
             stmt.setString(1, event.getTitle());
             stmt.setString(2, event.getLocation());
-            stmt.setTimestamp(3, Timestamp.valueOf(event.getStartDate()));
-            stmt.setTimestamp(4, Timestamp.valueOf(event.getEndDate()));
-            stmt.setTime(5, Time.valueOf(event.getStartTime()));
-            stmt.setTime(6, Time.valueOf(event.getEndTime()));
+            stmt.setDate(3, Date.valueOf(event.getStartDate()));
+            stmt.setDate(4, Date.valueOf(event.getEndDate()));
+            stmt.setTime(5, event.getStartTime());
+            stmt.setTime(6, event.getEndTime());
             stmt.setString(7, event.getDescription());
             stmt.setString(8, event.getImagePath());
 
@@ -105,10 +106,10 @@ public class EventDAO_DB implements IEventDataAccess {
 
             // Bind parameters
             stmt.setString(1, event.getTitle());
-            stmt.setTimestamp(2, Timestamp.valueOf(event.getStartDate()));
-            stmt.setTimestamp(3, Timestamp.valueOf(event.getEndDate()));
-            stmt.setTime(4, Time.valueOf(event.getStartTime()));
-            stmt.setTime(5, Time.valueOf(event.getStartTime()));
+            stmt.setDate(2, Date.valueOf(event.getStartDate()));
+            stmt.setDate(3, Date.valueOf(event.getEndDate()));
+            stmt.setTime(4, event.getStartTime());
+            stmt.setTime(5, event.getStartTime());
             stmt.setString(6, event.getDescription());
             stmt.setString(7, event.getCreatedBy());
             stmt.setInt(8, event.getId());

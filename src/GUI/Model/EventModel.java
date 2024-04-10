@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -27,8 +28,8 @@ public class EventModel {
         return eventsToBeViewed;
     }
 
-    public void createEvent(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                            LocalTime startTime, LocalTime endTime, String description, String imagePath) throws IOException {
+    public void createEvent(String title, String location, LocalDate startDate, LocalDate endDate,
+                            Time startTime, Time endTime, String description, String imagePath) throws IOException {
 
         Event event = new Event(title, location, startDate, endDate, startTime, endTime, description, imagePath);
 

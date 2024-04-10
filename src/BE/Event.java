@@ -1,6 +1,7 @@
 package BE;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -10,10 +11,10 @@ public class Event {
     private int statusId;
     private String title;
     private String location;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Time startTime;
+    private Time endTime;
     private String description;
     private String createdBy;
     private String assignedBy;
@@ -23,8 +24,8 @@ public class Event {
 
 
 
-    public Event(int id, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 LocalTime startTime, LocalTime endTime, String description, String createdBy, String imagePath, String coordinators) {
+    public Event(int id, String title, String location, LocalDate startDate, LocalDate endDate,
+                 Time startTime, Time endTime, String description, String createdBy, String imagePath, String coordinators) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -38,8 +39,8 @@ public class Event {
         this.coordinators = coordinators;
     }
 
-    public Event(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 LocalTime startTime, LocalTime endTime, String description, String imagePath) {
+    public Event(String title, String location, LocalDate startDate, LocalDate endDate,
+                 Time startTime, Time endTime, String description, String imagePath) {
         this.title = title;
         this.location = location;
         this.startDate = startDate;
@@ -49,7 +50,7 @@ public class Event {
         this.description = description;
         this.imagePath = imagePath;
     }
-    public Event(String title, LocalDateTime startDate) {
+    public Event(String title, LocalDate startDate) {
         this.title = title;
         this.startDate = startDate;
     }
@@ -89,35 +90,35 @@ public class Event {
         this.location = location;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public LocalTime getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
