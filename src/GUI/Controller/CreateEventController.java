@@ -130,14 +130,30 @@ public class CreateEventController implements Initializable {
 
 
             eventModel.updateEvent(eventToEdit);
+            showAlert("Event has been updated successfully!");
         } else {
-
             eventModel.createEvent(title, location, startDate, endDate,
                     startTimeSql, endTimeSql, description, selectedImagePath);
-
+            showAlert("Event has been created successfully and can now be found in pending events!");
         }
+
+        // Clear all fields after event creation
+        clearFields();
     }
 
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearFields() {
+        eventTitleField.clear();
+        eventLocationField.clear();
+        eventDescriptionField.clear();
+    }
 
     @FXML
     private void handleImportImage(ActionEvent actionEvent) {
