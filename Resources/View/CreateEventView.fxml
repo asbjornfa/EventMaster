@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -15,7 +16,10 @@
 
 <AnchorPane prefHeight="541.0" prefWidth="910.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
    <children>
-      <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;" />
+      <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;">
+         <children>
+            <ImageView fx:id="imageEvent" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
       <VBox layoutX="304.0" layoutY="23.0" prefHeight="253.0" prefWidth="563.0" spacing="10.0" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="23.0">
          <children>
             <Label text="Event name" textFill="WHITE">
@@ -70,7 +74,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="167.0" layoutY="239.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="38.0" style="-fx-background-color: #ffff;" text="...">
+      <Button layoutX="167.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleImportImage" prefHeight="18.0" prefWidth="38.0" style="-fx-background-color: #ffff;" text="...">
          <font>
             <Font size="11.0" />
          </font></Button>

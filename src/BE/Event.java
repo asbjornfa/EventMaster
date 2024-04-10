@@ -18,9 +18,12 @@ public class Event {
     private String createdBy;
     private String assignedBy;
     private LocalDateTime dateApproval;
+    private String imagePath;
+
+
 
     public Event(int id, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 LocalTime startTime, LocalTime endTime, String description, String createdBy) {
+                 LocalTime startTime, LocalTime endTime, String description, String createdBy, String imagePath) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -30,10 +33,11 @@ public class Event {
         this.endTime = endTime;
         this.description = description;
         this.createdBy = createdBy;
+        this.imagePath = imagePath;
     }
 
     public Event(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 LocalTime startTime, LocalTime endTime, String description) {
+                 LocalTime startTime, LocalTime endTime, String description, String imagePath) {
         this.title = title;
         this.location = location;
         this.startDate = startDate;
@@ -41,6 +45,7 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
+        this.imagePath = imagePath;
     }
     public Event(String title, LocalDateTime startDate) {
         this.title = title;
@@ -51,7 +56,6 @@ public class Event {
         return id;
     }
 
-    //Skal vi nok ikke bruge, bliver der lige for nu.
     public void setId(int id) {
         this.id = id;
     }
@@ -119,10 +123,19 @@ public class Event {
     }
 
     public String getCreatedBy() {
+
         return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

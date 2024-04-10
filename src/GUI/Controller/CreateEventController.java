@@ -6,15 +6,27 @@ import com.browniebytes.javafx.control.DateTimePicker;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ResourceBundle;
 
-public class CreateEventController {
+public class CreateEventController implements Initializable {
     public DateTimePicker DTPickerEnd;
     @FXML
     private DateTimePicker DTPickerStart;
@@ -28,10 +40,19 @@ public class CreateEventController {
     private Event eventToEdit;
     @FXML
     private MFXButton btnCreate;
+    @FXML
+    private ImageView imageEvent;
+    private String imagePath;
+
 
 
     public CreateEventController() throws Exception {
         eventModel = new EventModel();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setImage();
     }
 
     public void setEventModel(EventModel eventModel) {
@@ -39,11 +60,24 @@ public class CreateEventController {
         this.eventModel = eventModel;
     }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+        setImage();
+    }
+
     public void setEventToEdit(Event event) {
         this.eventToEdit = event;
         // Populate UI fields with the data from eventToEdit
         setEventInformation(event);
     }
+
+    public void setImage() {
+        if (imagePath != null && !imagePath.isEmpty()) {
+            Image image = new Image(imagePath);
+            imageEvent.setImage(image);
+        }
+    }
+
     private void setEventInformation(Event event) {
         if(event != null){
             eventTitleField.setText(event.getTitle());
@@ -52,7 +86,6 @@ public class CreateEventController {
 
             btnCreate.setText("Save");
             btnCreate.setStyle("-fx-background-color: #FBBB2C");
-
         }
     }
 
@@ -64,6 +97,7 @@ public class CreateEventController {
         String location = eventLocationField.getText();
         String description = eventDescriptionField.getText();
 
+
         LocalDateTime selectedDateTimeStart = DTPickerStart.dateTimeProperty().get();
         LocalDateTime selectedDateTimeEnd = DTPickerEnd.dateTimeProperty().get();
 
@@ -72,6 +106,8 @@ public class CreateEventController {
 
         LocalDate endDate = selectedDateTimeEnd.toLocalDate();
         LocalTime endTime = selectedDateTimeEnd.toLocalTime();
+
+
 
         if (eventToEdit != null) {
 
@@ -88,13 +124,31 @@ public class CreateEventController {
         } else {
 
             eventModel.createEvent(title, location, startDate.atStartOfDay(), endDate.atStartOfDay(),
-                    startTime, endTime, description);
+                    startTime, endTime, description, imagePath);
 
         }
 
 
     }
 
+
+    @FXML
+    private void handleImportImage(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ChooseImageEventView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load BuyTicket2.fxml");
+            alert.showAndWait();
+        }
+
+    }
 
 
 }

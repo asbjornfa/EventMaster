@@ -28,9 +28,9 @@ public class EventModel {
     }
 
     public void createEvent(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                            LocalTime startTime, LocalTime endTime, String description) throws IOException {
+                            LocalTime startTime, LocalTime endTime, String description, String imagePath) throws IOException {
 
-        Event event = new Event(title, location, startDate, endDate, startTime, endTime, description);
+        Event event = new Event(title, location, startDate, endDate, startTime, endTime, description, imagePath);
 
         eventManager.createEvent(event);
 
