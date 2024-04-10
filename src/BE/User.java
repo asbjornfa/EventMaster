@@ -54,8 +54,9 @@ public class User {
         this.positionId = positionId;
     }
 
-
-
+    public User(String name) {
+        this.name = name;
+    }
 
 
     public int getId() {

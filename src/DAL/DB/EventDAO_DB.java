@@ -25,7 +25,11 @@ public class EventDAO_DB implements IEventDataAccess {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.Event";
+            String sql = "SELECT e.*, STRING_AGG(u.username, ', ') AS coordinators\n" +
+                    "FROM Event e\n" +
+                    "left JOIN AssignedEventCoordinators ec ON e.id = ec.eventId\n" +
+                    "left JOIN users u ON ec.userId = u.id\n" +
+                    "GROUP BY e.id,e.createdBy,e.description,e.endDate,e.endTime,e.location,e.startDate,e.startTime,e.title, e.imagePath;";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -40,10 +44,11 @@ public class EventDAO_DB implements IEventDataAccess {
                 String description = rs.getString("description");
                 String createdBy = rs.getString("createdBy");
                 String imagePath = rs.getString("imagePath");
+                String coordinators = rs.getString("coordinators");
 
 
                 // Create an Event object and add it to the list
-                Event event = new Event(id, title, location, startDate, endDate, startTime, endTime, description, createdBy, imagePath);
+                Event event = new Event(id, title, location, startDate, endDate, startTime, endTime, description, createdBy, imagePath,coordinators);
                 allEvents.add(event);
             }
 

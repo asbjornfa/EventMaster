@@ -163,7 +163,7 @@ public class MainViewController implements Initializable {
         menuHome.setVisible(true);
         menuAuthorisedLogin.setVisible(true);
 
-        menuActiveEvents.setVisible(false);
+        menuActiveEvents.setVisible(true);
         menuCreateEvent.setVisible(true);
         menuPendingEvents.setVisible(true);
         menuReservations.setVisible(true);

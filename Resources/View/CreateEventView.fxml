@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="541.0" prefWidth="910.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
+<AnchorPane prefHeight="494.0" prefWidth="890.0" style="-fx-background-color: #373737;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateEventController">
    <children>
-      <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;">
+      <AnchorPane layoutX="41.0" layoutY="23.0" prefHeight="70.0" prefWidth="200.0" style="-fx-background-color: #ffff; -fx-background-radius: 6;" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.0">
          <children>
-            <ImageView fx:id="imageEvent" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fx:id="imageEvent" fitHeight="207.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
-      <VBox layoutX="304.0" layoutY="23.0" prefHeight="253.0" prefWidth="563.0" spacing="10.0" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="23.0">
+      <VBox layoutX="304.0" layoutY="23.0" prefHeight="207.0" prefWidth="543.0" spacing="10.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="20.0">
          <children>
             <Label text="Event name" textFill="WHITE">
                <font>
@@ -37,7 +37,7 @@
                </font></Label>
             <TextField fx:id="eventLocationField" style="-fx-background-radius: 6;" />
             <Pane prefHeight="6.0" prefWidth="563.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="317.0" prefWidth="543.0">
                <children>
                   <VBox prefHeight="97.0" prefWidth="316.0" spacing="10.0">
                      <children>
@@ -64,29 +64,25 @@
             </HBox>
          </children>
       </VBox>
-      <AnchorPane layoutX="41.0" layoutY="307.0" prefHeight="253.0" prefWidth="407.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="462.0" AnchorPane.topAnchor="307.0">
-         <children>
-            <TextArea fx:id="eventDescriptionField" layoutY="45.0" prefHeight="186.0" prefWidth="387.0" style="-fx-background-radius: 6;" wrapText="true" />
-            <Label layoutY="7.0" text="Description" textFill="WHITE">
-               <font>
-                  <Font name="Arial Black" size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <Button layoutX="167.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleImportImage" prefHeight="18.0" prefWidth="38.0" style="-fx-background-color: #ffff;" text="...">
+      <Button layoutX="172.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleImportImage" prefHeight="18.0" prefWidth="38.0" style="-fx-background-color: #ffff;" text="...">
          <font>
             <Font size="11.0" />
          </font></Button>
-      <Label layoutX="68.0" layoutY="238.0" prefHeight="26.0" prefWidth="99.0" text="Choose image" textFill="#b5b4b4">
+      <Label layoutX="73.0" layoutY="245.0" prefHeight="26.0" prefWidth="99.0" text="Choose image" textFill="#b5b4b4">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <MFXButton fx:id="btnCreate" layoutX="735.0" layoutY="552.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
+      <MFXButton fx:id="btnCreate" layoutX="716.0" layoutY="432.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
       </MFXButton>
+      <Label layoutX="40.0" layoutY="293.0" text="Description" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="eventDescriptionField" layoutX="40.0" layoutY="320.0" prefHeight="140.0" prefWidth="387.0" style="-fx-background-radius: 6;" wrapText="true" />
    </children>
 </AnchorPane>

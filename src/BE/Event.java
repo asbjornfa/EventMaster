@@ -19,11 +19,12 @@ public class Event {
     private String assignedBy;
     private LocalDateTime dateApproval;
     private String imagePath;
+    private String coordinators;
 
 
 
     public Event(int id, String title, String location, LocalDateTime startDate, LocalDateTime endDate,
-                 LocalTime startTime, LocalTime endTime, String description, String createdBy, String imagePath) {
+                 LocalTime startTime, LocalTime endTime, String description, String createdBy, String imagePath, String coordinators) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -34,6 +35,7 @@ public class Event {
         this.description = description;
         this.createdBy = createdBy;
         this.imagePath = imagePath;
+        this.coordinators = coordinators;
     }
 
     public Event(String title, String location, LocalDateTime startDate, LocalDateTime endDate,
@@ -50,6 +52,11 @@ public class Event {
     public Event(String title, LocalDateTime startDate) {
         this.title = title;
         this.startDate = startDate;
+    }
+
+    public Event(int id, String title) {
+        this.id = id;
+        this.title = title;
     }
 
     public int getId() {
@@ -137,5 +144,13 @@ public class Event {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public String getCoordinators() {
+        return coordinators;
+    }
+
+    public void setCoordinators(String coordinators) {
+        this.coordinators = coordinators;
     }
 }

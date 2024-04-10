@@ -66,6 +66,18 @@ public class UsersViewController implements Initializable {
         colPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
 
         tblViewUsers.setItems(userModel.getObservableUsers());
+
+        // Disable the button by default
+        btnDeleteUser.setDisable(true);
+        btnUpdateUser.setDisable(true);
+
+        // Add a listener to the TableView's selection model
+        tblViewUsers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // Enable the button if a row is selected, otherwise disable
+            btnUpdateUser.setDisable(newSelection == null);
+            btnDeleteUser.setDisable(newSelection == null);
+
+    });
     }
 
     public void clearSelection() {
@@ -82,9 +94,7 @@ public class UsersViewController implements Initializable {
 
             clearSelection();
         }
-        else {
-            btnDeleteUser.setDisable(true);
-        }
+
     }
 
     @FXML
@@ -111,10 +121,6 @@ public class UsersViewController implements Initializable {
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
-
-
-        } else {
-            btnUpdateUser.setDisable(true);
         }
     }
 
