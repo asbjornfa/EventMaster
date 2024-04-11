@@ -68,6 +68,7 @@ public class MainViewController implements Initializable {
     private EventModel eventModel;
     private UserModel userModel;
 
+    private LoginViewController loginViewController;
 
 
     public void setEventModel(EventModel eventModel) {
@@ -92,10 +93,17 @@ public class MainViewController implements Initializable {
         }
     }
 
+    // Method to set the LoginViewController
+    public void setLoginViewController(LoginViewController loginViewController) {
+        this.loginViewController = loginViewController;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
         updateMenuForInitialState();
+
+
         //loadActiveEvents();
 
     }
@@ -163,16 +171,16 @@ public class MainViewController implements Initializable {
         menuHome.setVisible(true);
         menuAuthorisedLogin.setVisible(true);
 
-        menuActiveEvents.setVisible(true);
-        menuCreateEvent.setVisible(true);
-        menuPendingEvents.setVisible(true);
-        menuReservations.setVisible(true);
+        menuActiveEvents.setVisible(false);
+        menuCreateEvent.setVisible(false);
+        menuPendingEvents.setVisible(false);
+        menuReservations.setVisible(false);
         menuLogOut.setVisible(false);
         menuCreateTicket.setVisible(false);
         menuUsers.setVisible(false);
         menuCreateUser.setVisible(false);
         menuBuyTickets.setVisible(false);
-        menuTicketInformation.setVisible(true);
+        menuTicketInformation.setVisible(false);
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
@@ -193,7 +201,7 @@ public class MainViewController implements Initializable {
             // Pass the stage to the LoginViewController
             LoginViewController loginViewController = loader.getController();
             loginViewController.setStage(stage);
-
+            loginViewController.setMainController(this); // Set the MainViewController instance
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -276,14 +284,12 @@ public class MainViewController implements Initializable {
     // Method to reopen the homepage
     public void reopenHomepage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
             Parent root = loader.load();
 
             // Get the stage from the main view
             Stage stage = (Stage) mainBorderPane.getScene().getWindow();
             stage.setScene(new Scene(root));
-
-            // Optional: You may want to update the menu or perform any other initialization here
 
             stage.show();
         } catch (IOException e) {

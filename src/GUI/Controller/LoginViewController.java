@@ -119,6 +119,7 @@ public class LoginViewController implements Initializable {
 
         MainViewController mainController = loader.getController();
         mainController.setUser(authenticatedUser);
+        mainController.setLoginViewController(this);
 
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
@@ -141,10 +142,10 @@ public class LoginViewController implements Initializable {
 
     // Handle the cancel button click event
     public void cancelBtnHandle(ActionEvent event) {
+            mainController.reopenHomepage();
 
-        mainController.reopenHomepage();
 
         // Close the login stage
         stage.close();
     }
-}
+    }
