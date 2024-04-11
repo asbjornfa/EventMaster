@@ -23,7 +23,7 @@ public class TicketDAO_DB implements ITicket {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.Ticket ";
+            String sql = "SELECT * FROM dbo.TicketsForEvent ";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class TicketDAO_DB implements ITicket {
     @Override
     public Ticket createTicket(Ticket ticket) throws IOException {
         // SQL statement to insert a new ticket into the tickets table
-        String sql = "INSERT INTO dbo.Ticket (price, ticketTypeId, eventId, quantityAvailable) " +
+        String sql = "INSERT INTO dbo.TicketsForEvents (price, ticketTypeId, eventId, quantityAvailable) " +
                 "VALUES (?, ?, ?,?)";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -77,7 +77,7 @@ public class TicketDAO_DB implements ITicket {
 
     @Override
     public Ticket deleteTicket(Ticket ticket) throws IOException {
-        String sql = "DELETE FROM dbo.Ticket WHERE Id =(?);";
+        String sql = "DELETE FROM dbo.TicketsForEvents WHERE Id =(?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
