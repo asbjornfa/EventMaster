@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="187.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.PdfTicketController">
+   <children>
+      <ImageView fitHeight="201.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Ticket-layout.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="430.0" layoutY="22.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #ffff;" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="430.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="22.0">
+         <children>
+            <ImageView fx:id="imageQR" fitHeight="150.0" fitWidth="156.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="labelEventName" layoutX="65.0" layoutY="14.0" text="Event Navn" />
+      <Label fx:id="labelLocation" layoutX="65.0" layoutY="39.0" text="Lokation" />
+      <Label fx:id="labelStartDate" layoutX="65.0" layoutY="64.0" text="Start dato" />
+      <Label fx:id="labelStartTime" layoutX="140.0" layoutY="64.0" text="Start Tid" />
+      <Label fx:id="labelTicketType" layoutX="342.0" layoutY="14.0" text="Ticket Type" />
+   </children>
+</AnchorPane>
