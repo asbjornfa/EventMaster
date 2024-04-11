@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #363636;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AddReservationViewController">
+    <children>
+        <Label layoutX="156.0" layoutY="19.0" text="Event name" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="166.0" layoutY="53.0" text="Event name" textFill="WHITE">
+            <font>
+                <Font name="System Italic" size="14.0" />
+            </font>
+        </Label>
+        <MenuButton fx:id="ticketTypeDropDown" layoutX="41.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClickTicketTypeDropDown" style="-fx-background-color: white;" text="Ticket type">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+            </items>
+        </MenuButton>
+        <Label layoutX="41.0" layoutY="165.0" text="Ticket type" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="176.0" layoutY="167.0" text="Quantity" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtFieldQuantity" layoutX="178.0" layoutY="197.0" prefHeight="26.0" prefWidth="65.0" />
+        <Label layoutX="41.0" layoutY="96.0" text="Costumer Email" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtFieldCostumerEmail" layoutX="41.0" layoutY="125.0" prefHeight="26.0" prefWidth="204.0" />
+        <MFXButton layoutX="119.0" layoutY="254.0" onAction="#onClickCancel" style="-fx-background-color: #C82828;" text="Cancel" />
+        <MFXButton layoutX="243.0" layoutY="254.0" onAction="#onClickSave" style="-fx-background-color: #309E2D;" text="Save" />
+    </children>
+</AnchorPane>

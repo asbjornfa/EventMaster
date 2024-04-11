@@ -138,7 +138,7 @@ public class MainViewController implements Initializable {
             menuUsers.setVisible(true);
             menuCreateUser.setVisible(true);
             menuHome.setVisible(true);
-            menuActiveEvents.setVisible(true);
+            menuActiveEvents.setVisible(false);
             menuPendingEvents.setVisible(true);
             menuLogOut.setVisible(true);
 
@@ -154,8 +154,8 @@ public class MainViewController implements Initializable {
             menuHome.setVisible(true);
             menuActiveEvents.setVisible(true);
             menuCreateEvent.setVisible(true);
-            menuPendingEvents.setVisible(true);
-            menuReservations.setVisible(true);
+            menuPendingEvents.setVisible(false);
+            menuReservations.setVisible(false);
             menuCreateTicket.setVisible(false);
             menuBuyTickets.setVisible(false);
             menuTicketInformation.setVisible(false);
@@ -278,6 +278,17 @@ public class MainViewController implements Initializable {
     }
 
     public void logoutHandle(ActionEvent actionEvent) {
+        try {
+            // Close the current stage
+            Stage currentStage = (Stage) mainBorderPane.getScene().getWindow();
+            currentStage.close();
+
+            // Reopen the login page
+            reopenLogin();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Handle error while logging out
+        }
     }
 
 
@@ -295,6 +306,26 @@ public class MainViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             // Handle error loading homepage
+        }
+    }
+
+    // Method to reopen the login page
+    private void reopenLogin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Login");
+            stage.show();
+
+            // Pass the stage to the LoginViewController
+            LoginViewController loginViewController = loader.getController();
+            loginViewController.setStage(stage);
+            loginViewController.setMainController(this); // Set the MainViewController instance
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle error loading login page
         }
     }
 

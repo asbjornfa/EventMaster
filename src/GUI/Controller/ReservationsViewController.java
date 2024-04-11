@@ -26,10 +26,14 @@ public class ReservationsViewController implements Initializable {
     private TableColumn<Reservations, String> colEmail;
     @FXML
     private TableColumn<Reservations, String> colEvent;
+
     @FXML
-    private TableColumn colTickets;
+    private TableColumn colTicketType;
+
     @FXML
-    private TableColumn colStatus;
+    private TableColumn colQuantity;
+
+
     private ReservationManager reservationManager;
     private ReservationModel reservationModel;
 
