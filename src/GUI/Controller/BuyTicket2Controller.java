@@ -7,7 +7,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+
 public class BuyTicket2Controller {
+   /*
     @FXML
     private TextField fieldFirstName;
     @FXML
@@ -22,11 +24,11 @@ public class BuyTicket2Controller {
 
     @FXML
     private void handleReserveTicket(ActionEvent actionEvent) throws IOException {
-        String firstName = fieldFirstName.getText();
-        String lastName = fieldLastName.getText();
         String email = fieldEmail.getText();
 
-        reservationModel.createReservation(firstName, lastName, email);
+        reservationModel.createReservation(email);
 
     }
+
+    */
 }

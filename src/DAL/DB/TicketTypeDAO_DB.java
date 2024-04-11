@@ -1,14 +1,14 @@
 package DAL.DB;
 
-import BE.Ticket_type;
-import DAL.ITicket_type;
+import BE.TicketType;
+import DAL.ITicketType;
 
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketTypeDAO_DB implements ITicket_type {
+public class TicketTypeDAO_DB implements ITicketType {
     private MyDatabaseConnector databaseConnector;
 
 
@@ -16,20 +16,20 @@ public class TicketTypeDAO_DB implements ITicket_type {
         databaseConnector = new MyDatabaseConnector();
     }
     @Override
-    public List<Ticket_type> getAllTicketType() throws SQLException {
-        ArrayList<Ticket_type> allTicketTypes = new ArrayList<>();
+    public List<TicketType> getAllTicketType() throws SQLException {
+        ArrayList<TicketType> allTicketTypes = new ArrayList<>();
 
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String  sql = "SELECT * FROM dbo.Ticket_type";
+            String  sql = "SELECT * FROM dbo.TicketType";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()){
                     int id = rs.getInt("id");
                     String title = rs.getString("Title");
 
-                    Ticket_type ticket_type = new Ticket_type(id, title);
+                    TicketType ticket_type = new TicketType(id, title);
                     allTicketTypes.add(ticket_type);
             }
             return allTicketTypes;
@@ -37,28 +37,28 @@ public class TicketTypeDAO_DB implements ITicket_type {
     }
 
     @Override
-    public Ticket_type createTicketType(Ticket_type ticket_type) throws SQLException {
-            String sql = "INSERT INTO dbo.Ticket_type (Title) VALUES (?)";
+    public TicketType createTicketType(TicketType ticketType) throws SQLException {
+            String sql = "INSERT INTO dbo.TicketType (Title) VALUES (?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql))
              {
 
 
-            stmt.setString(1, ticket_type.getTitle());
+            stmt.setString(1, ticketType.getTitle());
 
             stmt.executeUpdate();
 
 
 
             }
-            return ticket_type;
+            return ticketType;
         }
 
 
 
     @Override
-    public Ticket_type deleteTicketType(Ticket_type ticket_type) {
+    public TicketType deleteTicketType(TicketType ticketType) {
         return null;
     }
 }

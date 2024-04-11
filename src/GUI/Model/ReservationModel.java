@@ -26,9 +26,9 @@ public class ReservationModel {
         return reservationsToBeViewed;
     }
 
-    public void createReservation(String firstName, String lastName, String email) throws IOException {
+    public void createReservation(String email) throws IOException {
 
-        Reservations reservations = new Reservations(firstName, lastName, email);
+        Reservations reservations = new Reservations(email);
 
         reservationManager.createReservation(reservations);
 

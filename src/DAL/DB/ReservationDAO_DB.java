@@ -29,13 +29,11 @@ public class ReservationDAO_DB implements IReservations {
 
             while (rs.next()) {
                 // Map DB row to Reservations object
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
                 String email = rs.getString("email");
                 int id = rs.getInt("id");
 
                 // Create an Event object and add it to the list
-                Reservations reservations = new Reservations(id, firstName, lastName, email);
+                Reservations reservations = new Reservations(id, email);
                 allReservations.add(reservations);
             }
 
@@ -50,16 +48,14 @@ public class ReservationDAO_DB implements IReservations {
     @Override
     public Reservations createReservation(Reservations reservations) throws IOException {
         // SQL statement to insert a new event into the events table
-        String sql = "INSERT INTO dbo.Reservations (firstName, lastName, email) " +
-                "VALUES (?, ?, ?)";
+        String sql = "INSERT INTO dbo.Reservations (email) " +
+                "VALUES (?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Bind parameters
-            stmt.setString(1, reservations.getFirstName());
-            stmt.setString(2, reservations.getLastName());
-            stmt.setString(3, reservations.getEmail());
+            stmt.setString(1, reservations.getEmail());
 
             // Execute the SQL statement to insert the new event
             stmt.executeUpdate();

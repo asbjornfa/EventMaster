@@ -1,7 +1,6 @@
 package GUI.Model;
 
 import BE.Ticket;
-import BE.Ticket_type;
 import BLL.TicketManager;
 
 import javafx.collections.FXCollections;
@@ -26,8 +25,8 @@ public class TicketModel {
         return ticketToBeViewed;
     }
 
-    public void createTicket(int price, String ticket_description, int ticket_typeId) throws IOException {
-        Ticket ticket = new Ticket(price,ticket_description, ticket_typeId);
+    public void createTicket(int price, int ticketTypeId, int eventId, int quantityAvailable) throws IOException {
+        Ticket ticket = new Ticket(price,ticketTypeId,eventId,quantityAvailable);
 
         ticketManager.createTicket(ticket);
         ticketToBeViewed.add(ticket);

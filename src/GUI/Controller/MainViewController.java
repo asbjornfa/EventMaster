@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
+   @FXML
+    private MenuItem menuTickets;
     @FXML
     private MenuItem menuTicketInformation;
 
@@ -174,13 +176,14 @@ public class MainViewController implements Initializable {
         menuActiveEvents.setVisible(false);
         menuCreateEvent.setVisible(false);
         menuPendingEvents.setVisible(false);
-        menuReservations.setVisible(false);
+        menuReservations.setVisible(true);
         menuLogOut.setVisible(false);
         menuCreateTicket.setVisible(false);
         menuUsers.setVisible(false);
         menuCreateUser.setVisible(false);
         menuBuyTickets.setVisible(false);
         menuTicketInformation.setVisible(false);
+        menuTickets.setVisible(true);
     }
 
     public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
@@ -337,5 +340,10 @@ public class MainViewController implements Initializable {
     public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
         AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
         mainBorderPane.setCenter(ticketInformation);
+    }
+
+    public void ticketsHandle(ActionEvent event) throws IOException {
+        AnchorPane tickets = FXMLLoader.load(getClass().getResource("/View/TicketViewTable.fxml"));
+        mainBorderPane.setCenter(tickets);
     }
 }

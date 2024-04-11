@@ -1,87 +1,34 @@
 package BE;
 
 public class Ticket {
-        private int id;
-        private int price;
-        private String ticket_layout;
-        private String ticket_description;
-        private int ticket_typeId;
-        private String title;
+    private int id;
+    private int price;
+    private int ticketTypeId;
+    private int eventId;
+    private int quantityAvailable;
 
 
-
-    public Ticket(int id, int price, String ticket_layout, String ticket_description) {
+    public Ticket(int id, int price, int ticketTypeId, int eventId, int quantityAvailable) {
         this.id = id;
         this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-    }
-    public Ticket( int price, String ticket_layout, String ticket_description, String title) {
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.title = title;
-    }
-    public Ticket( int price, String ticket_layout, String ticket_description, int ticket_typeId) {
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.ticket_typeId = ticket_typeId;
+        this.ticketTypeId = ticketTypeId;
+        this.eventId = eventId;
+        this.quantityAvailable = quantityAvailable;
     }
 
-    public Ticket( int price, String ticket_description, int ticket_typeId) {
+    public Ticket(int price, int ticketTypeId, int eventId, int quantityAvailable) {
         this.price = price;
-        this.ticket_description = ticket_description;
-        this.ticket_typeId = ticket_typeId;
+        this.ticketTypeId = ticketTypeId;
+        this.eventId = eventId;
+        this.quantityAvailable = quantityAvailable;
     }
-    public Ticket( int id, int price, String ticket_layout, String ticket_description, int ticket_typeId) {
-        this.id = id;
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.ticket_typeId = ticket_typeId;
-    }
-
-    public Ticket( int price, String ticket_layout, String ticket_description, String title, int ticket_typeId) {
-        this.id = id;
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.title = title;
-        this.ticket_typeId = ticket_typeId;
-    }
-
-    public Ticket( int id, int ticket_typeId,int price, String ticket_layout, String ticket_description, String title) {
-        this.id = id;
-        this.ticket_typeId = ticket_typeId;
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.title = title;
-
-    }
-    public Ticket( int id,int price, String ticket_layout, String ticket_description, String title) {
-        this.id = id;
-        this.price = price;
-        this.ticket_layout = ticket_layout;
-        this.ticket_description = ticket_description;
-        this.title = title;
-
-    }
-
-
 
     public int getId() {
         return id;
     }
 
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPrice() {
@@ -92,30 +39,27 @@ public class Ticket {
         this.price = price;
     }
 
-    public int getTicket_typeId() {
-        return ticket_typeId;
+    public int getTicketTypeId() {
+        return ticketTypeId;
     }
 
-    public void setTicket_typeId(int ticket_typeId) {
-        this.ticket_typeId = ticket_typeId;
-    }
-    public String getTicket_layout() {
-        return ticket_layout;
+    public void setTicketTypeId(int ticketTypeId) {
+        this.ticketTypeId = ticketTypeId;
     }
 
-    public void setTicket_layout(String ticket_layout) {
-        this.ticket_layout = ticket_layout;
+    public int getEventId() {
+        return eventId;
     }
 
-    public String getTicket_description() {
-        return ticket_description;
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
     }
 
-    public void setTicket_description(String ticket_description) {
-        this.ticket_description = ticket_description;
+    public int getQuantityAvailable() {
+        return quantityAvailable;
     }
 
-
+    public void setQuantityAvailable(int quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
+    }
 }
-
-

@@ -3,11 +3,9 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #363636;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateTicketViewController">
    <children>
@@ -21,12 +19,7 @@
             <Font name="System Italic" size="14.0" />
          </font>
       </Label>
-      <MenuButton fx:id="ticketTypeDropDown" layoutX="41.0" layoutY="190.0" mnemonicParsing="false" onAction="#onClickTicketTypeDropDown" style="-fx-background-color: white;" text="Ticket type">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
+      <MenuButton fx:id="ticketTypeDropDown" layoutX="41.0" layoutY="190.0" mnemonicParsing="false" onAction="#onClickTicketTypeDropDown" style="-fx-background-color: white;" text="Ticket type" />
       <Label layoutX="41.0" layoutY="160.0" text="Ticket type" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />

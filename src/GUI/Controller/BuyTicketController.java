@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BuyTicketController {
+    /*
     public void handleNext(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/BuyTicket2.fxml"));
@@ -25,4 +26,6 @@ public class BuyTicketController {
             alert.showAndWait();
         }
     }
+
+     */
 }

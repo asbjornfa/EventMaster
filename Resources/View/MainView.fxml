@@ -52,6 +52,7 @@
                                     <MenuItem fx:id="menuReservations" mnemonicParsing="false" onAction="#reservationsHandle" text="Reservations" />
                                     <MenuItem fx:id="menuLogOut" mnemonicParsing="false" onAction="#logoutHandle" text="Log out" />
                                     <MenuItem fx:id="menuBuyTickets" mnemonicParsing="false" text="buyTicket" />
+                                    <MenuItem fx:id="menuTickets" mnemonicParsing="false" onAction="#ticketsHandle" text="Tickets" />
                               </items>
                             </Menu>
                           </menus>

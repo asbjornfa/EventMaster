@@ -1,21 +1,21 @@
 package BE;
 
 
-public class Ticket_type {
+public class TicketType {
     private int id;
     private String title;
 
 
-    public Ticket_type(int id, String title) {
+    public TicketType(int id, String title) {
         this.id = id;
         this.title = title;
 
     }
-    public Ticket_type (String title){
+    public TicketType(String title){
         this.title = title;
     }
 
-    public Ticket_type(int id) {
+    public TicketType(int id) {
         this.id = id;
 
     }
