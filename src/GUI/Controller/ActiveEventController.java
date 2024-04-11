@@ -32,6 +32,9 @@ public class ActiveEventController implements Initializable {
     public TableColumn colAssigned;
 
     @FXML
+    private Button btnCreateTickets;
+
+    @FXML
     private Button btnAssign;
 
     private EventModel eventModel;
@@ -127,7 +130,36 @@ public class ActiveEventController implements Initializable {
 
     }
 
+        public void onClickCreateTickets(ActionEvent event) {
+
+            // Get the selected event
+            Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
+            try {
+                // Load the FXML file for CreateTicketView
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateTicketView.fxml"));
+                Parent root = loader.load();
+
+                // Access the controller
+                CreateTicketViewController createTicketController = loader.getController();
+
+                // Pass the eventId to the CreateTicketViewController
+                createTicketController.setEventTitle(tblViewEvents.getSelectionModel().getSelectedItem().getTitle());
+
+                // Pass the eventId to the CreateTicketViewController
+                createTicketController.setEventId(selectedEvent.getId()); // Pass the eventId here
 
 
+                // Create the scene
+                Scene scene = new Scene(root);
 
-}
+                // Create a new stage for the CreateTicketView
+                Stage createTicketStage = new Stage();
+                createTicketStage.setScene(scene);
+                createTicketStage.setTitle("Create Ticket");
+                createTicketStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+

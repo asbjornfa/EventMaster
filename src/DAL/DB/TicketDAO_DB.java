@@ -23,7 +23,10 @@ public class TicketDAO_DB implements ITicket {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT * FROM dbo.TicketsForEvent ";
+            String sql = "SELECT t.id, t.price, t.ticketTypeId, t.eventId, t.quantityAvailable, e.title AS eventTitle, tt.title AS ticketTypeTitle\n" +
+                    "FROM dbo.TicketsForEvent t\n" +
+                    "JOIN dbo.Event e ON t.eventId = e.id\n" +
+                    "JOIN dbo.TicketType tt ON t.ticketTypeId = tt.id";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -33,9 +36,11 @@ public class TicketDAO_DB implements ITicket {
                 int ticketTypeId = rs.getInt("ticketTypeId");
                 int eventId = rs.getInt("eventId");
                 int quantityAvailable = rs.getInt("quantityAvailable");
+                String eventTitle = rs.getString("eventTitle");
+                String ticketTypeTitle = rs.getString("ticketTypeTitle");
 
                 // Create an Ticket object and add it to the list
-                Ticket ticket = new Ticket(id, price, ticketTypeId, eventId, quantityAvailable);
+                Ticket ticket = new Ticket(id, price, ticketTypeId, eventId, quantityAvailable, eventTitle, ticketTypeTitle);
                 allTickets.add(ticket);
             }
 
@@ -53,7 +58,7 @@ public class TicketDAO_DB implements ITicket {
     @Override
     public Ticket createTicket(Ticket ticket) throws IOException {
         // SQL statement to insert a new ticket into the tickets table
-        String sql = "INSERT INTO dbo.TicketsForEvents (price, ticketTypeId, eventId, quantityAvailable) " +
+        String sql = "INSERT INTO dbo.TicketsForEvent (price, ticketTypeId, eventId, quantityAvailable) " +
                 "VALUES (?, ?, ?,?)";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -77,7 +82,7 @@ public class TicketDAO_DB implements ITicket {
 
     @Override
     public Ticket deleteTicket(Ticket ticket) throws IOException {
-        String sql = "DELETE FROM dbo.TicketsForEvents WHERE Id =(?);";
+        String sql = "DELETE FROM dbo.TicketsForEvent WHERE Id =(?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

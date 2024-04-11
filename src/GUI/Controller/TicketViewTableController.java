@@ -3,6 +3,9 @@ package GUI.Controller;
 import BE.Event;
 import BE.Ticket;
 import BE.TicketType;
+import DAL.DB.TicketDAO_DB;
+import GUI.Model.TicketModel;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,29 +18,40 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TicketViewTableController implements Initializable {
 
     @FXML
-    private TableColumn colEventName;
-
+    private TableColumn<Ticket, String> colEventName;
     @FXML
-    private TableColumn colPrice;
-
+    private TableColumn<Ticket, Integer> colPrice;
     @FXML
-    private TableColumn colTicketAvailable;
-
+    private TableColumn<Ticket, Integer> colTicketAvailable;
     @FXML
-    private TableColumn colTicketType;
+    private TableColumn<Ticket, String> colTicketType;
 
     @FXML
     private TableView<Ticket> tblViewEventTickets;
 
+    private TicketModel ticketModel;
+
+
+    public TicketViewTableController() throws SQLException, IOException {
+        ticketModel = new TicketModel();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        colEventName.setCellValueFactory(new PropertyValueFactory<>("eventTitle"));
+        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colTicketType.setCellValueFactory(new PropertyValueFactory<>("ticketTypeTitle"));
+        colTicketAvailable.setCellValueFactory(new PropertyValueFactory<>("quantityAvailable"));
 
+        tblViewEventTickets.setItems(ticketModel.getObservableTicket());
     }
 
     @FXML
@@ -45,29 +59,15 @@ public class TicketViewTableController implements Initializable {
 
     }
 
+
     @FXML
-    private void onClickCreateTicket(ActionEvent event) {
-        try {
-            // Load the FXML file for CreateTicketView
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateTicketView.fxml"));
-            Parent root = loader.load();
+    private void onClickDeleteTicket(ActionEvent event) throws IOException {
+        Ticket selected = tblViewEventTickets.getSelectionModel().getSelectedItem();
+        if (selected != null) {
 
-            // Create the scene
-            Scene scene = new Scene(root);
+            ticketModel.deleteTicket(selected);
 
-            // Create a new stage for the CreateTicketView
-            Stage createTicketStage = new Stage();
-            createTicketStage.setScene(scene);
-            createTicketStage.setTitle("Create Ticket");
-            createTicketStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
-
-    @FXML
-    void onClickDeleteTicket(ActionEvent event) {
-
     }
 
     @FXML

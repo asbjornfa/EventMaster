@@ -14,7 +14,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="166.0" layoutY="73.0" text="Event name" textFill="WHITE">
+      <Label fx:id="eventName" layoutX="166.0" layoutY="73.0" text="Event name" textFill="WHITE">
          <font>
             <Font name="System Italic" size="14.0" />
          </font>

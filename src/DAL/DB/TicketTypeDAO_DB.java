@@ -27,7 +27,7 @@ public class TicketTypeDAO_DB implements ITicketType {
 
             while (rs.next()){
                     int id = rs.getInt("id");
-                    String title = rs.getString("Title");
+                    String title = rs.getString("title");
 
                     TicketType ticket_type = new TicketType(id, title);
                     allTicketTypes.add(ticket_type);

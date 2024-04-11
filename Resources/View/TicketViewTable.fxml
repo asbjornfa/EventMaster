@@ -23,14 +23,6 @@
       </TableView>
       <HBox alignment="BOTTOM_CENTER" layoutX="49.0" layoutY="448.0" prefHeight="46.0" prefWidth="774.0" AnchorPane.bottomAnchor="28.600000000000023" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="49.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#onClickCreateTicket" prefHeight="26.0" prefWidth="174.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Create ticket for event" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="60.0" />
-               </HBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
             <Button mnemonicParsing="false" onAction="#onClickAddReservation" prefHeight="26.0" prefWidth="126.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Add reservation" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="30.0" />

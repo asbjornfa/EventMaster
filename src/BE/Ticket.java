@@ -6,14 +6,18 @@ public class Ticket {
     private int ticketTypeId;
     private int eventId;
     private int quantityAvailable;
+    private String eventTitle;
+    private String ticketTypeTitle;
 
 
-    public Ticket(int id, int price, int ticketTypeId, int eventId, int quantityAvailable) {
+    public Ticket(int id, int price, int ticketTypeId, int eventId, int quantityAvailable, String eventTitle, String ticketTypeTitle) {
         this.id = id;
         this.price = price;
         this.ticketTypeId = ticketTypeId;
         this.eventId = eventId;
         this.quantityAvailable = quantityAvailable;
+        this.eventTitle = eventTitle;
+        this.ticketTypeTitle = ticketTypeTitle;
     }
 
     public Ticket(int price, int ticketTypeId, int eventId, int quantityAvailable) {
@@ -61,5 +65,21 @@ public class Ticket {
 
     public void setQuantityAvailable(int quantityAvailable) {
         this.quantityAvailable = quantityAvailable;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    public String getTicketTypeTitle() {
+        return ticketTypeTitle;
+    }
+
+    public void setTicketTypeTitle(String ticketTypeTitle) {
+        this.ticketTypeTitle = ticketTypeTitle;
     }
 }
