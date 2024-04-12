@@ -41,6 +41,6 @@ public class ReservationModel {
         reservationManager.deleteReservation(reservations);
 
         reservationsToBeViewed.remove(reservations);
-        System.out.println("model");
+
     }
 }

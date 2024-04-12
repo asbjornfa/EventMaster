@@ -55,7 +55,22 @@ public class TicketViewTableController implements Initializable {
     }
 
     @FXML
-    void onClickAddReservation(ActionEvent event) {
+    void onClickAddReservation(ActionEvent event) throws IOException {
+
+        Ticket selectedTicketEvent = tblViewEventTickets.getSelectionModel().getSelectedItem();
+
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddReservationView.fxml"));
+        Parent root = loader.load();
+
+
+        // Create a new stage
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Add Reservation");
+
+        // Show the stage
+        stage.show();
 
     }
 

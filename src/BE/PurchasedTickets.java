@@ -7,14 +7,20 @@ public class PurchasedTickets {
     private int eventId;
     private String qrCode;
     private int quantity;
+    private String eventTitle;
+    private String ticketTypeTitle;
+    private String emailString;
 
-    public PurchasedTickets(int id, int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity) {
+    public PurchasedTickets(int id, int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity, String eventTitle, String ticketTypeTitle, String emailString) {
         this.id = id;
         this.reservationId = reservationId;
         this.ticketTypeId = ticketTypeId;
         this.eventId = eventId;
         this.qrCode = qrCode;
         this.quantity = quantity;
+        this.eventTitle = eventTitle;
+        this.ticketTypeTitle = ticketTypeTitle;
+        this.emailString = emailString;
     }
 
     public PurchasedTickets(int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity) {
@@ -71,5 +77,29 @@ public class PurchasedTickets {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getEventTitle() {
+        return eventTitle;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    public String getTicketTypeTitle() {
+        return ticketTypeTitle;
+    }
+
+    public void setTicketTypeTitle(String ticketTypeTitle) {
+        this.ticketTypeTitle = ticketTypeTitle;
+    }
+
+    public String getEmailString() {
+        return emailString;
+    }
+
+    public void setEmailString(String emailString) {
+        this.emailString = emailString;
     }
 }
