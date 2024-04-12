@@ -1,12 +1,8 @@
 package GUI.Controller;
 
-import com.google.zxing.qrcode.encoder.QRCode;
+import DTO.TicketDTO;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-
-
-import java.io.ByteArrayOutputStream;
-import java.util.UUID;
 
 public class PdfTicketController {
     public ImageView imageQR;
@@ -15,6 +11,8 @@ public class PdfTicketController {
     public Label labelStartDate;
     public Label labelStartTime;
     public Label labelTicketType;
+
+    private TicketDTO ticketDTO;
 
 
     public void upDateInformation(String eventName, String location, String startDate, String startTime, int ticketPrice){
