@@ -74,7 +74,7 @@ public class CreateTicketViewController implements Initializable {
         int quantityAvailable = Integer.parseInt(txtFieldQuantity.getText());
 
         try {
-            // Create the ticket in the database
+            // Create the evnetTickets in the database
             ticketModel.createTicket(price, ticketTypeId, eventId, quantityAvailable);
 
 
