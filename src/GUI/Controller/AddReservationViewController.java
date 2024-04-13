@@ -43,10 +43,9 @@ public class AddReservationViewController implements Initializable {
 
     }
 
-    public void setEvent(String eventTitle) {
-        this.eventTitle = eventTitle;
+    public void setEventData(String eventTitle, String ticketTypeTitle) {
         lblEventTitle.setText(eventTitle);
-
+        lblTicketType.setText(ticketTypeTitle);
     }
 
     @FXML
@@ -56,8 +55,9 @@ public class AddReservationViewController implements Initializable {
 
     @FXML
     public void onClickSave(ActionEvent event) {
+        String email = txtFieldCostumerEmail.getText(); // Get customer email from input field
+        String eventTitle = lblEventTitle.getText(); // Get event title from label
+        String ticketTypeTitle = lblTicketType.getText();
 
     }
-
-
 }
