@@ -307,8 +307,8 @@ public class MainViewController implements Initializable {
     }
 
     public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
-        AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
-        mainBorderPane.setCenter(ticketInformation);
+        /*AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
+        mainBorderPane.setCenter(ticketInformation);*/
     }
 
     public void ticketsHandle(ActionEvent event) throws IOException {
