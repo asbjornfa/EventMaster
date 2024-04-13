@@ -19,8 +19,9 @@
       </AnchorPane>
       <Label fx:id="labelEventName" layoutX="65.0" layoutY="14.0" text="Event Navn" />
       <Label fx:id="labelLocation" layoutX="65.0" layoutY="39.0" text="Lokation" />
-      <Label fx:id="labelStartDate" layoutX="65.0" layoutY="64.0" text="Start dato" />
+      <Label fx:id="labelStartDate" layoutX="62.0" layoutY="64.0" text="Start dato" />
       <Label fx:id="labelStartTime" layoutX="140.0" layoutY="64.0" text="Start Tid" />
       <Label fx:id="labelTicketType" layoutX="342.0" layoutY="14.0" text="Ticket Type" />
+      <Label fx:id="labelEmail" layoutX="74.0" layoutY="146.0" text="Email" />
    </children>
 </AnchorPane>

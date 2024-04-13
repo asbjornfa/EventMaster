@@ -10,8 +10,11 @@ public class PurchasedTickets {
     private String eventTitle;
     private String ticketTypeTitle;
     private String emailString;
+    private String eventLocation;
+    private String startDate;
+    private String startTime;
 
-    public PurchasedTickets(int id, int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity, String eventTitle, String ticketTypeTitle, String emailString) {
+    public PurchasedTickets(int id, int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity, String eventTitle, String ticketTypeTitle, String emailString, String eventLocation, String startDate, String startTime) {
         this.id = id;
         this.reservationId = reservationId;
         this.ticketTypeId = ticketTypeId;
@@ -21,6 +24,9 @@ public class PurchasedTickets {
         this.eventTitle = eventTitle;
         this.ticketTypeTitle = ticketTypeTitle;
         this.emailString = emailString;
+        this.eventLocation = eventLocation;
+        this.startDate = startDate;
+        this.startTime = startTime;
     }
 
     public PurchasedTickets(int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity) {
@@ -101,5 +107,29 @@ public class PurchasedTickets {
 
     public void setEmailString(String emailString) {
         this.emailString = emailString;
+    }
+
+    public String getEventLocation() {
+        return eventLocation;
+    }
+
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }

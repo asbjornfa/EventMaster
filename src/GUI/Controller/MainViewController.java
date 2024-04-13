@@ -57,9 +57,6 @@ public class MainViewController implements Initializable {
     private MenuItem menuLogOut;
 
     @FXML
-    private MenuItem menuPendingEvents;
-
-    @FXML
     private MenuItem menuReservations;
 
     @FXML
@@ -109,26 +106,7 @@ public class MainViewController implements Initializable {
         //loadActiveEvents();
 
     }
-    /*public void loadActiveEvents() {
-        try {
 
-            List<Event> activeEvents = eventModel.getObservableEvents();
-
-            for (int i = 0; i < activeEvents.size(); i++) {
-                Event event = activeEvents.get(i);
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EventSample.fxml"));
-                Node eventSampleView = loader.load();
-
-                EventSampleController eventSampleController = loader.getController();
-                eventSampleController.setData(event);
-
-                GridPane.setMargin(eventSampleView, new Insets(15));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
 
 
 
@@ -141,7 +119,6 @@ public class MainViewController implements Initializable {
             menuCreateUser.setVisible(true);
             menuHome.setVisible(true);
             menuActiveEvents.setVisible(false);
-            menuPendingEvents.setVisible(true);
             menuLogOut.setVisible(true);
 
             menuAuthorisedLogin.setVisible(false);
@@ -156,7 +133,6 @@ public class MainViewController implements Initializable {
             menuHome.setVisible(true);
             menuActiveEvents.setVisible(true);
             menuCreateEvent.setVisible(true);
-            menuPendingEvents.setVisible(false);
             menuReservations.setVisible(false);
             menuCreateTicket.setVisible(false);
             menuBuyTickets.setVisible(false);
@@ -174,15 +150,13 @@ public class MainViewController implements Initializable {
         menuAuthorisedLogin.setVisible(true);
 
         menuActiveEvents.setVisible(true);
-        menuCreateEvent.setVisible(false);
-        menuPendingEvents.setVisible(false);
+        menuCreateEvent.setVisible(true);
         menuReservations.setVisible(true);
-        menuLogOut.setVisible(false);
-        menuCreateTicket.setVisible(false);
-        menuUsers.setVisible(false);
-        menuCreateUser.setVisible(false);
-        menuBuyTickets.setVisible(false);
-        menuTicketInformation.setVisible(false);
+        menuLogOut.setVisible(true);
+        menuCreateTicket.setVisible(true);
+        menuUsers.setVisible(true);
+        menuCreateUser.setVisible(true);
+        menuTicketInformation.setVisible(true);
         menuTickets.setVisible(true);
     }
 
@@ -249,13 +223,13 @@ public class MainViewController implements Initializable {
     }
 
     public void pendingEventsHandle(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PendingEvents.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PendingEvents.fxml"));
         Parent pendingEventsView = loader.load();
 
         PendingEventsController pendingEventsController = loader.getController();
         pendingEventsController.setMainViewController(this);
 
-        mainBorderPane.setCenter(pendingEventsView);
+        mainBorderPane.setCenter(pendingEventsView);*/
     }
 
     public void setCenterView(Node node) {
@@ -266,7 +240,7 @@ public class MainViewController implements Initializable {
     }
 
     public void createTicketHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane createTicket = FXMLLoader.load(getClass().getResource("/View/CreateTicket.fxml"));
+        AnchorPane createTicket = FXMLLoader.load(getClass().getResource("/View/CreateTicketView.fxml"));
         mainBorderPane.setCenter(createTicket);
     }
 
@@ -330,11 +304,6 @@ public class MainViewController implements Initializable {
             e.printStackTrace();
             // Handle error loading login page
         }
-    }
-
-    public void buyTicketHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane buyTickets = FXMLLoader.load(getClass().getResource("/View/BuyTicket.fxml"));
-        mainBorderPane.setCenter(buyTickets);
     }
 
     public void handleTicketInformation(ActionEvent actionEvent) throws IOException {

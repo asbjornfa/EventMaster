@@ -25,7 +25,8 @@ public class PurchasedTicketsDAO_DB implements IPurchasedTickets {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String sql = "SELECT pt.id, pt.reservationId, pt.ticketTypeId, pt.eventId, pt.qrCode, pt.quantity, r.email AS emailString, e.title AS eventTitle, tt.title AS ticketTypeTitle\n" +
+            String sql = "SELECT pt.id, pt.reservationId, pt.ticketTypeId, pt.eventId, pt.qrCode, pt.quantity, r.email AS emailString, e.title AS eventTitle, " +
+                    "e.location AS eventLocation, e.startDate AS startDate, e.startTime AS startTime, tt.title AS ticketTypeTitle\n" +
                     "FROM dbo.PurchasedTickets pt\n" +
                     "join dbo.Reservations r ON pt.reservationId = r.id\n" +
                     "JOIN dbo.Event e ON pt.eventId = e.id\n" +
@@ -43,9 +44,12 @@ public class PurchasedTicketsDAO_DB implements IPurchasedTickets {
                 String eventTitle = rs.getString("eventTitle");
                 String ticketTypeTitle = rs.getString("ticketTypeTitle");
                 String emailString = rs.getString("emailString");
+                String eventLocation = rs.getString("eventLocation");
+                String startDate = rs.getString("startDate");
+                String startTime = rs.getString("startTime");
 
                 // Create an Event object and add it to the list
-                PurchasedTickets purchasedTickets = new PurchasedTickets(id, reservationId,ticketTypeId,eventId,qrCode,quantity, eventTitle, ticketTypeTitle, emailString);
+                PurchasedTickets purchasedTickets = new PurchasedTickets(id, reservationId,ticketTypeId,eventId,qrCode,quantity, eventTitle, ticketTypeTitle, emailString, eventLocation, startDate, startTime);
                 allPurchasedTickets.add(purchasedTickets);
             }
 
