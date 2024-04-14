@@ -13,6 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -64,6 +66,17 @@ public class ReservationsViewController implements Initializable {
     public void handlePrintTicket(ActionEvent actionEvent) {
         PurchasedTickets selectedticket = tblReservations.getSelectionModel().getSelectedItem();
 
+        /*if(selectedticket != null) {
+            try {
+                PdfTicketController pdfTicketController = new PdfTicketController();
+                pdfTicketController.generatePdf(String.valueOf(selectedticket), "Ticket.pdf");
+
+                if(Desktop.isDesktopSupported()) {
+                    File file = new File("")
+                }
+            } catch ()
+
+        }*/
 
     }
 

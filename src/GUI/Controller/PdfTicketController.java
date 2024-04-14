@@ -1,14 +1,25 @@
 package GUI.Controller;
 
 import BE.PurchasedTickets;
+import com.google.zxing.qrcode.encoder.QRCode;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
+import org.apache.pdfbox.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class PdfTicketController {
     public ImageView imageQR;
@@ -36,7 +47,17 @@ public class PdfTicketController {
 
     }
 
-    public static void generatePdf(String filename, String content) throws IOException {
+    public void generateQR(PurchasedTickets purchasedTickets) {
+        if (purchasedTickets != null) {
+            String data = purchasedTickets.getQrCode();
+        }
+
+
+    }
+
+    public void generatePdf(String filename, String content, Node node) throws IOException {
+        //int startX = 0;
+        //int startY =
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
@@ -47,6 +68,14 @@ public class PdfTicketController {
                 contentStream.newLineAtOffset(100, 700);
                 contentStream.showText(content);
                 contentStream.endText();
+
+                WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", out);
+                out.close();
+                InputStream in = new ByteArrayInputStream(out.toByteArray());
+                PDImageXObject pdImage = PDImageXObject.createFromByteArray(document, IOUtils.toByteArray(in), "snapshot");
+                //contentStream.drawImage(pdImage, startX, startY, width, height);
             }
             document.save(filename);
         } catch (IOException e) {
