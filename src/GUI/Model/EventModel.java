@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,6 +49,10 @@ public class EventModel {
         eventManager.deleteEvent(event);
 
         eventsToBeViewed.remove(event);
+    }
+
+    public Event getEventIdFromTitle(String eventTitle) throws SQLException {
+        return eventManager.getEventIdFromTitle(eventTitle);
     }
 
 }

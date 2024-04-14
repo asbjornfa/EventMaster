@@ -1,6 +1,7 @@
 package DAL.DB;
 
 import BE.Event;
+import BE.TicketType;
 import DAL.IEventDataAccess;
 
 import java.io.IOException;
@@ -155,5 +156,22 @@ public class EventDAO_DB implements IEventDataAccess {
 
         // Return the deleted event
         return event;
+    }
+
+    @Override
+    public Event getEventIdFromTitle(String eventTitle) throws SQLException {
+        String sql = "SELECT id FROM dbo.Event WHERE title = ?";
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, eventTitle);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                return new Event(id);
+            }
+        }
+        return null; // Return null
     }
 }

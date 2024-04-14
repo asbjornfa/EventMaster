@@ -1,15 +1,12 @@
 package GUI.Model;
 
-import BE.Event;
 import BE.Reservations;
-import BLL.EventManager;
 import BLL.ReservationManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.SQLException;
 
 public class ReservationModel {
     private ObservableList<Reservations> reservationsToBeViewed;
@@ -26,7 +23,7 @@ public class ReservationModel {
         return reservationsToBeViewed;
     }
 
-    public void createReservation(String email) throws IOException {
+    public Reservations createReservation(String email) throws IOException {
 
         Reservations reservations = new Reservations(email);
 
@@ -35,6 +32,7 @@ public class ReservationModel {
         reservationsToBeViewed.add(reservations);
 
 
+        return reservations;
     }
 
     public void deleteReservation(Reservations reservations) throws IOException {

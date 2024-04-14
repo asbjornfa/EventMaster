@@ -15,6 +15,7 @@ public class TicketTypeDAO_DB implements ITicketType {
     public TicketTypeDAO_DB() throws SQLException {
         databaseConnector = new MyDatabaseConnector();
     }
+
     @Override
     public List<TicketType> getAllTicketType() throws SQLException {
         ArrayList<TicketType> allTicketTypes = new ArrayList<>();
@@ -22,15 +23,15 @@ public class TicketTypeDAO_DB implements ITicketType {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            String  sql = "SELECT * FROM dbo.TicketType";
+            String sql = "SELECT * FROM dbo.TicketType";
             ResultSet rs = stmt.executeQuery(sql);
 
-            while (rs.next()){
-                    int id = rs.getInt("id");
-                    String title = rs.getString("title");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
 
-                    TicketType ticket_type = new TicketType(id, title);
-                    allTicketTypes.add(ticket_type);
+                TicketType ticket_type = new TicketType(id, title);
+                allTicketTypes.add(ticket_type);
             }
             return allTicketTypes;
         }
@@ -38,11 +39,10 @@ public class TicketTypeDAO_DB implements ITicketType {
 
     @Override
     public TicketType createTicketType(TicketType ticketType) throws SQLException {
-            String sql = "INSERT INTO dbo.TicketType (Title) VALUES (?)";
+        String sql = "INSERT INTO dbo.TicketType (Title) VALUES (?)";
 
         try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql))
-             {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 
             stmt.setString(1, ticketType.getTitle());
@@ -50,15 +50,32 @@ public class TicketTypeDAO_DB implements ITicketType {
             stmt.executeUpdate();
 
 
-
-            }
-            return ticketType;
         }
-
+        return ticketType;
+    }
 
 
     @Override
     public TicketType deleteTicketType(TicketType ticketType) {
         return null;
     }
+
+    @Override
+    public TicketType getTicketTypeIdFromTitle(String ticketTypeTitle) throws SQLException {
+        String sql = "SELECT * FROM dbo.TicketType WHERE title = ?";
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, ticketTypeTitle);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                return new TicketType(id, title);
+            }
+        }
+        return null; // Return null if the ticket type is not found
+    }
 }
+

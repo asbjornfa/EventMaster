@@ -6,6 +6,7 @@ import DAL.DB.EventDAO_DB;
 import DAL.IEventDataAccess;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class EventManager {
@@ -45,5 +46,9 @@ public class EventManager {
     public void deleteEvent(Event event) throws IOException {
 
         eventDAO.deleteEvent(event);
+    }
+
+    public Event getEventIdFromTitle(String eventTitle) throws SQLException {
+        return eventDAO.getEventIdFromTitle(eventTitle);
     }
 }

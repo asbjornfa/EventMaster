@@ -45,26 +45,34 @@ public class ReservationDAO_DB implements IReservations {
         }
     }
 
-    @Override
-    public Reservations createReservation(Reservations reservations) throws IOException {
-        // SQL statement to insert a new event into the events table
-        String sql = "INSERT INTO dbo.Reservations (email) " +
-                "VALUES (?)";
+    public Reservations createReservation(Reservations reservations) {
+        String sql = "INSERT INTO dbo.Reservations (email) VALUES (?);";
 
-        try (Connection conn = databaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = databaseConnector.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            // Bind parameters
+            //Bind parameters
             stmt.setString(1, reservations.getEmail());
 
-            // Execute the SQL statement to insert the new event
-            stmt.executeUpdate();
+            // Run the specified SQL statement
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating reservation failed, no rows affected.");
+            }
+
+            // Get the generated ID from the DB
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    reservations.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating reservation failed, no ID obtained.");
+                }
+            }
 
             return reservations;
-
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new IOException("Could not create reservation in database", e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -85,7 +93,6 @@ public class ReservationDAO_DB implements IReservations {
             throw new IOException("Could not delete reservation in database", e);
         }
 
-        System.out.println("DAO");
         return reservations;
 
     }

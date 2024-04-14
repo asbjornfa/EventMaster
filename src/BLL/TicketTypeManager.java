@@ -24,4 +24,8 @@ public class TicketTypeManager {
         return ticketTypeDAO.createTicketType(TicketType);
     }
 
+    public TicketType getTicketTypeIdFromTitle(String ticketTypeTitle) throws SQLException{
+        return ticketTypeDAO.getTicketTypeIdFromTitle(ticketTypeTitle);
+    }
+
 }

@@ -13,8 +13,17 @@ public class Reservations {
     public Reservations(String email) {
         this.email = email;
     }
+
+    public Reservations(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

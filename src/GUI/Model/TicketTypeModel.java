@@ -32,4 +32,9 @@ public class TicketTypeModel {
         viewTicketType.add(ticket_type);
     }
 
+    public TicketType getTicketTypeIdFromTitle(String ticketTypeTitle) throws SQLException{
+        return ticketTypeManager.getTicketTypeIdFromTitle(ticketTypeTitle);
+    }
+
+
 }

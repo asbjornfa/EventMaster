@@ -8,6 +8,7 @@ import DAL.IEventDataAccess;
 import DAL.IReservations;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReservationManager {
@@ -44,4 +45,6 @@ public class ReservationManager {
         reservationsDAO.deleteReservation(reservations);
         System.out.println("Manager");
     }
+
+
 }

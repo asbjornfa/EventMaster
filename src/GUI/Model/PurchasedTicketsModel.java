@@ -27,8 +27,8 @@ public class PurchasedTicketsModel {
         return purchasedTicketsToBeViewed;
     }
 
-    public void createPurchasedTickets(int reservationId, int ticketTypeId, int eventId, String qrCode, int quantity) throws IOException {
-        PurchasedTickets purchasedTickets = new PurchasedTickets(reservationId, ticketTypeId, eventId, qrCode, quantity);
+    public void createPurchasedTickets(int reservationsId, int ticketTypeId, int eventId, String qrCode, int quantity) throws IOException {
+        PurchasedTickets purchasedTickets = new PurchasedTickets(reservationsId, ticketTypeId, eventId, qrCode, quantity);
 
         purchasedTicketsManager.createPurchasedTickets(purchasedTickets);
         purchasedTicketsToBeViewed.add(purchasedTickets);

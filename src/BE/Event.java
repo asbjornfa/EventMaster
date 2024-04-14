@@ -60,6 +60,10 @@ public class Event {
         this.title = title;
     }
 
+    public Event(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
