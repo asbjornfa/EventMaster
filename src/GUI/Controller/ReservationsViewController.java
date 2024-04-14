@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -66,17 +67,19 @@ public class ReservationsViewController implements Initializable {
     public void handlePrintTicket(ActionEvent actionEvent) {
         PurchasedTickets selectedticket = tblReservations.getSelectionModel().getSelectedItem();
 
-        /*if(selectedticket != null) {
+        if(selectedticket != null) {
             try {
+
                 PdfTicketController pdfTicketController = new PdfTicketController();
-                pdfTicketController.generatePdf(String.valueOf(selectedticket), "Ticket.pdf");
+                pdfTicketController.upDateInformation(selectedticket);
 
-                if(Desktop.isDesktopSupported()) {
-                    File file = new File("")
-                }
-            } catch ()
+                // Her kalder vi generatePdf med paneTicket som argument
+                pdfTicketController.generatePdf((AnchorPane) root);
 
-        }*/
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 

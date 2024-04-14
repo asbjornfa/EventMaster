@@ -1,25 +1,22 @@
 package GUI.Controller;
 
 import BE.PurchasedTickets;
-import com.google.zxing.qrcode.encoder.QRCode;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.image.ImageView;
-import org.apache.pdfbox.io.IOUtils;
+import javafx.scene.layout.AnchorPane;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-import javax.imageio.ImageIO;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
 public class PdfTicketController {
     public ImageView imageQR;
@@ -29,11 +26,17 @@ public class PdfTicketController {
     public Label labelStartDate;
     public Label labelStartTime;
     public Label labelEmail;
+    public AnchorPane paneInner;
+    public AnchorPane paneTicket;
 
     private PurchasedTickets purchasedTickets;
 
+    public void setPaneTicket(AnchorPane paneTicket) {
+        this.paneTicket = paneTicket;
+    }
 
-    public void upDateInformation(PurchasedTickets purchasedTickets){
+
+    public void upDateInformation(PurchasedTickets purchasedTickets) {
         if (purchasedTickets != null) {
             labelEventName.setText(purchasedTickets.getEventTitle());
             labelLocation.setText(purchasedTickets.getEventLocation());
@@ -55,32 +58,45 @@ public class PdfTicketController {
 
     }
 
-    public void generatePdf(String filename, String content, Node node) throws IOException {
-        //int startX = 0;
-        //int startY =
-        try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage();
-            document.addPage(page);
+    public void generatePdf(AnchorPane paneTicket) throws IOException {
 
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
-                contentStream.beginText();
-                contentStream.newLineAtOffset(100, 700);
-                contentStream.showText(content);
-                contentStream.endText();
+        paneTicket.applyCss();
+        paneTicket.layout();
 
-                WritableImage snapshot = node.snapshot(new SnapshotParameters(), null);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", out);
-                out.close();
-                InputStream in = new ByteArrayInputStream(out.toByteArray());
-                PDImageXObject pdImage = PDImageXObject.createFromByteArray(document, IOUtils.toByteArray(in), "snapshot");
-                //contentStream.drawImage(pdImage, startX, startY, width, height);
-            }
-            document.save(filename);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Logning af dimensionerne af paneTicket
+        System.out.println("Width of paneTicket: " + paneTicket.getWidth());
+        System.out.println("Height of paneTicket: " + paneTicket.getHeight());
+        // Opret en WritableImage af din FXML-scene
+        WritableImage snapshot = new WritableImage((int) paneTicket.getWidth(), (int) paneTicket.getHeight());
+        paneTicket.snapshot(new SnapshotParameters(), snapshot);
+
+        // Konverter WritableImage til BufferedImage
+        Image fxImage = snapshot;
+        BufferedImage awtImage = SwingFXUtils.fromFXImage(fxImage, null);
+
+        // Opret en ny PDF
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        // Indsæt billedet af FXML-scenen i PDF'en
+        PDImageXObject pdImage = LosslessFactory.createFromImage(document, awtImage);
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+            contentStream.drawImage(pdImage, 0, 0);
         }
+
+        // Gem PDF-filen
+        document.save("C:\\Users\\asbjo\\IdeaProjects\\EventMaster\\Resources\\PDF\\output.pdf");
+        System.out.println("PDF created");
+        document.close();
+    }
+
+    public static void main(String[] args) throws IOException {
+
+
+
+
+
     }
 
 
