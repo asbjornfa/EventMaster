@@ -4,15 +4,26 @@ import BE.User;
 import GUI.Model.UserModel;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import javax.swing.border.Border;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,7 +31,6 @@ import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable {
     // Buttons
-    public Button cancelBtn;
     public Button logInBtn;
 
     // Input fields
@@ -39,6 +49,15 @@ public class LoginViewController implements Initializable {
         try {
             // Initialize the UserModel instance
             userModel = new UserModel();
+
+            // Add event listeners to reset border color when text fields are edited
+            enterUsername.textProperty().addListener((observable, oldValue, newValue) -> {
+                enterUsername.setStyle("-fx-border-color: white;");
+            });
+
+            enterPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+                enterPassword.setStyle("-fx-border-color: white;");
+            });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -84,8 +103,36 @@ public class LoginViewController implements Initializable {
 
         } else {
             // Authentication failed, show an error message
-            showAlert("Login Failed", "Invalid username or password");
+            showErrorFeedback();
         }
+    }
+
+    // Method to show error feedback
+    private void showErrorFeedback() {
+        enterUsername.setStyle("-fx-border-color: red;");
+        enterPassword.setStyle("-fx-border-color: red;");
+        // Shake animation for text fields
+        shakeNode(enterUsername);
+        shakeNode(enterPassword);
+    }
+
+    // Method to apply shake animation to a node
+    private void shakeNode(Node node) {
+        double originalTranslateX = node.getTranslateX();
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(node.translateXProperty(), 0)),
+                new KeyFrame(Duration.seconds(0.1), new KeyValue(node.translateXProperty(), -10)),
+                new KeyFrame(Duration.seconds(0.2), new KeyValue(node.translateXProperty(), 10)),
+                new KeyFrame(Duration.seconds(0.3), new KeyValue(node.translateXProperty(), -10)),
+                new KeyFrame(Duration.seconds(0.4), new KeyValue(node.translateXProperty(), 10)),
+                new KeyFrame(Duration.seconds(0.5), new KeyValue(node.translateXProperty(), -10)),
+                new KeyFrame(Duration.seconds(0.6), new KeyValue(node.translateXProperty(), 10)),
+                new KeyFrame(Duration.seconds(0.7), new KeyValue(node.translateXProperty(), -10)),
+                new KeyFrame(Duration.seconds(0.8), new KeyValue(node.translateXProperty(), 10)),
+                new KeyFrame(Duration.seconds(0.9), new KeyValue(node.translateXProperty(), -10)),
+                new KeyFrame(Duration.seconds(1), new KeyValue(node.translateXProperty(), originalTranslateX))
+        );
+        timeline.play();
     }
 
 
@@ -129,23 +176,5 @@ public class LoginViewController implements Initializable {
     }
 
 
-    // Show an alert message
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        // Set the alert title
-        alert.setTitle(title);
-        // Set the alert content
-        alert.setContentText(content);
-        // Show the alert and wait for it to be closed
-        alert.showAndWait();
-    }
 
-    // Handle the cancel button click event
-    public void cancelBtnHandle(ActionEvent event) {
-            mainController.reopenHomepage();
-
-
-        // Close the login stage
-        stage.close();
-    }
     }

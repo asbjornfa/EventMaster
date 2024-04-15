@@ -1,7 +1,9 @@
 
 import GUI.Controller.ActiveEventController;
+import GUI.Controller.LoginViewController;
 import GUI.Controller.MainViewController;
 import GUI.Model.EventModel;
+import GUI.Model.UserModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,15 +17,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        EventModel eventModel = new EventModel();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
         Parent root = loader.load();
 
-        MainViewController controller = loader.getController();
-        controller.setEventModel(eventModel);
+        LoginViewController loginController = loader.getController();
+        loginController.setStage(primaryStage);
 
         primaryStage.setScene(new Scene(root));
+        primaryStage.setTitle("Login");
         primaryStage.show();
     }
 }
