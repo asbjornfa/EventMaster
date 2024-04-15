@@ -69,8 +69,6 @@ public class ReservationsViewController implements Initializable {
 
         if(selectedticket != null) {
 
-            PdfTicketController pdfTicketController = new PdfTicketController();
-            pdfTicketController.upDateInformation(selectedticket);
 
             // Her kalder vi generatePdf med paneTicket som argument
             //pdfTicketController.generatePdf((AnchorPane) root);
@@ -79,25 +77,4 @@ public class ReservationsViewController implements Initializable {
 
     }
 
-    public void handleShowTicket(ActionEvent actionEvent) {
-        PurchasedTickets selectedTicket = tblReservations.getSelectionModel().getSelectedItem();
-
-        if(selectedTicket != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PdfTicketView.fxml"));
-                Parent root = loader.load();
-
-                PdfTicketController pdfTicketController = loader.getController();
-
-                pdfTicketController.upDateInformation(selectedTicket);
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 }

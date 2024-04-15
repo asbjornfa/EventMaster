@@ -1,25 +1,29 @@
 package GUI.Controller;
 
-import BE.Event;
-import BE.Reservations;
-import BE.Ticket;
-import BE.TicketType;
+import BE.*;
 import BLL.EventManager;
+import BLL.QRManager;
 import BLL.ReservationManager;
 import GUI.Model.*;
+import com.google.zxing.WriterException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,7 +83,10 @@ public class AddReservationViewController implements Initializable {
     }
 
     @FXML
-    public void onClickSave(ActionEvent event) {
+    public void onClickSave(ActionEvent event) throws IOException, WriterException {
+
+
+
         String email = txtFieldCostumerEmail.getText().trim(); // Get customer email from input field
         String eventTitle = lblEventTitle.getText(); // Get event title from label
         String ticketTypeTitle = lblTicketType.getText();
@@ -102,6 +109,17 @@ public class AddReservationViewController implements Initializable {
             return;
         }
 
+
+        UUID uniqueId = QRManager.generateUniqueUUID(email + eventTitle + ticketTypeTitle);
+        String uniqueString = uniqueId.toString();
+
+        try {
+            File gemtFil = QRManager.getQrCodeFile(uniqueString);
+        } catch (Exception e) {
+            System.out.println("Noget gik galt...\n" + e.getMessage());
+        }
+
+
         try {
             // Check if email already exists in the database
             Reservations existingReservation = reservationManager.getReservationByEmail(email);
@@ -109,13 +127,13 @@ public class AddReservationViewController implements Initializable {
                 // Use the existing reservation ID
                 TicketType ticketTypeId = ticketTypeModel.getTicketTypeIdFromTitle(ticketTypeTitle);
                 Event eventId = eventModel.getEventIdFromTitle(eventTitle);
-                purchasedTicketsModel.createPurchasedTickets(existingReservation.getId(), ticketTypeId.getId(), eventId.getId(), "Not in use yet", quantity);
+                purchasedTicketsModel.createPurchasedTickets(existingReservation.getId(), ticketTypeId.getId(), eventId.getId(), uniqueString, quantity);
             } else {
                 // Create a new reservation
                 Reservations newReservation = reservationModel.createReservation(email);
                 TicketType ticketTypeId = ticketTypeModel.getTicketTypeIdFromTitle(ticketTypeTitle);
                 Event eventId = eventModel.getEventIdFromTitle(eventTitle);
-                purchasedTicketsModel.createPurchasedTickets(newReservation.getId(), ticketTypeId.getId(), eventId.getId(), "Not in use yet", quantity);
+                purchasedTicketsModel.createPurchasedTickets(newReservation.getId(), ticketTypeId.getId(), eventId.getId(), uniqueString, quantity);
             }
 
             //Not working 
@@ -127,7 +145,6 @@ public class AddReservationViewController implements Initializable {
                 // Update the ticket in the database with the new quantityAvailable value
                 ticketModel.updateTicket(selectedTicket); // Pass the updated ticket object
             }
-
 
             // Close the window
             ((Stage) lblQuantity.getScene().getWindow()).close();
