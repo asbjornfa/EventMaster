@@ -7,12 +7,15 @@ import GUI.Model.UserModel;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -25,8 +28,11 @@ public class AssignCoordinatorsController implements Initializable {
     private Stage stage; // Reference to this stage
     private Event selectedEvent;
 
+
+
     private ActiveEventController activeEventController;
     private AssignCoordinatorModel assignCoordinatorModel;
+    private MainViewController mainViewController;
 
     @FXML
     private TableView<User> tblViewEventCoordinators;
@@ -52,6 +58,11 @@ public class AssignCoordinatorsController implements Initializable {
 
     }
 
+    // Method to set MainViewController
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
     public void setSelectedEvent(Event selectedEvent) {
         this.selectedEvent = selectedEvent;
     }
@@ -67,19 +78,23 @@ public class AssignCoordinatorsController implements Initializable {
     }
 
     @FXML
-    public void onClickBtnCancel(ActionEvent event) {
-        stage.close();
+    public void onClickBtnCancel(ActionEvent event) throws IOException {
+        mainViewController.setCenterView("/View/ActiveEvent.fxml");
+
     }
 
     @FXML
-    public void onClickBtnSave(ActionEvent event) {
+    public void onClickBtnSave(ActionEvent event) throws IOException {
         User selectedUser = tblViewEventCoordinators.getSelectionModel().getSelectedItem();
 
         if (selectedUser != null) {
             assignCoordinatorModel.assignCoordinators(selectedEvent, selectedUser);
-            stage.close();
+            mainViewController.setCenterView("/View/ActiveEvent.fxml");
+            // Set the center of the border pane back to the ActiveEventController
+            activeEventController.updateTableView(); // Refresh the table if needed
         }
-
-
     }
+
+
+
 }

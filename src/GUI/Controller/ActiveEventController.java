@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,6 +31,9 @@ public class ActiveEventController implements Initializable {
     public TableColumn<Event, LocalDate> colDate;
     //public TableColumn colApprovalDate;
     public TableColumn colAssigned;
+    public TableColumn colLocation;
+    public Button btnCreateEvent;
+    public Button btnEventInformation;
 
     @FXML
     private Button btnCreateTickets;
@@ -40,11 +44,17 @@ public class ActiveEventController implements Initializable {
     private EventModel eventModel;
 
     private AssignCoordinatorModel assignCoordinatorModel;
+    private MainViewController mainViewController;
 
     public ActiveEventController() throws Exception {
         eventModel = new EventModel();
         assignCoordinatorModel = new AssignCoordinatorModel();
 
+    }
+
+    // Method to set MainViewController
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 
     public void setEventModel(EventModel eventModel) {
@@ -62,6 +72,7 @@ public class ActiveEventController implements Initializable {
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
         colAssigned.setCellValueFactory(new PropertyValueFactory<>("coordinators"));
+        colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
 
         tblViewEvents.setItems(eventModel.getObservableEvents());
 
@@ -96,36 +107,20 @@ public class ActiveEventController implements Initializable {
         }
     }
 
-    public void onClickAssign(ActionEvent actionEvent) {
+    public void onClickAssign(ActionEvent actionEvent) throws IOException {
 
         Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
 
-        try {
-            // Load the FXML file for the AssignCoordinators view
+        if (selectedEvent != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AssignCoordinators.fxml"));
-
             Parent root = loader.load();
-
-            // Create a new stage (window)
-            Stage stage = new Stage();
-            stage.setTitle("Assign Coordinators");
-
-            // Set the scene on the stage with the loaded parent node
-            stage.setScene(new Scene(root));
-
-            // Get the controller and set the stage
             AssignCoordinatorsController assignController = loader.getController();
-            assignController.setStage(stage);
             assignController.setSelectedEvent(selectedEvent);
             assignController.setActiveEventController(this);
+            assignController.setMainViewController(mainViewController); // Pass MainViewController instance
 
-            // Show the new stage
-            stage.show();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Could not load the AssignCoordinators view.");
+            // If you're updating the view within the same stage
+            mainViewController.setCenterView(root);
         }
 
     }
@@ -161,5 +156,13 @@ public class ActiveEventController implements Initializable {
                 e.printStackTrace();
             }
         }
+
+    public void onClickCreateEvent(ActionEvent event) {
     }
+
+    public void onClickEventInformation(ActionEvent event) {
+    }
+
+
+}
 

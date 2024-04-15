@@ -14,26 +14,23 @@
          <columns>
             <TableColumn fx:id="colTitle" prefWidth="75.0" style="-fx-background-color: #fff; -fx-font-size: 15; -fx-background-radius: 0;" text="Event Name" />
             <TableColumn fx:id="colDate" prefWidth="75.0" style="-fx-background-color: #fff; -fx-font-size: 15;" text="Date" />
-            <TableColumn fx:id="colApprovalDate" prefWidth="75.0" style="-fx-background-color: #ffff; -fx-font-size: 15;" text="Date of approval" />
+            <TableColumn fx:id="colLocation" prefWidth="75.0" style="-fx-background-color: #ffff; -fx-font-size: 15;" text="Location" />
             <TableColumn fx:id="colAssigned" prefWidth="75.0" style="-fx-background-color: #fff; -fx-font-size: 15;" text="Assigned" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox alignment="BOTTOM_CENTER" layoutX="93.0" layoutY="458.0" prefHeight="38.0" prefWidth="619.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="160.0">
+      <HBox alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="462.0" prefHeight="38.0" prefWidth="834.0" spacing="40.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="19.0">
          <children>
-            <Button fx:id="btnAssign" mnemonicParsing="false" onAction="#onClickAssign" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Assign coord" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="60.0" />
-               </HBox.margin>
+            <Button fx:id="btnCreateEvent" mnemonicParsing="false" onAction="#onClickCreateEvent" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Create event">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#onClickEditEvent" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Edit event" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets left="80.0" />
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -41,8 +38,21 @@
             </Button>
             <Button mnemonicParsing="false" onAction="#onClickDeleteEvent" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #C82828; -fx-background-radius: 5;" text="Delete event" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets left="80.0" />
+                  <Insets />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAssign" mnemonicParsing="false" onAction="#onClickAssign" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #009FE3; -fx-background-radius: 5;" text="Assign coord" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEventInformation" mnemonicParsing="false" onAction="#onClickEventInformation" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #FBBB2C; -fx-background-radius: 5;" text="Event information">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -52,7 +62,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
                <HBox.margin>
-                  <Insets left="80.0" />
+                  <Insets />
                </HBox.margin>
             </Button>
          </children>

@@ -181,7 +181,13 @@ public class MainViewController implements Initializable {
     }
 
     public void activeEventsHandle(ActionEvent actionEvent) throws IOException {
-        AnchorPane activeEvents = FXMLLoader.load((getClass().getResource("/View/ActiveEvent.fxml")));
+        // Load UsersView
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ActiveEvent.fxml"));
+        Parent activeEvents = loader.load();
+
+        // Get the UsersViewController and set MainViewController
+        ActiveEventController activeEventController = loader.getController();
+        activeEventController.setMainViewController(this);
         mainBorderPane.setCenter(activeEvents);
     }
 
@@ -229,5 +235,12 @@ public class MainViewController implements Initializable {
     public void ticketsHandle(ActionEvent event) throws IOException {
         AnchorPane tickets = FXMLLoader.load(getClass().getResource("/View/TicketViewTable.fxml"));
         mainBorderPane.setCenter(tickets);
+    }
+
+    public void setCenterView(String fxmlPath) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        // Assuming you have a reference to the border pane
+        mainBorderPane.setCenter(root);
     }
 }
