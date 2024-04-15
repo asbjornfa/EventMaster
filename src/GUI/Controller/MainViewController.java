@@ -14,7 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,19 +29,18 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
-   @FXML
-    private MenuItem menuTickets;
-    @FXML
-    private MenuItem menuTicketInformation;
+    public ImageView imageViewer;
+    public Label lblUsername;
+    public Label lblPosition;
+    public Label lblMenuTitle;
 
     @FXML
-    private MenuItem menuBuyTickets;
+    private MenuItem menuTickets;
+
 
     @FXML
     private MenuItem menuActiveEvents;
 
-    @FXML
-    private MenuItem menuAuthorisedLogin;
 
     @FXML
     private MenuItem menuCreateEvent;
@@ -50,8 +51,6 @@ public class MainViewController implements Initializable {
     @FXML
     private MenuItem menuCreateUser;
 
-    @FXML
-    private MenuItem menuHome;
 
     @FXML
     private MenuItem menuLogOut;
@@ -86,6 +85,8 @@ public class MainViewController implements Initializable {
             String username = authenticatedUser.getUsername();
             String role = userModel.getPositionFromUser(username);
             // Update the menu based on the user's role
+            lblUsername.setText(username);
+            lblPosition.setText(role);
             updateMenu(role);
         } else {
             // Handle case when authenticatedUser is null
@@ -100,15 +101,9 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
-        updateMenuForInitialState();
-
-
+        lblMenuTitle.setText("");
         //loadActiveEvents();
-
     }
-
-
-
 
     private void updateMenu(String role) {
 
@@ -117,80 +112,30 @@ public class MainViewController implements Initializable {
             // Admin-specific menu items
             menuUsers.setVisible(true);
             menuCreateUser.setVisible(true);
-            menuHome.setVisible(true);
-            menuActiveEvents.setVisible(false);
+            menuActiveEvents.setVisible(true);
             menuLogOut.setVisible(true);
 
-            menuAuthorisedLogin.setVisible(false);
+
             menuCreateTicket.setVisible(false);
             menuCreateEvent.setVisible(false);
             menuReservations.setVisible(false);
-            menuBuyTickets.setVisible(false);
-            menuTicketInformation.setVisible(false);
+            menuTickets.setVisible(false);
+
 
         } else if ("event coordinator".equalsIgnoreCase(role)) {
             // Event Coordinator-specific menu items
-            menuHome.setVisible(true);
             menuActiveEvents.setVisible(true);
             menuCreateEvent.setVisible(true);
             menuReservations.setVisible(false);
             menuCreateTicket.setVisible(false);
-            menuBuyTickets.setVisible(false);
-            menuTicketInformation.setVisible(false);
             menuLogOut.setVisible(true);
+            menuTickets.setVisible(true);
 
-            menuAuthorisedLogin.setVisible(false);
             menuUsers.setVisible(false);
             menuCreateUser.setVisible(false);
         }
     }
 
-    private void updateMenuForInitialState() {
-        menuHome.setVisible(true);
-        menuAuthorisedLogin.setVisible(true);
-
-        menuActiveEvents.setVisible(true);
-        menuCreateEvent.setVisible(true);
-        menuReservations.setVisible(true);
-        menuLogOut.setVisible(true);
-        menuCreateTicket.setVisible(true);
-        menuUsers.setVisible(true);
-        menuCreateUser.setVisible(true);
-        menuTicketInformation.setVisible(true);
-        menuTickets.setVisible(true);
-    }
-
-    public void handleAuthorisedLogin(ActionEvent actionEvent) throws Exception {
-
-        try {
-
-            // Close the current scene
-            Stage currentStage = (Stage) mainBorderPane.getScene().getWindow();
-            currentStage.close();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/loginView.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Login");
-            stage.show();
-
-            // Pass the stage to the LoginViewController
-            LoginViewController loginViewController = loader.getController();
-            loginViewController.setStage(stage);
-            loginViewController.setMainController(this); // Set the MainViewController instance
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load loginView.fxml");
-            alert.showAndWait();
-        }
-
-    }
-
-    public void handleHome(ActionEvent actionEvent) {
-        mainBorderPane.setCenter(OriginalCenter);
-    }
 
     public void createEventHandle(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateEventView.fxml"));
@@ -198,11 +143,13 @@ public class MainViewController implements Initializable {
         CreateEventController createEventView = loader.getController();
         createEventView.setEventModel(eventModel);
         mainBorderPane.setCenter(testView);
+        lblMenuTitle.setText("Create event");
     }
 
     public void createUserHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane testView = FXMLLoader.load((getClass().getResource("/View/CreateUserView.fxml")));
         mainBorderPane.setCenter(testView);
+        lblMenuTitle.setText("Create user");
     }
 
     public void usersHandle(ActionEvent actionEvent) {
@@ -217,26 +164,15 @@ public class MainViewController implements Initializable {
 
             // Assume mainBorderPane is the container in MainViewController where you want to set the users view
             this.mainBorderPane.setCenter(usersView);
+            lblMenuTitle.setText("Users");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void pendingEventsHandle(ActionEvent actionEvent) throws IOException {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/PendingEvents.fxml"));
-        Parent pendingEventsView = loader.load();
-
-        PendingEventsController pendingEventsController = loader.getController();
-        pendingEventsController.setMainViewController(this);
-
-        mainBorderPane.setCenter(pendingEventsView);*/
-    }
 
     public void setCenterView(Node node) {
         mainBorderPane.setCenter(node);
-    }
-
-    public void eventsHandle(ActionEvent event) {
     }
 
     public void createTicketHandle(ActionEvent actionEvent) throws IOException {
@@ -269,23 +205,6 @@ public class MainViewController implements Initializable {
     }
 
 
-    // Method to reopen the homepage
-    public void reopenHomepage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/MainView.fxml"));
-            Parent root = loader.load();
-
-            // Get the stage from the main view
-            Stage stage = (Stage) mainBorderPane.getScene().getWindow();
-            stage.setScene(new Scene(root));
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle error loading homepage
-        }
-    }
-
     // Method to reopen the login page
     private void reopenLogin() {
         try {
@@ -306,10 +225,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-    public void handleTicketInformation(ActionEvent actionEvent) throws IOException {
-        /*AnchorPane ticketInformation = FXMLLoader.load(getClass().getResource("/View/TicketInformationView.fxml"));
-        mainBorderPane.setCenter(ticketInformation);*/
-    }
 
     public void ticketsHandle(ActionEvent event) throws IOException {
         AnchorPane tickets = FXMLLoader.load(getClass().getResource("/View/TicketViewTable.fxml"));
