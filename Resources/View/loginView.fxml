@@ -17,19 +17,9 @@
    <children>
       <BorderPane fx:id="loginBorderPane" prefHeight="650.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <AnchorPane prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="534.0" prefWidth="910.0" style="-fx-background-color: #373737;;" BorderPane.alignment="CENTER">
                <children>
-                  <HBox alignment="CENTER" layoutX="388.0" layoutY="289.0" prefHeight="55.0" prefWidth="134.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="388.0" AnchorPane.rightAnchor="388.0" AnchorPane.topAnchor="289.0">
-                     <children>
-                        <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#loginBtnHandle" prefHeight="26.0" prefWidth="114.0" style="-fx-background-radius: 5; -fx-background-color: linear-gradient(to right bottom,#FBBB2C,#81AD85,#009FE3);" text="Log In" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="239.0" layoutY="14.0" prefHeight="44.0" prefWidth="471.0" AnchorPane.bottomAnchor="366.0" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0" />
-                  <VBox alignment="CENTER" layoutX="276.0" layoutY="63.0" prefHeight="170.0" prefWidth="357.0" spacing="30.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="277.0" AnchorPane.topAnchor="63.0">
+                  <VBox alignment="CENTER" layoutX="277.0" layoutY="127.0" prefHeight="170.0" prefWidth="357.0" spacing="30.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="276.0" AnchorPane.topAnchor="127.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="358.0">
                            <children>
@@ -69,6 +59,14 @@
                               </VBox>
                            </children>
                         </HBox>
+                        <Button fx:id="logInBtn" mnemonicParsing="false" onAction="#loginBtnHandle" prefHeight="26.0" prefWidth="114.0" style="-fx-background-radius: 5; -fx-background-color: linear-gradient(to right bottom,#FBBB2C,#81AD85,#009FE3);" text="Log In" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>
@@ -84,7 +82,7 @@
                               <Insets bottom="75.0" top="107.0" />
                            </HBox.margin>
                         </AnchorPane>
-                        <AnchorPane prefHeight="165.0" prefWidth="225.0">
+                        <AnchorPane prefHeight="34.0" prefWidth="251.0">
                            <children>
                               <AnchorPane layoutY="75.0" prefHeight="110.0" prefWidth="251.0" style="-fx-background-color: #ffff; -fx-background-radius: 10;">
                                  <children>
