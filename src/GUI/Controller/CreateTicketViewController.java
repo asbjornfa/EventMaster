@@ -39,6 +39,7 @@ public class CreateTicketViewController implements Initializable {
     private int ticketTypeId;
     private TicketTypeModel ticketTypeModel;
     private TicketModel ticketModel;
+    private MainViewController mainViewController;
 
     public CreateTicketViewController() throws SQLException, IOException {
         ticketTypeModel = new TicketTypeModel();
@@ -52,6 +53,11 @@ public class CreateTicketViewController implements Initializable {
 
     }
 
+    // Method to set MainViewController
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
     public void setEventTitle(String eventTitle) {
         this.eventTitle = eventTitle;
         eventName.setText(eventTitle);
@@ -62,9 +68,10 @@ public class CreateTicketViewController implements Initializable {
     }
 
 
-    @FXML
-    public void onClickCancel(ActionEvent event) {
 
+    @FXML
+    public void onClickCancel(ActionEvent event) throws IOException {
+        mainViewController.setCenterView("/View/TicketViewTable.fxml");
     }
 
     @FXML
@@ -78,7 +85,7 @@ public class CreateTicketViewController implements Initializable {
             ticketModel.createTicket(price, ticketTypeId, eventId, quantityAvailable);
 
 
-            ((Stage) txtFieldQuantity.getScene().getWindow()).close();
+            mainViewController.setCenterView("/View/TicketViewTable.fxml");
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -86,7 +86,22 @@ public class ActiveEventController implements Initializable {
         });
     }
 
-    public void onClickEditEvent(ActionEvent actionEvent) {
+    public void onClickEditEvent(ActionEvent actionEvent) throws IOException {
+        Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
+        if (selectedEvent !=null){
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateEventView.fxml"));
+        Parent root = loader.load();
+        CreateEventController createEventController = loader.getController();
+
+        // Pass the EventModel to the CreateEventController
+        createEventController.setEventModel(eventModel);
+        createEventController.setEventToEdit(selectedEvent);
+        createEventController.setMainViewController(mainViewController);
+
+        // Set the scene or update the main view
+        mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
+    }
     }
 
     public void onClickDeleteEvent(ActionEvent actionEvent) {
@@ -125,11 +140,11 @@ public class ActiveEventController implements Initializable {
 
     }
 
-        public void onClickCreateTickets(ActionEvent event) {
+        public void onClickCreateTickets(ActionEvent event) throws IOException {
 
-            // Get the selected event
             Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
-            try {
+
+            if (selectedEvent != null) {
                 // Load the FXML file for CreateTicketView
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateTicketView.fxml"));
                 Parent root = loader.load();
@@ -143,24 +158,28 @@ public class ActiveEventController implements Initializable {
                 // Pass the eventId to the CreateTicketViewController
                 createTicketController.setEventId(selectedEvent.getId()); // Pass the eventId here
 
+                createTicketController.setMainViewController(mainViewController); // Pass MainViewController instance
 
-                // Create the scene
-                Scene scene = new Scene(root);
-
-                // Create a new stage for the CreateTicketView
-                Stage createTicketStage = new Stage();
-                createTicketStage.setScene(scene);
-                createTicketStage.setTitle("Create Ticket");
-                createTicketStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+                // If you're updating the view within the same stage
+                mainViewController.setCenterView(root);
             }
         }
 
-    public void onClickCreateEvent(ActionEvent event) {
+    public void onClickCreateEvent(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateEventView.fxml"));
+        Parent root = loader.load();
+        CreateEventController createEventController = loader.getController();
+
+        // Pass the EventModel to the CreateEventController
+        createEventController.setEventModel(eventModel);
+        
+        createEventController.setMainViewController(mainViewController);
+        // Set the scene or update the main view
+        mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
     }
 
     public void onClickEventInformation(ActionEvent event) {
+        //A new view with all information about event..
     }
 
 

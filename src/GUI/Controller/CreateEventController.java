@@ -45,6 +45,7 @@ public class CreateEventController implements Initializable {
     private ImageView imageEvent;
     private String selectedImagePath;
 
+    private MainViewController mainViewController;
 
 
     public CreateEventController() {
@@ -67,6 +68,12 @@ public class CreateEventController implements Initializable {
     public void setSelectedImagePath(String selectedImagePath) {
         this.selectedImagePath = selectedImagePath;
     }
+
+    // Method to set MainViewController
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
     public void setEventToEdit(Event event) {
         this.eventToEdit = event;
         // Populate UI fields with the data from eventToEdit
@@ -130,24 +137,17 @@ public class CreateEventController implements Initializable {
 
 
             eventModel.updateEvent(eventToEdit);
-            showAlert("Event has been updated successfully!");
+
         } else {
             eventModel.createEvent(title, location, startDate, endDate,
                     startTimeSql, endTimeSql, description, selectedImagePath);
-            showAlert("Event has been created successfully and can now be found in pending events!");
+
         }
 
-        // Clear all fields after event creation
-        clearFields();
+        mainViewController.setCenterView("/View/ActiveEvent.fxml");
+
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 
     private void clearFields() {
         eventTitleField.clear();
