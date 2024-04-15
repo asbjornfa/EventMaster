@@ -146,6 +146,8 @@ public class LoginViewController implements Initializable {
         NewPasswordViewController newPasswordController = loader.getController();
         // Set the username to the NewPasswordViewController
         newPasswordController.setUser(username);
+        // Pass the login stage reference to the NewPasswordViewController
+        newPasswordController.setLoginStage(stage);
 
         // Add the NewPasswordView to the center of the login screen's BorderPane
         loginBorderPane.setCenter(root);
