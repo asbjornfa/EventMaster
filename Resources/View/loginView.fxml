@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="logInView" maxHeight="650.0" maxWidth="910.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.LoginViewController">
    <children>
-      <BorderPane prefHeight="650.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="loginBorderPane" prefHeight="650.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;;" BorderPane.alignment="CENTER">
                <children>

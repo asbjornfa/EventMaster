@@ -8,6 +8,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,10 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -39,6 +37,9 @@ public class LoginViewController implements Initializable {
 
     // UserModel instance
     private UserModel userModel;
+
+    @FXML
+    private BorderPane loginBorderPane;
 
     private Stage stage; // Reference to the login stage
     // Reference to the main controller
@@ -136,7 +137,6 @@ public class LoginViewController implements Initializable {
     }
 
 
-    // Open the NewPasswordView
     private void openNewPasswordView(String username) throws IOException {
         // Load the NewPasswordView FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/NewPasswordView.fxml"));
@@ -147,17 +147,9 @@ public class LoginViewController implements Initializable {
         // Set the username to the NewPasswordViewController
         newPasswordController.setUser(username);
 
-        // Create a new stage
-        Stage stage = new Stage();
-        // Set the scene of the stage
-        stage.setScene(new Scene(root));
+        // Add the NewPasswordView to the center of the login screen's BorderPane
+        loginBorderPane.setCenter(root);
 
-        // Set the stage properties
-        stage.setResizable(false); // Make the stage not resizable
-        stage.centerOnScreen(); // Center the stage on the screen
-
-        // Show the stage
-        stage.show();
     }
 
     private void openMainView(User authenticatedUser) throws IOException {
