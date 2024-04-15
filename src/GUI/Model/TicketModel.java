@@ -37,5 +37,9 @@ public class TicketModel {
         ticketToBeViewed.remove(ticket);
     }
 
+    public void updateTicket(Ticket ticket) throws IOException, SQLException {
+        ticketManager.updateTicket(ticket);
+    }
+
 
 }

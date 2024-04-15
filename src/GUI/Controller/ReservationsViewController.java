@@ -68,17 +68,13 @@ public class ReservationsViewController implements Initializable {
         PurchasedTickets selectedticket = tblReservations.getSelectionModel().getSelectedItem();
 
         if(selectedticket != null) {
-            try {
 
-                PdfTicketController pdfTicketController = new PdfTicketController();
-                pdfTicketController.upDateInformation(selectedticket);
+            PdfTicketController pdfTicketController = new PdfTicketController();
+            pdfTicketController.upDateInformation(selectedticket);
 
-                // Her kalder vi generatePdf med paneTicket som argument
-                pdfTicketController.generatePdf((AnchorPane) root);
+            // Her kalder vi generatePdf med paneTicket som argument
+            //pdfTicketController.generatePdf((AnchorPane) root);
 
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
         }
 
     }

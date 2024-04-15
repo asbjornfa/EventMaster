@@ -46,5 +46,18 @@ public class ReservationManager {
         System.out.println("Manager");
     }
 
+    public Reservations getReservationByEmail(String email) throws IOException {
+        try {
+            List<Reservations> allReservations = reservationsDAO.getAllReservations();
+            for (Reservations reservation : allReservations) {
+                if (reservation.getEmail().equalsIgnoreCase(email)) {
+                    return reservation;
+                }
+            }
+            return null; // Return null if no matching reservation is found
+        } catch (IOException e) {
+            throw new IOException("Failed to get reservation by email.", e);
+        }
+    }
 
 }
