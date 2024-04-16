@@ -65,6 +65,7 @@ public class MainViewController implements Initializable {
     private Node OriginalCenter;
     private EventModel eventModel;
     private UserModel userModel;
+    private User authenticatedUser;
 
     private LoginViewController loginViewController;
 
@@ -80,6 +81,7 @@ public class MainViewController implements Initializable {
     }
 
     public void setUser(User authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
         // Check if the authenticated user is not null
         if (authenticatedUser != null) {
             String username = authenticatedUser.getUsername();
@@ -188,6 +190,8 @@ public class MainViewController implements Initializable {
         // Get the UsersViewController and set MainViewController
         ActiveEventController activeEventController = loader.getController();
         activeEventController.setMainViewController(this);
+        activeEventController.setUser(authenticatedUser);
+
         mainBorderPane.setCenter(activeEvents);
         lblMenuTitle.setText("Events");
     }
