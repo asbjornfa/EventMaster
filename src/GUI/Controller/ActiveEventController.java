@@ -4,6 +4,7 @@ import BE.Event;
 import BE.User;
 import GUI.Model.AssignCoordinatorModel;
 import GUI.Model.EventModel;
+import GUI.Model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +44,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
     private Button btnAssign;
 
     private EventModel eventModel;
+    private UserModel userModel;
 
     private AssignCoordinatorModel assignCoordinatorModel;
     private MainViewController mainViewController;
@@ -50,7 +52,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
     public ActiveEventController() throws Exception {
         eventModel = new EventModel();
         assignCoordinatorModel = new AssignCoordinatorModel();
-
+        userModel = new UserModel();
     }
 
     // Method to set MainViewController
@@ -197,6 +199,59 @@ public class ActiveEventController implements Initializable, MainViewControllerA
         //A new view with all information about event..
     }
 
+    public void setUser(User authenticatedUser) {
+        // Check if the authenticated user is not null
+        if (authenticatedUser != null) {
+            String username = authenticatedUser.getUsername();
+            String role = userModel.getPositionFromUser(username);
 
-}
+            updateBtn(role);
+        } else {
+            // Handle case when authenticatedUser is null
+        }
+    }
+
+    private void updateBtn(String role) {
+        // Show or hide additional buttons based on user role
+        if ("admin".equalsIgnoreCase(role)) {
+            // Admin-specific buttons
+            setButtonVisibility(btnCreateEvent, false);
+            setButtonVisibility(btnDeleteEvent, true);
+            setButtonVisibility(btnCreateTickets, false);
+            setButtonVisibility(btnEventInformation, true);
+            setButtonVisibility(btnAssign, true);
+            setButtonVisibility(btnEditEvent, false);
+        } else if ("event coordinator".equalsIgnoreCase(role)) {
+            // Event Coordinator-specific buttons
+            setButtonVisibility(btnCreateEvent, true);
+            setButtonVisibility(btnDeleteEvent, true);
+            setButtonVisibility(btnCreateTickets, true);
+            setButtonVisibility(btnEventInformation, true);
+            setButtonVisibility(btnAssign, true);
+            setButtonVisibility(btnEditEvent, true);
+        }
+        centerVisibleButtons();
+    }
+
+    private void setButtonVisibility(Button button, boolean isVisible) {
+        button.setVisible(isVisible);
+        button.setManaged(isVisible); // Ensure layout management respects visibility
+    }
+
+    private void centerVisibleButtons() {
+        ObservableList<Node> buttons = mainViewController.mainBorderPane.getChildren(); // Assuming buttons are direct children of mainBorderPane
+        double spacing = 20; // Adjust the spacing between buttons if needed
+        double currentX = (mainViewController.mainBorderPane.getWidth() - (buttons.size() * btnCreateEvent.getWidth() + (buttons.size() - 1) * spacing)) / 2.0;
+
+        for (Node node : buttons) {
+            if (node instanceof Button && ((Button) node).isVisible()) {
+                node.setLayoutX(currentX);
+                currentX += node.getBoundsInParent().getWidth() + spacing;
+            }
+        }
+    }
+    }
+
+
+
 

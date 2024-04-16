@@ -35,10 +35,10 @@ public class ReservationModel {
         return reservations;
     }
 
-    public void deleteReservation(Reservations reservations) throws IOException {
-        reservationManager.deleteReservation(reservations);
+    public void deleteReservation(int reservationId) throws IOException {
+        reservationManager.deleteReservation(reservationId);
 
-        reservationsToBeViewed.remove(reservations);
+        reservationsToBeViewed.remove(reservationId);
 
     }
 }

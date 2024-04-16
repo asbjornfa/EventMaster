@@ -1,14 +1,10 @@
 package BLL;
 
-import BE.Event;
 import BE.Reservations;
-import DAL.DB.EventDAO_DB;
 import DAL.DB.ReservationDAO_DB;
-import DAL.IEventDataAccess;
 import DAL.IReservations;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ReservationManager {
@@ -40,10 +36,9 @@ public class ReservationManager {
 
     }
 
-    public void deleteReservation(Reservations reservations) throws IOException {
+    public void deleteReservation(int reservationId) throws IOException {
 
-        reservationsDAO.deleteReservation(reservations);
-        System.out.println("Manager");
+        reservationsDAO.deleteReservation(reservationId);
     }
 
     public Reservations getReservationByEmail(String email) throws IOException {

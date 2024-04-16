@@ -3,8 +3,10 @@ package GUI.Controller;
 import BE.Event;
 import BE.Ticket;
 import BE.TicketType;
+import BE.User;
 import DAL.DB.TicketDAO_DB;
 import GUI.Model.TicketModel;
+import GUI.Model.UserModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,8 +47,10 @@ public class TicketViewTableController implements Initializable, MainViewControl
 
     private MainViewController mainViewController;
 
+
     public TicketViewTableController() throws SQLException, IOException {
         ticketModel = new TicketModel();
+
     }
 
     @Override
@@ -116,5 +120,8 @@ public class TicketViewTableController implements Initializable, MainViewControl
     void onClickEditTicket(ActionEvent event) {
         //Needs to be made
     }
+
+
+
 
 }

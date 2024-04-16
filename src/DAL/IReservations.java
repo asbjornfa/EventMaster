@@ -15,7 +15,7 @@ public interface IReservations {
     public List<Reservations> getAllReservations() throws IOException;
 
     public Reservations createReservation(Reservations reservations) throws IOException;
-    public Reservations deleteReservation(Reservations reservations) throws IOException;
+    public void deleteReservation(int reservationId) throws IOException;
 
 
 }
