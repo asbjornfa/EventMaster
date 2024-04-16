@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -58,6 +59,17 @@ public class LoginViewController implements Initializable {
 
             enterPassword.textProperty().addListener((observable, oldValue, newValue) -> {
                 enterPassword.setStyle("-fx-border-color: white;");
+            });
+
+            enterPassword.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    try {
+                        loginBtnHandle(new ActionEvent());
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
             });
         } catch (SQLException e) {
             throw new RuntimeException(e);
