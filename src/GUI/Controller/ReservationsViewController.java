@@ -1,7 +1,9 @@
 package GUI.Controller;
 
 import BE.PurchasedTickets;
+import BE.Reservations;
 import GUI.Model.PurchasedTicketsModel;
+import GUI.Model.ReservationModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,14 +42,11 @@ public class ReservationsViewController implements Initializable {
     private TableView<PurchasedTickets> tblReservations;
 
     private PurchasedTicketsModel purchasedTicketsModel;
+    private ReservationModel reservationModel;
 
-    public ReservationsViewController() throws SQLException, IOException {
+    public ReservationsViewController() throws Exception {
         purchasedTicketsModel = new PurchasedTicketsModel();
-    }
-
-    @FXML
-    public void initialize() {
-
+        reservationModel = new ReservationModel();
     }
 
     @Override
@@ -60,8 +59,13 @@ public class ReservationsViewController implements Initializable {
         tblReservations.setItems(purchasedTicketsModel.getObservablePurchasedTickets());
     }
 
-    public void handleDeleteReservation(ActionEvent event) {
-    }
+        public void handleDeleteReservation(ActionEvent event) throws IOException {
+            PurchasedTickets selectedTicket = tblReservations.getSelectionModel().getSelectedItem();
+
+            if (selectedTicket != null) {
+                purchasedTicketsModel.deletePurchasedTickets(selectedTicket);
+            }
+        }
 
 
     public void handlePrintTicket(ActionEvent actionEvent) {

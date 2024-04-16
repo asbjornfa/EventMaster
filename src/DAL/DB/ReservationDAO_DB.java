@@ -77,7 +77,7 @@ public class ReservationDAO_DB implements IReservations {
     }
 
     @Override
-    public Reservations deleteReservation(Reservations reservations) throws IOException {
+    public void deleteReservation(int reservationId) throws IOException {
         // SQL statement to delete an event from the events table
         String sql = "DELETE FROM dbo.Reservations WHERE id = (?)";
 
@@ -85,15 +85,13 @@ public class ReservationDAO_DB implements IReservations {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             // Bind parameter
-            stmt.setInt(1, reservations.getId());
+            stmt.setInt(1, reservationId);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new IOException("Could not delete reservation in database", e);
         }
-
-        return reservations;
 
     }
 }
