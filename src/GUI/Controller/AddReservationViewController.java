@@ -137,12 +137,13 @@ public class AddReservationViewController implements Initializable {
                 purchasedTicketsModel.createPurchasedTickets(newReservation.getId(), ticketTypeId.getId(), eventId.getId(), uniqueString, quantity);
             }
 
-            //Not working 
+            System.out.println("Selected Ticket: " + selectedTicket);
+           
             if (selectedTicket != null) {
                 // Subtract the quantity from the reservation from the quantityAvailable field
                 int updatedQuantity = selectedTicket.getQuantityAvailable() - quantity;
                 selectedTicket.setQuantityAvailable(updatedQuantity);
-
+                System.out.println("Updating ticket..");
                 // Update the ticket in the database with the new quantityAvailable value
                 ticketModel.updateTicket(selectedTicket); // Pass the updated ticket object
             }

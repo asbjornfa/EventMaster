@@ -99,6 +99,7 @@ public class TicketViewTableController implements Initializable, MainViewControl
             addReservationController.setEventData(selectedTicketEvent.getEventTitle(), selectedTicketEvent.getTicketTypeTitle());
 
             addReservationController.setMainViewController(mainViewController);
+            addReservationController.setSelectedTicket(selectedTicketEvent);
 
             mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
             mainViewController.lblMenuTitle.setText("Add reservation");

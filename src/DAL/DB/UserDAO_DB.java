@@ -90,13 +90,6 @@ public class UserDAO_DB implements IUser {
     @Override
     public void updateUser(User user) {
 
-        System.out.println("Received user information for update:");
-        System.out.println("Name: " + user.getName());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Username: " + user.getUsername());
-        System.out.println("positionId: " + user.getPositionId());
-        System.out.println("userId: " + user.getId());
-
         String sql = "UPDATE dbo.Users SET name = ?, email = ?, username = ?, positionId = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
