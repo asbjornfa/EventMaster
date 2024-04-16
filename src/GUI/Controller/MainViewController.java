@@ -118,8 +118,8 @@ public class MainViewController implements Initializable {
 
             menuCreateTicket.setVisible(false);
             menuCreateEvent.setVisible(false);
-            menuReservations.setVisible(false);
-            menuTickets.setVisible(false);
+            menuReservations.setVisible(true);
+            menuTickets.setVisible(true);
 
 
         } else if ("event coordinator".equalsIgnoreCase(role)) {
@@ -233,14 +233,34 @@ public class MainViewController implements Initializable {
 
 
     public void ticketsHandle(ActionEvent event) throws IOException {
-        AnchorPane tickets = FXMLLoader.load(getClass().getResource("/View/TicketViewTable.fxml"));
+        // Load UsersView
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TicketViewTable.fxml"));
+        Parent tickets = loader.load();
+
+        TicketViewTableController ticketViewTableController = loader.getController();
+        ticketViewTableController.setMainViewController(this);
+
         mainBorderPane.setCenter(tickets);
     }
 
-    public void setCenterView(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = loader.load();
-        // Assuming you have a reference to the border pane
-        mainBorderPane.setCenter(root);
+
+    // Method in MainViewController to change the central view of the application
+    public void setCenterView(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent newView = loader.load();
+            mainBorderPane.setCenter(newView); // Assuming borderPane is the container in MainViewController
+
+            // Set the mainViewController reference in the newly loaded controller if it requires it
+            Object controller = loader.getController();
+            if (controller instanceof MainViewControllerAware) {
+                ((MainViewControllerAware) controller).setMainViewController(this);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to load the view");
+            alert.showAndWait();
+        }
     }
 }

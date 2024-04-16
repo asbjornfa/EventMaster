@@ -73,7 +73,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <MFXButton fx:id="btnCreate" layoutX="716.0" layoutY="432.0" onAction="#btnCreateEvent" prefHeight="28.0" prefWidth="131.0" style="-fx-background-color: #009FE3;" text="Create event">
+      <MFXButton fx:id="btnCreate" layoutX="733.0" layoutY="433.0" onAction="#btnCreateEvent" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: #009FE3;" text="Create event">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>
@@ -84,5 +84,10 @@
          </font>
       </Label>
       <TextArea fx:id="eventDescriptionField" layoutX="40.0" layoutY="320.0" prefHeight="140.0" prefWidth="387.0" style="-fx-background-radius: 6;" wrapText="true" />
+      <MFXButton fx:id="btnCancel" layoutX="576.0" layoutY="433.0" onAction="#onClickCancel" prefHeight="27.0" prefWidth="114.0" style="-fx-background-color: #C82828;" text="Cancel">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </MFXButton>
    </children>
 </AnchorPane>

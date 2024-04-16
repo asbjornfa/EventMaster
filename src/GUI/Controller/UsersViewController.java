@@ -20,7 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class UsersViewController implements Initializable {
+public class UsersViewController implements Initializable, MainViewControllerAware {
 
     private UserModel userModel;
     private MainViewController mainViewController;
@@ -99,10 +99,17 @@ public class UsersViewController implements Initializable {
 
     @FXML
     void onClickCreateUser(ActionEvent event) throws IOException {
-        if (tblViewUsers.getSelectionModel().getSelectedItem() == null) {
-            changeScene("/View/CreateUserView.fxml");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
+            Parent root = loader.load();
+
+            CreateUserController createUserController = loader.getController();
+            createUserController.setMainViewController(mainViewController);
+
+            // If you're updating the view within the same stage
+            mainViewController.setCenterView(root);
         }
-    }
+
 
 
     @FXML
@@ -110,25 +117,20 @@ public class UsersViewController implements Initializable {
         User selectedUser = tblViewUsers.getSelectionModel().getSelectedItem();
 
         if (selectedUser != null) {
-            System.out.println(selectedUser.getId());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
             Parent root = loader.load();
 
 
             CreateUserController createUserController = loader.getController();
             createUserController.setUserForEditing(selectedUser);
-
+            createUserController.setMainViewController(mainViewController);
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
         }
     }
 
-    private void changeScene(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Node view = loader.load();
-        mainViewController.setCenterView(view);
-    }
+
 
 
 

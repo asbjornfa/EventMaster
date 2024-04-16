@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -23,8 +24,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TicketViewTableController implements Initializable {
+public class TicketViewTableController implements Initializable, MainViewControllerAware {
 
+    public Button btnAddReservation;
+    public Button btnEditEventTickets;
+    public Button btnDeleteEventTickets;
     @FXML
     private TableColumn<Ticket, String> colEventName;
     @FXML
@@ -39,6 +43,7 @@ public class TicketViewTableController implements Initializable {
 
     private TicketModel ticketModel;
 
+    private MainViewController mainViewController;
 
     public TicketViewTableController() throws SQLException, IOException {
         ticketModel = new TicketModel();
@@ -52,6 +57,26 @@ public class TicketViewTableController implements Initializable {
         colTicketAvailable.setCellValueFactory(new PropertyValueFactory<>("quantityAvailable"));
 
         tblViewEventTickets.setItems(ticketModel.getObservableTicket());
+
+        // Disable the button by default
+        btnAddReservation.setDisable(true);
+        btnEditEventTickets.setDisable(true);
+        btnDeleteEventTickets.setDisable(true);
+
+
+        // Add a listener to the TableView's selection model
+        tblViewEventTickets.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // Enable the button if a row is selected, otherwise disable
+            btnAddReservation.setDisable(newSelection == null);
+            btnEditEventTickets.setDisable(newSelection == null);
+            btnDeleteEventTickets.setDisable(newSelection == null);
+        });
+    }
+
+
+    // Method to set MainViewController
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 
     @FXML
@@ -69,13 +94,9 @@ public class TicketViewTableController implements Initializable {
             // Pass event and ticket type titles to the controller
             addReservationController.setEventData(selectedTicketEvent.getEventTitle(), selectedTicketEvent.getTicketTypeTitle());
 
-            // Create a new stage
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Add Reservation");
+            addReservationController.setMainViewController(mainViewController);
 
-            // Show the stage
-            stage.show();
+            mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
         }
     }
 
@@ -92,7 +113,7 @@ public class TicketViewTableController implements Initializable {
 
     @FXML
     void onClickEditTicket(ActionEvent event) {
-
+        //Needs to be made
     }
 
 }

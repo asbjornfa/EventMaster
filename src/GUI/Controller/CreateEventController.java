@@ -27,8 +27,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class CreateEventController implements Initializable {
+public class CreateEventController implements Initializable{
     public DateTimePicker DTPickerEnd;
+    public MFXButton btnCancel;
     @FXML
     private DateTimePicker DTPickerStart;
     @FXML
@@ -173,5 +174,9 @@ public class CreateEventController implements Initializable {
             alert.showAndWait();
         }
 
+    }
+
+    public void onClickCancel(ActionEvent event) throws IOException {
+        mainViewController.setCenterView("/View/ActiveEvent.fxml");
     }
 }

@@ -49,6 +49,7 @@ public class AddReservationViewController implements Initializable {
     private EventModel eventModel;
     private ReservationManager reservationManager;
     private Ticket selectedTicket;
+    private MainViewController mainViewController;
 
     public AddReservationViewController() throws Exception {
         ticketModel = new TicketModel();
@@ -64,6 +65,10 @@ public class AddReservationViewController implements Initializable {
 
     }
 
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
+
     public void setSelectedTicket(Ticket ticket) {
         this.selectedTicket = ticket;
     }
@@ -76,16 +81,11 @@ public class AddReservationViewController implements Initializable {
 
     @FXML
     public void onClickCancel(ActionEvent event) {
-        // Get the reference to the cancel button's stage
-        Stage stage = (Stage) lblQuantity.getScene().getWindow();
-        // Close the stage
-        stage.close();
+        mainViewController.setCenterView("/View/TicketViewTable.fxml");
     }
 
     @FXML
     public void onClickSave(ActionEvent event) throws IOException, WriterException {
-
-
 
         String email = txtFieldCostumerEmail.getText().trim(); // Get customer email from input field
         String eventTitle = lblEventTitle.getText(); // Get event title from label
@@ -147,7 +147,7 @@ public class AddReservationViewController implements Initializable {
             }
 
             // Close the window
-            ((Stage) lblQuantity.getScene().getWindow()).close();
+            mainViewController.setCenterView("/View/ReservationsView.fxml");
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();

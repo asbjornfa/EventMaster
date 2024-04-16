@@ -25,19 +25,20 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class ActiveEventController implements Initializable {
+public class ActiveEventController implements Initializable, MainViewControllerAware {
     public TableView<Event> tblViewEvents;
     public TableColumn<Event, String> colTitle;
     public TableColumn<Event, LocalDate> colDate;
     //public TableColumn colApprovalDate;
     public TableColumn colAssigned;
     public TableColumn colLocation;
+
     public Button btnCreateEvent;
     public Button btnEventInformation;
-
+    public Button btnEditEvent;
+    public Button btnDeleteEvent;
     @FXML
     private Button btnCreateTickets;
-
     @FXML
     private Button btnAssign;
 
@@ -78,11 +79,20 @@ public class ActiveEventController implements Initializable {
 
         // Disable the button by default
         btnAssign.setDisable(true);
+        btnCreateTickets.setDisable(true);
+        btnEditEvent.setDisable(true);
+        btnEventInformation.setDisable(true);
+        btnDeleteEvent.setDisable(true);
 
         // Add a listener to the TableView's selection model
         tblViewEvents.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // Enable the button if a row is selected, otherwise disable
             btnAssign.setDisable(newSelection == null);
+            btnCreateTickets.setDisable(newSelection == null);
+            btnEditEvent.setDisable(newSelection == null);
+            btnEventInformation.setDisable(newSelection == null);
+            btnDeleteEvent.setDisable(newSelection == null);
+
         });
     }
 
@@ -172,7 +182,7 @@ public class ActiveEventController implements Initializable {
 
         // Pass the EventModel to the CreateEventController
         createEventController.setEventModel(eventModel);
-        
+
         createEventController.setMainViewController(mainViewController);
         // Set the scene or update the main view
         mainViewController.setCenterView(root); // Adjust this line if you use different method to change views

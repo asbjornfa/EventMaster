@@ -71,7 +71,7 @@ public class CreateTicketViewController implements Initializable {
 
     @FXML
     public void onClickCancel(ActionEvent event) throws IOException {
-        mainViewController.setCenterView("/View/TicketViewTable.fxml");
+        mainViewController.setCenterView("/View/ActiveEvent.fxml");
     }
 
     @FXML

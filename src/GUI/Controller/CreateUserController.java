@@ -5,6 +5,10 @@ import BE.User;
 import BLL.PositionManager;
 import GUI.Model.PositionModel;
 import GUI.Model.UserModel;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +27,7 @@ import java.util.ResourceBundle;
 public class CreateUserController implements Initializable {
 
 
+    public Button btnCancel;
     // Declare a UserModel object to interact with the database
     private UserModel userModel;
     private PositionModel positionModel;
@@ -101,7 +106,7 @@ public class CreateUserController implements Initializable {
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User Created", "User has been created successfully.");
         }else {
-            //Not working ?
+
             editingUser.setName(firstName + " " + lastName);
             editingUser.setEmail(email);
             editingUser.setUsername(username);
@@ -115,8 +120,7 @@ public class CreateUserController implements Initializable {
 
         }
 
-        // Clear the input fields
-        clearFields();
+        mainViewController.setCenterView("/View/UsersView.fxml");
     }
 
     // Method to set user information into the input fields for update
@@ -222,6 +226,12 @@ public class CreateUserController implements Initializable {
             menuButton.getItems().add(item);
         }
     }
+
+    public void onClickCancel(ActionEvent event) {
+        mainViewController.setCenterView("/View/UsersView.fxml");
+    }
+
+
 
 }
 
