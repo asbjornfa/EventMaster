@@ -4,16 +4,15 @@ import BE.Ticket;
 import BE.TicketType;
 import GUI.Model.TicketModel;
 import GUI.Model.TicketTypeModel;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class CreateTicketViewController implements Initializable {
 
+    public MFXButton btnSave;
     @FXML
     private Label eventName;
 
@@ -40,6 +40,7 @@ public class CreateTicketViewController implements Initializable {
     private TicketTypeModel ticketTypeModel;
     private TicketModel ticketModel;
     private MainViewController mainViewController;
+    private Ticket ticketToEdit;
 
     public CreateTicketViewController() throws SQLException, IOException {
         ticketTypeModel = new TicketTypeModel();
@@ -50,7 +51,6 @@ public class CreateTicketViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setEventTitle(eventTitle);
         populateTicketTypeDropDown();
-
     }
 
     // Method to set MainViewController
@@ -67,7 +67,23 @@ public class CreateTicketViewController implements Initializable {
         this.eventId = eventId;
     }
 
+    public void setTicketToEdit(Ticket ticketToEdit) {
+        this.ticketToEdit = ticketToEdit;
+        // Populate UI fields with the data from ticketToEdit
+        setTicketInformation(ticketToEdit);
+    }
 
+    private void setTicketInformation(Ticket ticket) {
+        if(ticket != null){
+            eventName.setText(ticket.getEventTitle());
+            ticketTypeDropDown.setText(ticket.getTicketTypeTitle());
+            txtFieldPrice.setText(String.valueOf(ticket.getPrice()));
+            txtFieldQuantity.setText(String.valueOf(ticket.getQuantityAvailable()));
+
+            btnSave.setText("Update tickets");
+            btnSave.setStyle("-fx-background-color: #FBBB2C");
+        }
+    }
 
     @FXML
     public void onClickCancel(ActionEvent event) throws IOException {
@@ -82,21 +98,30 @@ public class CreateTicketViewController implements Initializable {
         int quantityAvailable = Integer.parseInt(txtFieldQuantity.getText());
 
         try {
-            // Create the ticket in the database
-            ticketModel.createTicket(price, ticketTypeId, eventId, quantityAvailable);
-
+            if (ticketToEdit != null) {
+                // Update the ticket in the database
+                ticketToEdit.setPrice(price);
+                ticketToEdit.setQuantityAvailable(quantityAvailable);
+                ticketToEdit.setTicketTypeId(ticketTypeId);
+                ticketModel.updateTicket(ticketToEdit);
+            } else {
+                // Create the ticket in the database
+                ticketModel.createTicket(price, ticketTypeId, eventId, quantityAvailable);
+            }
 
             mainViewController.setCenterView("/View/TicketViewTable.fxml");
             mainViewController.lblMenuTitle.setText("Event tickets");
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
     public void onClickTicketTypeDropDown(ActionEvent event) {
-
+        // Handle ticket type selection
     }
 
     private void populateTicketTypeDropDown() {
@@ -110,10 +135,8 @@ public class CreateTicketViewController implements Initializable {
     }
 
     private void handleTicketTypeSelection(TicketType ticketType) {
-        // Store the selected ticket type's ID
-        ticketTypeId = ticketType.getId();
+        ticketTypeId = ticketType.getId();  // Ensure this is getting the correct ID
         ticketTypeDropDown.setText(ticketType.getTitle());
+
     }
-
-
 }

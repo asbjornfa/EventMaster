@@ -113,13 +113,29 @@ public class TicketViewTableController implements Initializable, MainViewControl
         if (selected != null) {
 
             ticketModel.deleteTicket(selected);
-
         }
     }
 
     @FXML
-    void onClickEditTicket(ActionEvent event) {
-        //Needs to be made
+    void onClickEditTicket(ActionEvent event) throws IOException {
+        Ticket selectedTicket = tblViewEventTickets.getSelectionModel().getSelectedItem();
+
+        if (selectedTicket != null) {
+            // Load the FXML file for CreateTicketView
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateTicketView.fxml"));
+            Parent root = loader.load();
+
+            // Access the controller
+            CreateTicketViewController createTicketController = loader.getController();
+
+            createTicketController.setTicketToEdit(selectedTicket);
+
+            createTicketController.setMainViewController(mainViewController); // Pass MainViewController instance
+
+            // If you're updating the view within the same stage
+            mainViewController.setCenterView(root);
+            mainViewController.lblMenuTitle.setText("Edit event tickets");
+        }
     }
 
 

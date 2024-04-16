@@ -97,7 +97,7 @@ public class CreateEventController implements Initializable{
             eventLocationField.setText(event.getLocation());
             eventDescriptionField.setText(event.getDescription());
 
-            btnCreate.setText("Save");
+            btnCreate.setText("Update event");
             btnCreate.setStyle("-fx-background-color: #FBBB2C");
         }
     }

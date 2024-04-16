@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ import java.util.ResourceBundle;
 public class ReservationsViewController implements Initializable {
 
 
+    public Button btnDeleteReservation;
     @FXML
     private TableColumn<PurchasedTickets, String> colEmailString;
 
@@ -57,6 +59,14 @@ public class ReservationsViewController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         tblReservations.setItems(purchasedTicketsModel.getObservablePurchasedTickets());
+
+        btnDeleteReservation.setDisable(true);
+
+        // Add a listener to the TableView's selection model
+        tblReservations.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // Enable the button if a row is selected, otherwise disable
+            btnDeleteReservation.setDisable(newSelection == null);
+        });
     }
 
         public void handleDeleteReservation(ActionEvent event) throws IOException {
@@ -67,18 +77,5 @@ public class ReservationsViewController implements Initializable {
             }
         }
 
-
-    public void handlePrintTicket(ActionEvent actionEvent) {
-        PurchasedTickets selectedticket = tblReservations.getSelectionModel().getSelectedItem();
-
-        if(selectedticket != null) {
-
-
-            // Her kalder vi generatePdf med paneTicket som argument
-            //pdfTicketController.generatePdf((AnchorPane) root);
-
-        }
-
-    }
 
 }
