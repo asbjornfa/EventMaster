@@ -108,6 +108,7 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
+        mainViewController.lblMenuTitle.setText("Create user");
         }
 
 
@@ -127,6 +128,7 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
+            mainViewController.lblMenuTitle.setText("Edit user");
         }
     }
 

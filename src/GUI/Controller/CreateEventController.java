@@ -146,6 +146,7 @@ public class CreateEventController implements Initializable{
         }
 
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
+        mainViewController.lblMenuTitle.setText("Events");
 
     }
 
@@ -178,5 +179,6 @@ public class CreateEventController implements Initializable{
 
     public void onClickCancel(ActionEvent event) throws IOException {
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
+        mainViewController.lblMenuTitle.setText("Events");
     }
 }

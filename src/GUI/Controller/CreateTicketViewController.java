@@ -72,6 +72,7 @@ public class CreateTicketViewController implements Initializable {
     @FXML
     public void onClickCancel(ActionEvent event) throws IOException {
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
+        mainViewController.lblMenuTitle.setText("Events");
     }
 
     @FXML
@@ -86,6 +87,7 @@ public class CreateTicketViewController implements Initializable {
 
 
             mainViewController.setCenterView("/View/TicketViewTable.fxml");
+            mainViewController.lblMenuTitle.setText("Event tickets");
 
         } catch (IOException e) {
             e.printStackTrace();

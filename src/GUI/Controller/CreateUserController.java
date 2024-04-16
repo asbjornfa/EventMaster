@@ -121,6 +121,7 @@ public class CreateUserController implements Initializable {
         }
 
         mainViewController.setCenterView("/View/UsersView.fxml");
+            mainViewController.lblMenuTitle.setText("Users");
     }
 
     // Method to set user information into the input fields for update
@@ -229,6 +230,7 @@ public class CreateUserController implements Initializable {
 
     public void onClickCancel(ActionEvent event) {
         mainViewController.setCenterView("/View/UsersView.fxml");
+        mainViewController.lblMenuTitle.setText("Users");
     }
 
 

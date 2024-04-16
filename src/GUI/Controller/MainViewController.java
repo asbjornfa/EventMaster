@@ -111,26 +111,25 @@ public class MainViewController implements Initializable {
         if ("admin".equalsIgnoreCase(role)) {
             // Admin-specific menu items
             menuUsers.setVisible(true);
-            menuCreateUser.setVisible(true);
             menuActiveEvents.setVisible(true);
             menuLogOut.setVisible(true);
 
-
+            menuCreateUser.setVisible(false);
             menuCreateTicket.setVisible(false);
             menuCreateEvent.setVisible(false);
-            menuReservations.setVisible(true);
-            menuTickets.setVisible(true);
+            menuReservations.setVisible(false);
+            menuTickets.setVisible(false);
 
 
         } else if ("event coordinator".equalsIgnoreCase(role)) {
             // Event Coordinator-specific menu items
             menuActiveEvents.setVisible(true);
-            menuCreateEvent.setVisible(true);
-            menuReservations.setVisible(false);
-            menuCreateTicket.setVisible(false);
-            menuLogOut.setVisible(true);
+            menuReservations.setVisible(true);
             menuTickets.setVisible(true);
+            menuLogOut.setVisible(true);
 
+            menuCreateTicket.setVisible(false);
+            menuCreateEvent.setVisible(false);
             menuUsers.setVisible(false);
             menuCreateUser.setVisible(false);
         }
@@ -178,6 +177,7 @@ public class MainViewController implements Initializable {
     public void createTicketHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane createTicket = FXMLLoader.load(getClass().getResource("/View/CreateTicketView.fxml"));
         mainBorderPane.setCenter(createTicket);
+        lblMenuTitle.setText("Create ticket");
     }
 
     public void activeEventsHandle(ActionEvent actionEvent) throws IOException {
@@ -189,11 +189,13 @@ public class MainViewController implements Initializable {
         ActiveEventController activeEventController = loader.getController();
         activeEventController.setMainViewController(this);
         mainBorderPane.setCenter(activeEvents);
+        lblMenuTitle.setText("Events");
     }
 
     public void reservationsHandle(ActionEvent actionEvent) throws IOException {
         AnchorPane reservations = FXMLLoader.load(getClass().getResource("/View/ReservationsView.fxml"));
         mainBorderPane.setCenter(reservations);
+        lblMenuTitle.setText("Reservations");
     }
 
     public void logoutHandle(ActionEvent actionEvent) {
@@ -241,6 +243,7 @@ public class MainViewController implements Initializable {
         ticketViewTableController.setMainViewController(this);
 
         mainBorderPane.setCenter(tickets);
+        lblMenuTitle.setText("Event tickets");
     }
 
 

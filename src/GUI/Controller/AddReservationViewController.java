@@ -82,6 +82,7 @@ public class AddReservationViewController implements Initializable {
     @FXML
     public void onClickCancel(ActionEvent event) {
         mainViewController.setCenterView("/View/TicketViewTable.fxml");
+        mainViewController.lblMenuTitle.setText("Event tickets");
     }
 
     @FXML
@@ -148,6 +149,7 @@ public class AddReservationViewController implements Initializable {
 
             // Close the window
             mainViewController.setCenterView("/View/ReservationsView.fxml");
+            mainViewController.lblMenuTitle.setText("Reservations");
 
         } catch (IOException | SQLException e) {
             e.printStackTrace();

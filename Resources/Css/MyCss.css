@@ -11,3 +11,7 @@
 .table-view:focused .table-row-cell:selected .text {
     -fx-fill: #ff0000; /* Ensures text color is consistent even when focused */
 }
+/* Css for MenuButton icon */
+.menu-bar .label {
+    -fx-font-size: 30px;
+}

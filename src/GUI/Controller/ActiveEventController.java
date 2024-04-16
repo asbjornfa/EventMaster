@@ -92,6 +92,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
             btnEditEvent.setDisable(newSelection == null);
             btnEventInformation.setDisable(newSelection == null);
             btnDeleteEvent.setDisable(newSelection == null);
+            btnCreateEvent.setDisable(newSelection != null);
 
         });
     }
@@ -111,6 +112,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
 
         // Set the scene or update the main view
         mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
+            mainViewController.lblMenuTitle.setText("Edit event");
     }
     }
 
@@ -146,6 +148,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
 
             // If you're updating the view within the same stage
             mainViewController.setCenterView(root);
+            mainViewController.lblMenuTitle.setText("Assign coordinators");
         }
 
     }
@@ -172,6 +175,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
 
                 // If you're updating the view within the same stage
                 mainViewController.setCenterView(root);
+                mainViewController.lblMenuTitle.setText("Create event tickets");
             }
         }
 
@@ -186,6 +190,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
         createEventController.setMainViewController(mainViewController);
         // Set the scene or update the main view
         mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
+        mainViewController.lblMenuTitle.setText("Create event");
     }
 
     public void onClickEventInformation(ActionEvent event) {

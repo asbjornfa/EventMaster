@@ -80,6 +80,7 @@ public class AssignCoordinatorsController implements Initializable {
     @FXML
     public void onClickBtnCancel(ActionEvent event) throws IOException {
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
+        mainViewController.lblMenuTitle.setText("Events");
 
     }
 
@@ -90,8 +91,9 @@ public class AssignCoordinatorsController implements Initializable {
         if (selectedUser != null) {
             assignCoordinatorModel.assignCoordinators(selectedEvent, selectedUser);
             mainViewController.setCenterView("/View/ActiveEvent.fxml");
-            // Set the center of the border pane back to the ActiveEventController
-            activeEventController.updateTableView(); // Refresh the table if needed
+            mainViewController.lblMenuTitle.setText("Events");
+
+
         }
     }
 
