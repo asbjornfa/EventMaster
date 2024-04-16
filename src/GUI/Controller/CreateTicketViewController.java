@@ -9,10 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -93,11 +90,16 @@ public class CreateTicketViewController implements Initializable {
 
     @FXML
     public void onClickSave(ActionEvent event) {
-        // Get the values from the input fields
-        int price = Integer.parseInt(txtFieldPrice.getText());
-        int quantityAvailable = Integer.parseInt(txtFieldQuantity.getText());
-
         try {
+            // Check if any field is empty or ticket type is not selected
+            if (txtFieldPrice.getText().isEmpty() || txtFieldQuantity.getText().isEmpty() || ticketTypeId == 0) {
+                showAlert("Validation Error", "All fields must be filled and a ticket type must be selected.");
+                return; // Stop processing since validation failed
+            }
+
+            int price = Integer.parseInt(txtFieldPrice.getText());
+            int quantityAvailable = Integer.parseInt(txtFieldQuantity.getText());
+
             if (ticketToEdit != null) {
                 // Update the ticket in the database
                 ticketToEdit.setPrice(price);
@@ -111,7 +113,8 @@ public class CreateTicketViewController implements Initializable {
 
             mainViewController.setCenterView("/View/TicketViewTable.fxml");
             mainViewController.lblMenuTitle.setText("Event tickets");
-
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Please enter valid numbers for price and quantity.");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -137,5 +140,13 @@ public class CreateTicketViewController implements Initializable {
     private void handleTicketTypeSelection(TicketType ticketType) {
         ticketTypeId = ticketType.getId();  // Ensure this is getting the correct ID
         ticketTypeDropDown.setText(ticketType.getTitle());
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }
