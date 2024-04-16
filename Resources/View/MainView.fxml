@@ -31,7 +31,7 @@
                                   <Menu fx:id="menuIcon" mnemonicParsing="false" text="☰">
                                     <items>
                                           <MenuItem fx:id="menuCreateEvent" mnemonicParsing="false" onAction="#createEventHandle" text="Create event" />
-                                          <MenuItem fx:id="menuActiveEvents" mnemonicParsing="false" onAction="#activeEventsHandle" text="Active events" />
+                                          <MenuItem fx:id="menuActiveEvents" mnemonicParsing="false" onAction="#activeEventsHandle" text="Events" />
                                           <MenuItem fx:id="menuUsers" mnemonicParsing="false" onAction="#usersHandle" text="Users" />
                                           <MenuItem fx:id="menuCreateUser" mnemonicParsing="false" onAction="#createUserHandle" text="Create user" />
                                           <MenuItem fx:id="menuCreateTicket" mnemonicParsing="false" onAction="#createTicketHandle" text="Create ticket" />
