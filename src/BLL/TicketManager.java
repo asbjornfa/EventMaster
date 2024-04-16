@@ -27,6 +27,10 @@ public class TicketManager {
         ticketDAO.deleteTicket(ticket);
     }
 
+    public void updateQuantityAvailable(Ticket ticket) throws IOException, SQLException {
+        ticketDAO.updateQuantityAvailable(ticket);
+    }
+
     public void updateTicket(Ticket ticket) throws IOException, SQLException {
         ticketDAO.updateTicket(ticket);
     }

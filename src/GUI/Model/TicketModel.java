@@ -37,6 +37,10 @@ public class TicketModel {
         ticketToBeViewed.remove(ticket);
     }
 
+    public void updateQuantityAvailable(Ticket ticket) throws IOException, SQLException {
+        ticketManager.updateQuantityAvailable(ticket);
+    }
+
     public void updateTicket(Ticket ticket) throws IOException, SQLException {
         ticketManager.updateTicket(ticket);
     }

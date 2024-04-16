@@ -11,6 +11,8 @@ public interface ITicket {
     public Ticket createTicket(Ticket ticket) throws IOException;
     public Ticket deleteTicket(Ticket ticket) throws IOException;
 
+    public Ticket updateQuantityAvailable(Ticket ticket) throws SQLException;
+
     public Ticket updateTicket(Ticket ticket) throws SQLException;
-    }
+}
 

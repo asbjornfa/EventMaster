@@ -98,7 +98,7 @@ public class TicketDAO_DB implements ITicket {
     }
 
     @Override
-    public Ticket updateTicket(Ticket ticket) throws SQLException {
+    public Ticket updateQuantityAvailable(Ticket ticket) throws SQLException {
         String sql = "UPDATE dbo.TicketsForEvent SET quantityAvailable = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -115,5 +115,26 @@ public class TicketDAO_DB implements ITicket {
 
         return ticket;
     }
+
+    @Override
+    public Ticket updateTicket(Ticket ticket) throws SQLException {
+        String sql = "UPDATE dbo.TicketsForEvent SET price = ?, quantityAvailable = ?,  WHERE id = ?";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // Bind parameters
+            stmt.setInt(1, ticket.getPrice());
+            stmt.setInt(2, ticket.getQuantityAvailable());
+            stmt.setInt(3, ticket.getId());
+
+            stmt.executeUpdate();
+
+
+        }
+
+        return ticket;
+    }
+
     }
 

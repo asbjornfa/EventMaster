@@ -1,6 +1,7 @@
 
 # Config files
 config/config.settings
+config/config.emailapi
 
 # User-specific stuff
 .idea/**/workspace.xml

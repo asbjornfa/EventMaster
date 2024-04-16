@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class QRManager {
-    //https://www.baeldung.com/java-generating-barcodes-qr-codes
 
     // unikke koder pr QR
     public static UUID generateUniqueUUID(String args) {
@@ -40,7 +39,8 @@ public class QRManager {
     }
 
     public static File saveImage(BufferedImage billede, String fileName) {
-        File output = new File(fileName);
+        String directoryPath = "Resources/PDF/";
+        File output = new File(directoryPath + fileName);
 
         try {
             ImageIO.write(billede, "PNG", output);
@@ -63,7 +63,7 @@ public class QRManager {
         return saveImage(file, uniqueText + ".png");
     }
 
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         // kaldes
         UUID unique = generateUniqueUUID("FredagsBar-EventTicket-patrick@hotmail.dk");
 

@@ -1,23 +1,20 @@
 package GUI.Controller;
 
 import BE.*;
-import BLL.EventManager;
+import BLL.EmailSender;
 import BLL.QRManager;
 import BLL.ReservationManager;
 import GUI.Model.*;
 import com.google.zxing.WriterException;
+import com.resend.core.exception.ResendException;
+import com.resend.services.emails.model.Attachment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -86,7 +83,7 @@ public class AddReservationViewController implements Initializable {
     }
 
     @FXML
-    public void onClickSave(ActionEvent event) throws IOException, WriterException {
+    public void onClickSave(ActionEvent event) throws Exception {
 
         String email = txtFieldCostumerEmail.getText().trim(); // Get customer email from input field
         String eventTitle = lblEventTitle.getText(); // Get event title from label
@@ -110,16 +107,35 @@ public class AddReservationViewController implements Initializable {
             return;
         }
 
+        // Laver en ny instans af klasen
+        EmailSender emailSender = new EmailSender();
 
+        // Genererer en unik UUID baseret på en streng sammensat af email, eventTitle og ticketTypeTitle
         UUID uniqueId = QRManager.generateUniqueUUID(email + eventTitle + ticketTypeTitle);
+        // Konverterer den unikke UUID til en streng
         String uniqueString = uniqueId.toString();
 
+        // Genererer en 2D QR-kodebillede baseret på den unikke streng
+        QRManager.generate2DQRCodeImage(uniqueString);
+
+        // Initialiserer en File variabel og en Attachment variabel
+        File gemtFil = null;
+        Attachment attachment = null;
         try {
-            File gemtFil = QRManager.getQrCodeFile(uniqueString);
+            // Henter QR-kodefilen ved hjælp af den unikke streng
+            gemtFil = QRManager.getQrCodeFile(uniqueString);
+            // Tilføjer filen som en vedhæftning til emailen
+            attachment = emailSender.addImageAttachment(gemtFil);
         } catch (Exception e) {
             System.out.println("Noget gik galt...\n" + e.getMessage());
         }
 
+        try {
+            // Sender emailen med vedhæftningen
+            emailSender.sendEmailWithAttachment(email, eventTitle, "Her er din " + ticketTypeTitle + " billet" + ". Vi ses snart til " + eventTitle, attachment);
+        } catch (ResendException e) {
+            System.out.println("Error trying to send eamil");
+        }
 
         try {
             // Check if email already exists in the database
@@ -137,15 +153,13 @@ public class AddReservationViewController implements Initializable {
                 purchasedTicketsModel.createPurchasedTickets(newReservation.getId(), ticketTypeId.getId(), eventId.getId(), uniqueString, quantity);
             }
 
-            System.out.println("Selected Ticket: " + selectedTicket);
-           
             if (selectedTicket != null) {
                 // Subtract the quantity from the reservation from the quantityAvailable field
                 int updatedQuantity = selectedTicket.getQuantityAvailable() - quantity;
                 selectedTicket.setQuantityAvailable(updatedQuantity);
-                System.out.println("Updating ticket..");
+
                 // Update the ticket in the database with the new quantityAvailable value
-                ticketModel.updateTicket(selectedTicket); // Pass the updated ticket object
+                ticketModel.updateQuantityAvailable(selectedTicket); // Pass the updated ticket object
             }
 
             // Close the window

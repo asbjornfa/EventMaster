@@ -18,5 +18,6 @@
     <orderEntry type="library" name="apache.pdfbox.debugger.app" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
     <orderEntry type="library" name="junit.jupiter" level="project" />
+    <orderEntry type="library" name="resend.java" level="project" />
   </component>
 </module>
