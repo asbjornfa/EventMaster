@@ -38,5 +38,4 @@ public class PurchasedTicketsModel {
         purchasedTicketsManager.deletePurchasedTickets(purchasedTickets);
         purchasedTicketsToBeViewed.remove(purchasedTickets);
     }
-
 }

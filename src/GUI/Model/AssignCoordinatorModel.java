@@ -13,7 +13,6 @@ public class AssignCoordinatorModel {
 
     private AssignCoordinatorManager assignCoordinatorManager;
 
-
     public AssignCoordinatorModel() throws SQLException {
         assignCoordinatorManager = new AssignCoordinatorManager();
     }

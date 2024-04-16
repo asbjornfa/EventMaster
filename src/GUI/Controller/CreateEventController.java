@@ -28,8 +28,11 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class CreateEventController implements Initializable{
-    public DateTimePicker DTPickerEnd;
-    public MFXButton btnCancel;
+
+    @FXML
+    private DateTimePicker DTPickerEnd;
+    @FXML
+    private MFXButton btnCancel;
     @FXML
     private DateTimePicker DTPickerStart;
     @FXML
@@ -38,36 +41,24 @@ public class CreateEventController implements Initializable{
     private TextArea eventDescriptionField;
     @FXML
     private TextField eventTitleField;
-    private EventModel eventModel;
-    private Event eventToEdit;
     @FXML
     private MFXButton btnCreate;
-    @FXML
-    private ImageView imageEvent;
-    private String selectedImagePath;
+
+    private EventModel eventModel;
+
+    private Event eventToEdit;
 
     private MainViewController mainViewController;
-
 
     public CreateEventController() {
     }
 
-    /*public CreateEventController(EventModel eventModel) throws Exception {
-        this.eventModel = eventModel;
-    }*/
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //setImage();
     }
 
     public void setEventModel(EventModel eventModel) {
         this.eventModel = eventModel;
-    }
-
-    public void setSelectedImagePath(String selectedImagePath) {
-        this.selectedImagePath = selectedImagePath;
     }
 
     // Method to set MainViewController
@@ -79,16 +70,6 @@ public class CreateEventController implements Initializable{
         this.eventToEdit = event;
         // Populate UI fields with the data from eventToEdit
         setEventInformation(event);
-    }
-
-    public void setImage(String imagePath){
-        File file = new File(imagePath);
-        Image image = new Image(file.toURI().toString());
-        imageEvent.setImage(image);
-
-        imageEvent.setPreserveRatio(false);
-        imageEvent.setFitWidth(250);
-        imageEvent.setFitHeight(200);
     }
 
     private void setEventInformation(Event event) {
@@ -104,12 +85,10 @@ public class CreateEventController implements Initializable{
 
 
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
-
         // Handle creation logic
         String title = eventTitleField.getText();
         String location = eventLocationField.getText();
         String description = eventDescriptionField.getText();
-
 
         LocalDateTime selectedDateTimeStart = DTPickerStart.dateTimeProperty().get();
         LocalDateTime selectedDateTimeEnd = DTPickerEnd.dateTimeProperty().get();
@@ -125,7 +104,6 @@ public class CreateEventController implements Initializable{
         Time startTimeSql = Time.valueOf(startTime);
         Time endTimeSql = Time.valueOf(endTime);
 
-
         if (eventToEdit != null) {
 
             eventToEdit.setTitle(title);
@@ -136,45 +114,21 @@ public class CreateEventController implements Initializable{
             eventToEdit.setStartTime(startTimeSql);
             eventToEdit.setEndTime(endTimeSql);
 
-
             eventModel.updateEvent(eventToEdit);
 
         } else {
             eventModel.createEvent(title, location, startDate, endDate,
-                    startTimeSql, endTimeSql, description, selectedImagePath);
-
+                    startTimeSql, endTimeSql, description);
         }
 
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
         mainViewController.lblMenuTitle.setText("Events");
-
     }
-
 
     private void clearFields() {
         eventTitleField.clear();
         eventLocationField.clear();
         eventDescriptionField.clear();
-    }
-
-    @FXML
-    private void handleImportImage(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ChooseImageEventView.fxml"));
-            Parent root = loader.load();
-            ChooseImageEventController chooseImageEventController = loader.getController();
-            chooseImageEventController.setCreateEventController(this);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Login");
-            stage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Could not load fxml");
-            alert.showAndWait();
-        }
-
     }
 
     public void onClickCancel(ActionEvent event) throws IOException {

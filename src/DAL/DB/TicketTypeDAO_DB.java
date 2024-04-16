@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicketTypeDAO_DB implements ITicketType {
-    private MyDatabaseConnector databaseConnector;
 
+    private MyDatabaseConnector databaseConnector;
 
     public TicketTypeDAO_DB() throws SQLException {
         databaseConnector = new MyDatabaseConnector();
@@ -44,20 +44,11 @@ public class TicketTypeDAO_DB implements ITicketType {
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-
             stmt.setString(1, ticketType.getTitle());
 
             stmt.executeUpdate();
-
-
         }
         return ticketType;
-    }
-
-
-    @Override
-    public TicketType deleteTicketType(TicketType ticketType) {
-        return null;
     }
 
     @Override

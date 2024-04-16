@@ -23,7 +23,6 @@ public class UserModel {
     }
 
     public ObservableList<User> getObservableUsers() {
-
         return userToBeViewed;
     }
 
@@ -47,7 +46,9 @@ public class UserModel {
         return userManager.authenticateUser(username, password);
     }
 
-    public String getPositionFromUser(String username){ return userManager.getPositionFromUser(username);}
+    public String getPositionFromUser(String username){
+        return userManager.getPositionFromUser(username);
+    }
 
     public boolean usernameExists(String username){
         return userManager.usernameExists(username);
@@ -68,5 +69,4 @@ public class UserModel {
     public String getLoggedInUsername() {
         return loggedInUsername;
     }
-
 }

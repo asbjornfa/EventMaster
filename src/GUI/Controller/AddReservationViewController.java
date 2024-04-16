@@ -28,14 +28,10 @@ public class AddReservationViewController implements Initializable {
 
     @FXML
     private Label lblQuantity;
-
     @FXML
     private Label lblTicketType;
-
     @FXML
     private Label lblEventTitle;
-
-
     @FXML
     private TextField txtFieldCostumerEmail;
 
@@ -44,9 +40,11 @@ public class AddReservationViewController implements Initializable {
     private PurchasedTicketsModel purchasedTicketsModel;
     private TicketTypeModel ticketTypeModel;
     private EventModel eventModel;
+
     private ReservationManager reservationManager;
-    private Ticket selectedTicket;
     private MainViewController mainViewController;
+
+    private Ticket selectedTicket;
 
     public AddReservationViewController() throws Exception {
         ticketModel = new TicketModel();
@@ -59,7 +57,6 @@ public class AddReservationViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     public void setMainViewController(MainViewController mainViewController) {
@@ -75,7 +72,6 @@ public class AddReservationViewController implements Initializable {
         lblTicketType.setText(ticketTypeTitle);
     }
 
-
     @FXML
     public void onClickCancel(ActionEvent event) {
         mainViewController.setCenterView("/View/TicketViewTable.fxml");
@@ -84,7 +80,6 @@ public class AddReservationViewController implements Initializable {
 
     @FXML
     public void onClickSave(ActionEvent event) throws Exception {
-
         String email = txtFieldCostumerEmail.getText().trim(); // Get customer email from input field
         String eventTitle = lblEventTitle.getText(); // Get event title from label
         String ticketTypeTitle = lblTicketType.getText();
@@ -162,7 +157,6 @@ public class AddReservationViewController implements Initializable {
                 ticketModel.updateQuantityAvailable(selectedTicket); // Pass the updated ticket object
             }
 
-            // Close the window
             mainViewController.setCenterView("/View/ReservationsView.fxml");
             mainViewController.lblMenuTitle.setText("Reservations");
 

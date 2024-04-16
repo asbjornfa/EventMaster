@@ -21,26 +21,26 @@ import java.util.ResourceBundle;
 
 public class CreateTicketViewController implements Initializable {
 
-    public MFXButton btnSave;
+    @FXML
+    private MFXButton btnSave;
     @FXML
     private Label eventName;
-
     @FXML
     private MenuButton ticketTypeDropDown;
-
     @FXML
     private TextField txtFieldPrice;
-
     @FXML
     private TextField txtFieldQuantity;
 
+    private TicketTypeModel ticketTypeModel;
+    private TicketModel ticketModel;
+
+    private MainViewController mainViewController;
+
+    private Ticket ticketToEdit;
     private String eventTitle;
     private int eventId;
     private int ticketTypeId;
-    private TicketTypeModel ticketTypeModel;
-    private TicketModel ticketModel;
-    private MainViewController mainViewController;
-    private Ticket ticketToEdit;
 
     public CreateTicketViewController() throws SQLException, IOException {
         ticketTypeModel = new TicketTypeModel();
@@ -137,6 +137,5 @@ public class CreateTicketViewController implements Initializable {
     private void handleTicketTypeSelection(TicketType ticketType) {
         ticketTypeId = ticketType.getId();  // Ensure this is getting the correct ID
         ticketTypeDropDown.setText(ticketType.getTitle());
-
     }
 }

@@ -18,13 +18,11 @@ public class User {
         this.positionId = positionId;
     }
 
-
     public User(int id, String name, String email, String username){
         this.id = id;
         this.name = name;
         this.email = email;
         this.username = username;
-
     }
 
     public User(String name, String email, String password, String username) {
@@ -57,7 +55,6 @@ public class User {
     public User(String name) {
         this.name = name;
     }
-
 
     public int getId() {
         return id;

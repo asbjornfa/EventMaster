@@ -19,7 +19,6 @@ public class ReservationModel {
     }
 
     public ObservableList<Reservations> getObservableReservations() {
-
         return reservationsToBeViewed;
     }
 
@@ -28,17 +27,13 @@ public class ReservationModel {
         Reservations reservations = new Reservations(email);
 
         reservationManager.createReservation(reservations);
-
         reservationsToBeViewed.add(reservations);
-
 
         return reservations;
     }
 
     public void deleteReservation(int reservationId) throws IOException {
         reservationManager.deleteReservation(reservationId);
-
         reservationsToBeViewed.remove(reservationId);
-
     }
 }

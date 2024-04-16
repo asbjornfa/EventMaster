@@ -24,25 +24,21 @@ import java.util.ResourceBundle;
 
 public class AssignCoordinatorsController implements Initializable {
 
+    @FXML
+    private TableView<User> tblViewEventCoordinators;
+    @FXML
+    private TableColumn colName;
+    @FXML
+    private TableColumn colUsername;
+
     private UserModel userModel;
-    private Stage stage; // Reference to this stage
-    private Event selectedEvent;
-
-
 
     private ActiveEventController activeEventController;
     private AssignCoordinatorModel assignCoordinatorModel;
     private MainViewController mainViewController;
 
-    @FXML
-    private TableView<User> tblViewEventCoordinators;
-
-    @FXML
-    private TableColumn colName;
-
-    @FXML
-    private TableColumn colUsername;
-
+    private Stage stage; // Reference to this stage
+    private Event selectedEvent;
 
     public AssignCoordinatorsController() throws SQLException {
         userModel = new UserModel();
@@ -55,7 +51,6 @@ public class AssignCoordinatorsController implements Initializable {
         colUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
 
         tblViewEventCoordinators.setItems(userModel.getObservableUsers());
-
     }
 
     // Method to set MainViewController
@@ -71,7 +66,6 @@ public class AssignCoordinatorsController implements Initializable {
         this.activeEventController = activeEventController;
     }
 
-
     // Set the stage
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -81,7 +75,6 @@ public class AssignCoordinatorsController implements Initializable {
     public void onClickBtnCancel(ActionEvent event) throws IOException {
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
         mainViewController.lblMenuTitle.setText("Events");
-
     }
 
     @FXML
@@ -92,11 +85,6 @@ public class AssignCoordinatorsController implements Initializable {
             assignCoordinatorModel.assignCoordinators(selectedEvent, selectedUser);
             mainViewController.setCenterView("/View/ActiveEvent.fxml");
             mainViewController.lblMenuTitle.setText("Events");
-
-
         }
     }
-
-
-
 }

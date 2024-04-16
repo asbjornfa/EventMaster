@@ -106,7 +106,6 @@ public class UserDAO_DB implements IUser {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
@@ -127,7 +126,6 @@ public class UserDAO_DB implements IUser {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return position;
     }
 
@@ -150,7 +148,6 @@ public class UserDAO_DB implements IUser {
             } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return null; // Return null if user not found
     }
 
@@ -210,8 +207,4 @@ public class UserDAO_DB implements IUser {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 }

@@ -16,7 +16,6 @@ public class EventManager {
     public EventManager() throws IOException{
         try{
             eventDAO = new EventDAO_DB();
-
         } catch (Exception e) {
             throw new IOException(e);
         }
@@ -44,7 +43,6 @@ public class EventManager {
     }
 
     public void deleteEvent(Event event) throws IOException {
-
         eventDAO.deleteEvent(event);
     }
 

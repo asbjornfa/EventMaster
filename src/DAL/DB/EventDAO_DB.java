@@ -31,7 +31,7 @@ public class EventDAO_DB implements IEventDataAccess {
                     "FROM Event e\n" +
                     "left JOIN AssignedEventCoordinators ec ON e.id = ec.eventId\n" +
                     "left JOIN users u ON ec.userId = u.id\n" +
-                    "GROUP BY e.id,e.createdBy,e.description,e.endDate,e.endTime,e.location,e.startDate,e.startTime,e.title, e.imagePath;";
+                    "GROUP BY e.id,e.description,e.endDate,e.endTime,e.location,e.startDate,e.startTime,e.title";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -44,16 +44,13 @@ public class EventDAO_DB implements IEventDataAccess {
                 Time startTime = rs.getTime("startTime");
                 Time endTime = rs.getTime("endTime");
                 String description = rs.getString("description");
-                String createdBy = rs.getString("createdBy");
-                String imagePath = rs.getString("imagePath");
                 String coordinators = rs.getString("coordinators");
 
 
                 // Create an Event object and add it to the list
-                Event event = new Event(id, title, location, startDate, endDate, startTime, endTime, description, createdBy, imagePath,coordinators);
+                Event event = new Event(id, title, location, startDate, endDate, startTime, endTime, description, coordinators);
                 allEvents.add(event);
             }
-
             // Return the list of events
             return allEvents;
 
@@ -68,8 +65,8 @@ public class EventDAO_DB implements IEventDataAccess {
     @Override
     public Event createEvent(Event event) throws IOException {
         // SQL statement to insert a new event into the events table
-        String sql = "INSERT INTO dbo.Event (title, location, startDate, endDate, startTime, endTime, description, imagePath) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dbo.Event (title, location, startDate, endDate, startTime, endTime, description) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -82,7 +79,6 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setTime(5, event.getStartTime());
             stmt.setTime(6, event.getEndTime());
             stmt.setString(7, event.getDescription());
-            stmt.setString(8, event.getImagePath());
 
             // Execute the SQL statement to insert the new event
             stmt.executeUpdate();
@@ -100,7 +96,7 @@ public class EventDAO_DB implements IEventDataAccess {
     @Override
     public Event updateEvent(Event event) throws IOException {
     // SQL statement to update an event in the events table
-        String sql = "UPDATE dbo.Event SET title = ?, startDate = ?, endDate = ?, startTime = ?, endTime = ?, description = ?, createdBy = ? WHERE id = ?";
+        String sql = "UPDATE dbo.Event SET title = ?, startDate = ?, endDate = ?, startTime = ?, endTime = ?, description = ? WHERE id = ?";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -112,8 +108,7 @@ public class EventDAO_DB implements IEventDataAccess {
             stmt.setTime(4, event.getStartTime());
             stmt.setTime(5, event.getStartTime());
             stmt.setString(6, event.getDescription());
-            stmt.setString(7, event.getCreatedBy());
-            stmt.setInt(8, event.getId());
+            stmt.setInt(7, event.getId());
 
             stmt.executeUpdate();
 

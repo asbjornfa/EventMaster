@@ -17,7 +17,6 @@ public class AssignCoordinatorManager {
         assignCoordinatorsDAO = new AssignCoordinatorsDAO_DB();
     }
 
-
     public void assignCoordinators(Event event, User user) {
         assignCoordinatorsDAO.assignCoordinators(event, user);
     }

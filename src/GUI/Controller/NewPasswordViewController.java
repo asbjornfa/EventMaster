@@ -24,22 +24,20 @@ import java.util.ResourceBundle;
 
 public class NewPasswordViewController implements Initializable {
 
-    // Password input fields
-    public MFXPasswordField txtFieldPassword;
-    public MFXPasswordField txtFieldReEnterPassword;
+    @FXML
+    private MFXPasswordField txtFieldPassword;
+    @FXML
+    private MFXPasswordField txtFieldReEnterPassword;
+    @FXML
+    private Label lblPasswordError;
+    @FXML
+    private Label lblReEnterPasswordError;
 
-    // Error labels
-    public Label lblPasswordError;
-    public Label lblReEnterPasswordError;
-
-    // UserModel instance to handle password update
     private UserModel userModel;
-    // Current user's username
-    private String currentUser;
 
+    private String currentUser;
     private Stage loginStage;
 
-    // Initialize the controller and set up the UserModel instance
     public NewPasswordViewController() throws SQLException {
         userModel = new UserModel();
     }
@@ -56,7 +54,6 @@ public class NewPasswordViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         // Clear previous error messages and border colors
         clearErrorMessages();
         clearBorders();
@@ -66,7 +63,6 @@ public class NewPasswordViewController implements Initializable {
             txtFieldPassword.setStyle("-fx-border-color: white;");
             lblPasswordError.setText("");
         });
-
         txtFieldReEnterPassword.textProperty().addListener((observable, oldValue, newValue) -> {
             txtFieldReEnterPassword.setStyle("-fx-border-color: white;");
             lblReEnterPasswordError.setText("");
@@ -131,7 +127,6 @@ public class NewPasswordViewController implements Initializable {
             }));
             timeline.play();
         }
-
             // Show success message
             lblPasswordError.setText("Password has been updated successfully.");
             lblPasswordError.setTextFill(Color.GREEN);
@@ -168,7 +163,6 @@ public class NewPasswordViewController implements Initializable {
             txtFieldReEnterPassword.setStyle("-fx-border-color: white;");
         }
 
-
     // Method to apply shake animation to a node
     private void shakeNode(MFXPasswordField node) {
         double originalTranslateX = node.getTranslateX();
@@ -187,6 +181,4 @@ public class NewPasswordViewController implements Initializable {
         );
         timeline.play();
     }
-
-
 }

@@ -25,20 +25,16 @@ public class EventModel {
     }
 
     public ObservableList<Event> getObservableEvents() {
-
         return eventsToBeViewed;
     }
 
     public void createEvent(String title, String location, LocalDate startDate, LocalDate endDate,
-                            Time startTime, Time endTime, String description, String imagePath) throws IOException {
+                            Time startTime, Time endTime, String description) throws IOException {
 
-        Event event = new Event(title, location, startDate, endDate, startTime, endTime, description, imagePath);
+        Event event = new Event(title, location, startDate, endDate, startTime, endTime, description);
 
         eventManager.createEvent(event);
-
         eventsToBeViewed.add(event);
-
-
     }
 
     public void updateEvent(Event event) throws IOException {
@@ -47,12 +43,10 @@ public class EventModel {
 
     public void deleteEvent(Event event) throws IOException {
         eventManager.deleteEvent(event);
-
         eventsToBeViewed.remove(event);
     }
 
     public Event getEventIdFromTitle(String eventTitle) throws SQLException {
         return eventManager.getEventIdFromTitle(eventTitle);
     }
-
 }

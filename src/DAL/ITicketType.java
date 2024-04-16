@@ -8,7 +8,6 @@ import java.util.List;
 public interface ITicketType {
     public List<TicketType> getAllTicketType() throws SQLException;
     public TicketType createTicketType(TicketType ticket_type) throws SQLException;
-    public TicketType deleteTicketType(TicketType ticket_type);
     public TicketType getTicketTypeIdFromTitle(String ticketTypeTitle) throws SQLException;
 
 }

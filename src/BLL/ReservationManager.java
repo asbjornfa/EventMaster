@@ -37,7 +37,6 @@ public class ReservationManager {
     }
 
     public void deleteReservation(int reservationId) throws IOException {
-
         reservationsDAO.deleteReservation(reservationId);
     }
 

@@ -109,10 +109,7 @@ public class TicketDAO_DB implements ITicket {
             stmt.setInt(2, ticket.getId());
 
             stmt.executeUpdate();
-
-
         }
-
         return ticket;
     }
 
@@ -130,12 +127,9 @@ public class TicketDAO_DB implements ITicket {
             stmt.setInt(4, ticket.getId());
 
             stmt.executeUpdate();
-
-
         }
-
         return ticket;
     }
 
-    }
+}
 

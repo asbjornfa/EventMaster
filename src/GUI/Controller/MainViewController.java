@@ -29,55 +29,45 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController implements Initializable {
-    public ImageView imageViewer;
+
+
     public Label lblUsername;
     public Label lblPosition;
     public Label lblMenuTitle;
+    public BorderPane mainBorderPane;
 
     @FXML
     private MenuItem menuTickets;
-
-
     @FXML
     private MenuItem menuActiveEvents;
-
-
     @FXML
     private MenuItem menuCreateEvent;
-
     @FXML
     private MenuItem menuCreateTicket;
-
     @FXML
     private MenuItem menuCreateUser;
-
-
     @FXML
     private MenuItem menuLogOut;
-
     @FXML
     private MenuItem menuReservations;
-
     @FXML
     private MenuItem menuUsers;
 
-    public BorderPane mainBorderPane;
-    private Node OriginalCenter;
     private EventModel eventModel;
     private UserModel userModel;
+
     private User authenticatedUser;
+    private Node OriginalCenter;
 
     private LoginViewController loginViewController;
-
-
-    public void setEventModel(EventModel eventModel) {
-
-        this.eventModel = eventModel;
-    }
 
     public MainViewController() throws Exception {
         userModel = new UserModel();
         eventModel = new EventModel();
+    }
+
+    public void setEventModel(EventModel eventModel) {
+        this.eventModel = eventModel;
     }
 
     public void setUser(User authenticatedUser) {
@@ -104,11 +94,9 @@ public class MainViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         OriginalCenter = mainBorderPane.getCenter();
         lblMenuTitle.setText("");
-        //loadActiveEvents();
     }
 
     private void updateMenu(String role) {
-
         // Show additional menu items based on user role
         if ("admin".equalsIgnoreCase(role)) {
             // Admin-specific menu items
@@ -121,8 +109,6 @@ public class MainViewController implements Initializable {
             menuCreateEvent.setVisible(false);
             menuReservations.setVisible(false);
             menuTickets.setVisible(false);
-
-
         } else if ("event coordinator".equalsIgnoreCase(role)) {
             // Event Coordinator-specific menu items
             menuActiveEvents.setVisible(true);
@@ -171,7 +157,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-
     public void setCenterView(Node node) {
         mainBorderPane.setCenter(node);
     }
@@ -216,7 +201,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-
     // Method to reopen the login page
     private void reopenLogin() {
         try {
@@ -237,7 +221,6 @@ public class MainViewController implements Initializable {
         }
     }
 
-
     public void ticketsHandle(ActionEvent event) throws IOException {
         // Load UsersView
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/TicketViewTable.fxml"));
@@ -249,7 +232,6 @@ public class MainViewController implements Initializable {
         mainBorderPane.setCenter(tickets);
         lblMenuTitle.setText("Event tickets");
     }
-
 
     // Method in MainViewController to change the central view of the application
     public void setCenterView(String fxmlPath) {

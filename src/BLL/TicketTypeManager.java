@@ -12,12 +12,10 @@ public class TicketTypeManager {
 
     public TicketTypeManager() throws SQLException {
         ticketTypeDAO = new TicketTypeDAO_DB();
-
     }
 
     public List<TicketType> getAllTicketType() throws SQLException {
         return ticketTypeDAO.getAllTicketType();
-
     }
 
     public TicketType createTicketType (TicketType TicketType) throws SQLException {

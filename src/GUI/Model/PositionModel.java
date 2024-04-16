@@ -23,9 +23,6 @@ public class PositionModel {
     }
 
     public ObservableList<Positions> getObservablePositions() {
-
         return positionsToBeViewed;
     }
-
-
 }

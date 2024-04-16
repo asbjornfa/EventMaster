@@ -26,48 +26,36 @@ import java.util.ResourceBundle;
 
 public class CreateUserController implements Initializable {
 
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Button btnCreateUserOrUpdate;
+    @FXML
+    private MenuButton menuButton;
+    @FXML
+    private TextField txtFieldEmail;
+    @FXML
+    private TextField txtFieldFirstName;
+    @FXML
+    private TextField txtFieldLastName;
+    @FXML
+    private TextField txtFieldUsername;
 
-    public Button btnCancel;
-    // Declare a UserModel object to interact with the database
     private UserModel userModel;
     private PositionModel positionModel;
     private MainViewController mainViewController;
 
+    private User editingUser;
     private Positions selectedPosition;
 
-    // Declare TextField objects for each input field
-    @FXML
-    private Button btnCreateUserOrUpdate;
-
-    @FXML
-    private MenuButton menuButton;
-
-    @FXML
-    private TextField txtFieldEmail;
-
-    @FXML
-    private TextField txtFieldFirstName;
-
-    @FXML
-    private TextField txtFieldLastName;
-
-    @FXML
-    private TextField txtFieldUsername;
-
-    // This user will be null when creating a new user and contain a user object when editing an existing user.
-    private User editingUser;
-
-    // Initialize method called when the controller is loaded
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            // Initialize the UserModel object
             userModel = new UserModel();
             positionModel = new PositionModel();
 
             loadPositionsIntoMenuButton();
         } catch (SQLException e) {
-            // Throw a runtime exception if there is an error initializing the UserModel
             throw new RuntimeException(e);
         }
     }
@@ -84,7 +72,6 @@ public class CreateUserController implements Initializable {
 
         @FXML
     void onClickBtnCreateUser(ActionEvent event) throws IOException {
-
         String firstName = txtFieldFirstName.getText();
         String lastName = txtFieldLastName.getText();
         String email = txtFieldEmail.getText();
@@ -94,32 +81,24 @@ public class CreateUserController implements Initializable {
         if(editingUser ==null)
         {
             // Creating a new user
-
             // Validate input fields
             if (!validateFields(firstName, lastName, email, username, position)) {
                 return;
             }
-
             // Create the user in the database
             userModel.createUser(firstName + " " + lastName, email, username, selectedPosition.getId());
-
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User Created", "User has been created successfully.");
         }else {
-
             editingUser.setName(firstName + " " + lastName);
             editingUser.setEmail(email);
             editingUser.setUsername(username);
             editingUser.setPositionId(selectedPosition.getId());
 
-
             userModel.updateUser(editingUser);
-
             // Show success alert
             showAlert(Alert.AlertType.INFORMATION, "User updated", "User has been updated successfully.");
-
         }
-
         mainViewController.setCenterView("/View/UsersView.fxml");
             mainViewController.lblMenuTitle.setText("Users");
     }
@@ -232,8 +211,5 @@ public class CreateUserController implements Initializable {
         mainViewController.setCenterView("/View/UsersView.fxml");
         mainViewController.lblMenuTitle.setText("Users");
     }
-
-
-
 }
 

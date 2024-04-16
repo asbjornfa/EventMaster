@@ -27,17 +27,27 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class ActiveEventController implements Initializable, MainViewControllerAware {
-    public TableView<Event> tblViewEvents;
-    public TableColumn<Event, String> colTitle;
-    public TableColumn<Event, LocalDate> colDate;
-    //public TableColumn colApprovalDate;
-    public TableColumn colAssigned;
-    public TableColumn colLocation;
 
-    public Button btnCreateEvent;
-    public Button btnEventInformation;
-    public Button btnEditEvent;
-    public Button btnDeleteEvent;
+    @FXML
+    private TableView<Event> tblViewEvents;
+
+    @FXML
+    private TableColumn<Event, String> colTitle;
+    @FXML
+    private TableColumn<Event, LocalDate> colDate;
+    @FXML
+    private TableColumn colAssigned;
+    @FXML
+    private TableColumn colLocation;
+
+    @FXML
+    private Button btnCreateEvent;
+    @FXML
+    private Button btnEventInformation;
+    @FXML
+    private Button btnEditEvent;
+    @FXML
+    private Button btnDeleteEvent;
     @FXML
     private Button btnCreateTickets;
     @FXML
@@ -68,7 +78,6 @@ public class ActiveEventController implements Initializable, MainViewControllerA
         tblViewEvents.refresh();
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize table columns
@@ -79,7 +88,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
 
         tblViewEvents.setItems(eventModel.getObservableEvents());
 
-        // Disable the button by default
+        // Disable the buttons by default
         btnAssign.setDisable(true);
         btnCreateTickets.setDisable(true);
         btnEditEvent.setDisable(true);
@@ -95,7 +104,6 @@ public class ActiveEventController implements Initializable, MainViewControllerA
             btnEventInformation.setDisable(newSelection == null);
             btnDeleteEvent.setDisable(newSelection == null);
             btnCreateEvent.setDisable(newSelection != null);
-
         });
     }
 
@@ -107,21 +115,17 @@ public class ActiveEventController implements Initializable, MainViewControllerA
         Parent root = loader.load();
         CreateEventController createEventController = loader.getController();
 
-        // Pass the EventModel to the CreateEventController
         createEventController.setEventModel(eventModel);
         createEventController.setEventToEdit(selectedEvent);
         createEventController.setMainViewController(mainViewController);
 
-        // Set the scene or update the main view
-        mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
+        mainViewController.setCenterView(root);
             mainViewController.lblMenuTitle.setText("Edit event");
-    }
+         }
     }
 
     public void onClickDeleteEvent(ActionEvent actionEvent) {
-
         Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
-
 
         if (selectedEvent != null) {
             try {
@@ -131,32 +135,30 @@ public class ActiveEventController implements Initializable, MainViewControllerA
                 e.printStackTrace();
             }
         } else {
-
             System.out.println("Please select an event to delete.");
         }
     }
 
     public void onClickAssign(ActionEvent actionEvent) throws IOException {
-
         Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
 
         if (selectedEvent != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AssignCoordinators.fxml"));
             Parent root = loader.load();
+
             AssignCoordinatorsController assignController = loader.getController();
             assignController.setSelectedEvent(selectedEvent);
             assignController.setActiveEventController(this);
-            assignController.setMainViewController(mainViewController); // Pass MainViewController instance
 
-            // If you're updating the view within the same stage
+            // Pass MainViewController instance
+            assignController.setMainViewController(mainViewController);
+
             mainViewController.setCenterView(root);
             mainViewController.lblMenuTitle.setText("Assign coordinators");
         }
-
     }
 
         public void onClickCreateTickets(ActionEvent event) throws IOException {
-
             Event selectedEvent = tblViewEvents.getSelectionModel().getSelectedItem();
 
             if (selectedEvent != null) {
@@ -167,15 +169,13 @@ public class ActiveEventController implements Initializable, MainViewControllerA
                 // Access the controller
                 CreateTicketViewController createTicketController = loader.getController();
 
-                // Pass the eventId to the CreateTicketViewController
                 createTicketController.setEventTitle(tblViewEvents.getSelectionModel().getSelectedItem().getTitle());
-
                 // Pass the eventId to the CreateTicketViewController
-                createTicketController.setEventId(selectedEvent.getId()); // Pass the eventId here
+                createTicketController.setEventId(selectedEvent.getId());
 
-                createTicketController.setMainViewController(mainViewController); // Pass MainViewController instance
+                // Pass MainViewController instance
+                createTicketController.setMainViewController(mainViewController);
 
-                // If you're updating the view within the same stage
                 mainViewController.setCenterView(root);
                 mainViewController.lblMenuTitle.setText("Create event tickets");
             }
@@ -190,8 +190,8 @@ public class ActiveEventController implements Initializable, MainViewControllerA
         createEventController.setEventModel(eventModel);
 
         createEventController.setMainViewController(mainViewController);
-        // Set the scene or update the main view
-        mainViewController.setCenterView(root); // Adjust this line if you use different method to change views
+
+        mainViewController.setCenterView(root);
         mainViewController.lblMenuTitle.setText("Create event");
     }
 
@@ -250,7 +250,7 @@ public class ActiveEventController implements Initializable, MainViewControllerA
             }
         }
     }
-    }
+}
 
 
 

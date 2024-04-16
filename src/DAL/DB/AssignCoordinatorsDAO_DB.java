@@ -19,10 +19,8 @@ public class AssignCoordinatorsDAO_DB implements IAssignCoordinators {
 
 
         @Override
-    public void assignCoordinators(Event event, User user) {
-
-            String sql =
-                    "INSERT INTO AssignedEventCoordinators (eventId, userId) VALUES (?, ?)";
+        public void assignCoordinators(Event event, User user) {
+            String sql = "INSERT INTO AssignedEventCoordinators (eventId, userId) VALUES (?, ?)";
 
             try (Connection conn = databaseConnector.getConnection();
                  PreparedStatement stmt = conn.prepareStatement(sql)) {

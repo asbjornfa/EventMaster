@@ -17,11 +17,9 @@ public class TicketTypeModel {
 
         viewTicketType = FXCollections.observableArrayList();
         viewTicketType.addAll(ticketTypeManager.getAllTicketType());
-
     }
 
     public ObservableList<TicketType> getObservableTicketType() {
-
         return viewTicketType;
     }
 
@@ -35,6 +33,4 @@ public class TicketTypeModel {
     public TicketType getTicketTypeIdFromTitle(String ticketTypeTitle) throws SQLException{
         return ticketTypeManager.getTicketTypeIdFromTitle(ticketTypeTitle);
     }
-
-
 }

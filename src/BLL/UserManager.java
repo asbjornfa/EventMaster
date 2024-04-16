@@ -17,17 +17,14 @@ public class UserManager {
     }
 
     public List<User> getAllUsers(){
-
         return userDAO.getAllUsers();
     }
 
     public User createUser(User newUser){
-
         return userDAO.createUser(newUser);
     }
 
     public void deleteUser(User user){
-
         userDAO.deleteUser(user);
     }
 
@@ -48,7 +45,6 @@ public class UserManager {
                 return user;
             }
         }
-
         // Authentication failed
         return null;
     }

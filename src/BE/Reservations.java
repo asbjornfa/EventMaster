@@ -5,6 +5,7 @@ public class Reservations {
     private int id;
     private String email;
 
+
     public Reservations(int id, String email) {
         this.id = id;
         this.email = email;

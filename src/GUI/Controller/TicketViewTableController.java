@@ -28,9 +28,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TicketViewTableController implements Initializable, MainViewControllerAware {
 
-    public Button btnAddReservation;
-    public Button btnEditEventTickets;
-    public Button btnDeleteEventTickets;
+    @FXML
+    private Button btnAddReservation;
+    @FXML
+    private Button btnEditEventTickets;
+    @FXML
+    private Button btnDeleteEventTickets;
     @FXML
     private TableColumn<Ticket, String> colEventName;
     @FXML
@@ -39,7 +42,6 @@ public class TicketViewTableController implements Initializable, MainViewControl
     private TableColumn<Ticket, Integer> colTicketAvailable;
     @FXML
     private TableColumn<Ticket, String> colTicketType;
-
     @FXML
     private TableView<Ticket> tblViewEventTickets;
 
@@ -47,10 +49,8 @@ public class TicketViewTableController implements Initializable, MainViewControl
 
     private MainViewController mainViewController;
 
-
     public TicketViewTableController() throws SQLException, IOException {
         ticketModel = new TicketModel();
-
     }
 
     @Override
@@ -67,7 +67,6 @@ public class TicketViewTableController implements Initializable, MainViewControl
         btnEditEventTickets.setDisable(true);
         btnDeleteEventTickets.setDisable(true);
 
-
         // Add a listener to the TableView's selection model
         tblViewEventTickets.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // Enable the button if a row is selected, otherwise disable
@@ -76,7 +75,6 @@ public class TicketViewTableController implements Initializable, MainViewControl
             btnDeleteEventTickets.setDisable(newSelection == null);
         });
     }
-
 
     // Method to set MainViewController
     public void setMainViewController(MainViewController mainViewController) {
@@ -105,7 +103,6 @@ public class TicketViewTableController implements Initializable, MainViewControl
             mainViewController.lblMenuTitle.setText("Add reservation");
         }
     }
-
 
     @FXML
     private void onClickDeleteTicket(ActionEvent event) throws IOException {
@@ -137,8 +134,4 @@ public class TicketViewTableController implements Initializable, MainViewControl
             mainViewController.lblMenuTitle.setText("Edit event tickets");
         }
     }
-
-
-
-
 }

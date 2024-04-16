@@ -21,7 +21,6 @@ public class TicketModel {
     }
 
     public ObservableList<Ticket> getObservableTicket() {
-
         return ticketToBeViewed;
     }
 
@@ -44,6 +43,4 @@ public class TicketModel {
     public void updateTicket(Ticket ticket) throws IOException, SQLException {
         ticketManager.updateTicket(ticket);
     }
-
-
 }

@@ -5,6 +5,7 @@ public class Positions {
     private int id;
     private String position;
 
+
     public Positions(int id, String position) {
         this.id = id;
         this.position = position;

@@ -26,20 +26,16 @@ import java.util.ResourceBundle;
 
 public class ReservationsViewController implements Initializable {
 
-
-    public Button btnDeleteReservation;
+    @FXML
+    private Button btnDeleteReservation;
     @FXML
     private TableColumn<PurchasedTickets, String> colEmailString;
-
     @FXML
     private TableColumn<PurchasedTickets, String> colEventName;
-
     @FXML
     private TableColumn<PurchasedTickets, String> colTicketType;
-
     @FXML
     private TableColumn<PurchasedTickets, Integer> colQuantity;
-
     @FXML
     private TableView<PurchasedTickets> tblReservations;
 
@@ -76,6 +72,4 @@ public class ReservationsViewController implements Initializable {
                 purchasedTicketsModel.deletePurchasedTickets(selectedTicket);
             }
         }
-
-
 }

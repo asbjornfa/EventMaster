@@ -17,6 +17,7 @@ public class ReservationDAO_DB implements IReservations {
     public ReservationDAO_DB() throws SQLException {
         databaseConnector = new MyDatabaseConnector();
     }
+
     @Override
     public List<Reservations> getAllReservations() throws IOException {
         ArrayList<Reservations> allReservations = new ArrayList<>();

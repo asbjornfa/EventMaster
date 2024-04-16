@@ -22,32 +22,26 @@ import java.util.ResourceBundle;
 
 public class UsersViewController implements Initializable, MainViewControllerAware {
 
-    private UserModel userModel;
-    private MainViewController mainViewController;
-
     @FXML
     private Button btnCreateUser;
-
     @FXML
     private Button btnDeleteUser;
-
     @FXML
     private Button btnUpdateUser;
-
     @FXML
     private TableColumn colEmail;
-
     @FXML
     private TableColumn colName;
-
     @FXML
     private TableColumn colPosition;
-
     @FXML
     private TableColumn colUsername;
-
     @FXML
     private TableView<User> tblViewUsers;
+
+    private UserModel userModel;
+
+    private MainViewController mainViewController;
 
     public UsersViewController() throws SQLException {
         userModel = new UserModel();
@@ -77,8 +71,6 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
             btnUpdateUser.setDisable(newSelection == null);
             btnDeleteUser.setDisable(newSelection == null);
             btnCreateUser.setDisable(newSelection != null);
-
-
     });
     }
 
@@ -96,12 +88,10 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
 
             clearSelection();
         }
-
     }
 
     @FXML
     void onClickCreateUser(ActionEvent event) throws IOException {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
             Parent root = loader.load();
 
@@ -123,7 +113,6 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CreateUserView.fxml"));
             Parent root = loader.load();
 
-
             CreateUserController createUserController = loader.getController();
             createUserController.setUserForEditing(selectedUser);
             createUserController.setMainViewController(mainViewController);
@@ -133,9 +122,4 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
             mainViewController.lblMenuTitle.setText("Edit user");
         }
     }
-
-
-
-
-
 }

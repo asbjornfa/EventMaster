@@ -29,38 +29,37 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable {
-    // Buttons
-    public Button logInBtn;
-
-    // Input fields
-    public MFXPasswordField enterPassword;
-    public MFXTextField enterUsername;
-
-    // UserModel instance
-    private UserModel userModel;
 
     @FXML
     private BorderPane loginBorderPane;
+    @FXML
+    private Button logInBtn;
+    @FXML
+    private MFXPasswordField enterPassword;
+    @FXML
+    private MFXTextField enterUsername;
 
-    private Stage stage; // Reference to the login stage
-    // Reference to the main controller
+
+    private UserModel userModel;
+
+    private Stage stage;
+
     private MainViewController mainController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            // Initialize the UserModel instance
             userModel = new UserModel();
 
             // Add event listeners to reset border color when text fields are edited
             enterUsername.textProperty().addListener((observable, oldValue, newValue) -> {
                 enterUsername.setStyle("-fx-border-color: white;");
             });
-
             enterPassword.textProperty().addListener((observable, oldValue, newValue) -> {
                 enterPassword.setStyle("-fx-border-color: white;");
             });
 
+            //Allows the user to press loginbtn with enter
             enterPassword.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     try {
@@ -81,12 +80,10 @@ public class LoginViewController implements Initializable {
         this.mainController = mainController;
     }
 
-
     // Set the stage
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
 
     // Handle the login button click event
     public void loginBtnHandle(ActionEvent actionEvent) throws IOException {
@@ -99,21 +96,16 @@ public class LoginViewController implements Initializable {
 
         // Check if the user is authenticated
         if (authenticatedUser != null) {
-
             if (authenticatedUser.getPassword() == null) {
                 // User has no password, open the NewPasswordView
                 openNewPasswordView(username);
             } else {
-
                 // Set the logged-in username in UserModel
                 userModel.setLoggedInUsername(username);
                 stage.close();
-
                 // Open the main view
                 openMainView(authenticatedUser);
-
             }
-
         } else {
             // Authentication failed, show an error message
             showErrorFeedback();
@@ -148,7 +140,6 @@ public class LoginViewController implements Initializable {
         timeline.play();
     }
 
-
     private void openNewPasswordView(String username) throws IOException {
         // Load the NewPasswordView FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/NewPasswordView.fxml"));
@@ -163,7 +154,6 @@ public class LoginViewController implements Initializable {
 
         // Add the NewPasswordView to the center of the login screen's BorderPane
         loginBorderPane.setCenter(root);
-
     }
 
     private void openMainView(User authenticatedUser) throws IOException {
@@ -178,9 +168,7 @@ public class LoginViewController implements Initializable {
         mainStage.setScene(new Scene(root));
         mainStage.setResizable(true);
         mainStage.centerOnScreen();
+        mainStage.setTitle("EASV");
         mainStage.show();
     }
-
-
-
-    }
+}
