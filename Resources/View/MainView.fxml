@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;" stylesheets="@../Css/MyCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainViewController">
+<BorderPane fx:id="mainBorderPane" prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;" stylesheets="@../Css/MyCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainViewController">
    <top>
       <AnchorPane prefHeight="118.0" prefWidth="910.0" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" layoutX="4.0" layoutY="3.0" prefHeight="19.0" prefWidth="904.0" AnchorPane.bottomAnchor="0.19999999999998863" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="2.3999999999999773" AnchorPane.topAnchor="3.0">
                <children>
-                  <AnchorPane prefHeight="47.0" prefWidth="257.0" style="-fx-background-color: #FBBB2C;" HBox.hgrow="ALWAYS">
+                  <AnchorPane prefHeight="27.0" prefWidth="347.0" style="-fx-background-color: #FBBB2C;" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="55.0" top="41.0" />
                      </HBox.margin>
@@ -59,9 +59,9 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="143.0" prefWidth="226.0">
                      <children>
-                        <AnchorPane layoutX="-17.0" layoutY="16.0" prefHeight="96.0" prefWidth="246.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="-17.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="16.0">
+                        <AnchorPane layoutX="-22.0" layoutY="16.0" prefHeight="113.0" prefWidth="247.0" style="-fx-background-color: #fff; -fx-background-radius: 10;" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="-22.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="16.0">
                            <children>
-                              <ImageView fitHeight="86.0" fitWidth="233.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="9.0">
+                              <ImageView fitHeight="101.0" fitWidth="241.0" layoutX="3.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.5030517578125" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.4000000000000057" AnchorPane.topAnchor="16.0">
                                  <image>
                                     <Image url="@../Images/Erhvervsakademi-Sydvest-logo-vektor-removebg-preview.png" />
                                  </image>
