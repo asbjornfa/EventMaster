@@ -76,6 +76,8 @@ public class UsersViewController implements Initializable, MainViewControllerAwa
             // Enable the button if a row is selected, otherwise disable
             btnUpdateUser.setDisable(newSelection == null);
             btnDeleteUser.setDisable(newSelection == null);
+            btnCreateUser.setDisable(newSelection != null);
+
 
     });
     }
