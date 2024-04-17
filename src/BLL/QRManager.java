@@ -15,36 +15,43 @@ import java.util.UUID;
 
 public class QRManager {
 
-    // unikke koder pr QR
+
     public static UUID generateUniqueUUID(String args) {
+        // Generate a UUID based on the given string
         return UUID.nameUUIDFromBytes(args.getBytes());
     }
 
-    // bruges til 2d qr koder
     public static BufferedImage generate2DQRCodeImage(String barcodeText) throws Exception {
+        // Create a QR Code writer
         QRCodeWriter barcodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix =
-                barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
+        // Encode the barcode text into a BitMatrix
+        BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.QR_CODE, 200, 200);
 
+        // Convert the BitMatrix into a BufferedImage and return
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    // bruges til 1d qr koder
     public static BufferedImage generate1DCodeImage(String barcodeText) throws WriterException {
+        // Create a Code128 writer
         Code128Writer barcodeWriter = new Code128Writer();
-        BitMatrix bitMatrix;
-        bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.CODE_128, 400, 100);
+        // Encode the barcode text into a BitMatrix
+        BitMatrix bitMatrix = barcodeWriter.encode(barcodeText, BarcodeFormat.CODE_128, 400, 100);
 
+        // Convert the BitMatrix into a BufferedImage and return
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
-    public static File saveImage(BufferedImage billede, String fileName) {
+    public static File saveImage(BufferedImage image, String fileName) {
+        // Define the directory path to save the image
         String directoryPath = "Resources/PDF/";
+        // Create a File object for the output image
         File output = new File(directoryPath + fileName);
 
         try {
-            ImageIO.write(billede, "PNG", output);
+            // Write the image to the output file as PNG format
+            ImageIO.write(image, "PNG", output);
         } catch (IOException e) {
+            // Throw a runtime exception if an error occurs while saving the image
             throw new RuntimeException(e);
         }
 
@@ -52,30 +59,17 @@ public class QRManager {
     }
 
     public static File getQrCodeFile(String uniqueText) throws Exception {
-        BufferedImage twoD = generate2DQRCodeImage(uniqueText); // 4bc3e2cc-4a29-3ec2-a050-1967acbce4db
-        BufferedImage oneD = generate1DCodeImage(uniqueText);   // 4bc3e2cc-4a29-3ec2-a050-1967acbce4db
+        // Generate 2D QR Code and 1D Code images based on the unique text
+        BufferedImage twoD = generate2DQRCodeImage(uniqueText);
+        BufferedImage oneD = generate1DCodeImage(uniqueText);
 
-        //BufferedImage kombineretBilleder = bla blala
+        // Save the 2D QR Code image and return the File object
         return saveImage(twoD, uniqueText + ".png");
     }
 
-    public static File getOneQrCodeFile(BufferedImage file, String uniqueText) {
-        return saveImage(file, uniqueText + ".png");
+    public static File getOneQrCodeFile(BufferedImage image, String uniqueText) {
+        // Save the provided image and return the File object
+        return saveImage(image, uniqueText + ".png");
     }
 
-    public static void main(String[] args) throws Exception {
-        // kaldes
-        UUID unique = generateUniqueUUID("FredagsBar-EventTicket-patrick@hotmail.dk");
-
-        // gem i db + brug til generering af barkoder
-        String uniqueText = unique.toString();
-
-        //File qrCode = getQrCodeFile(uniqueText);
-
-        File getOne = getOneQrCodeFile(generate1DCodeImage(uniqueText), uniqueText);
-
-        System.out.println(uniqueText);
-        System.out.println(getOne.getAbsolutePath());
-
-    }
 }

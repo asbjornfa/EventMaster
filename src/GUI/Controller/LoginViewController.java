@@ -123,9 +123,14 @@ public class LoginViewController implements Initializable {
 
     // Method to apply shake animation to a node
     private void shakeNode(Node node) {
+        // Get the original translation of the node
         double originalTranslateX = node.getTranslateX();
+
+        // Define a Timeline for the animation with a series of KeyFrames
         Timeline timeline = new Timeline(
+                // Start KeyFrame: Set translation to 0
                 new KeyFrame(Duration.seconds(0), new KeyValue(node.translateXProperty(), 0)),
+                // Subsequent KeyFrames: Alternating translations to create a shaking effect
                 new KeyFrame(Duration.seconds(0.1), new KeyValue(node.translateXProperty(), -10)),
                 new KeyFrame(Duration.seconds(0.2), new KeyValue(node.translateXProperty(), 10)),
                 new KeyFrame(Duration.seconds(0.3), new KeyValue(node.translateXProperty(), -10)),
@@ -135,8 +140,10 @@ public class LoginViewController implements Initializable {
                 new KeyFrame(Duration.seconds(0.7), new KeyValue(node.translateXProperty(), -10)),
                 new KeyFrame(Duration.seconds(0.8), new KeyValue(node.translateXProperty(), 10)),
                 new KeyFrame(Duration.seconds(0.9), new KeyValue(node.translateXProperty(), -10)),
+                // Final KeyFrame: Restore the original translation
                 new KeyFrame(Duration.seconds(1), new KeyValue(node.translateXProperty(), originalTranslateX))
         );
+        // Play the animation
         timeline.play();
     }
 

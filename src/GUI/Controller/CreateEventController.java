@@ -85,27 +85,29 @@ public class CreateEventController implements Initializable{
 
 
     public void btnCreateEvent(ActionEvent actionEvent) throws IOException {
-        // Handle creation logic
+        // Handle creation logic for events
+        // Retrieve input data from text fields
         String title = eventTitleField.getText();
         String location = eventLocationField.getText();
         String description = eventDescriptionField.getText();
 
+        // Retrieve selected start and end date-time values
         LocalDateTime selectedDateTimeStart = DTPickerStart.dateTimeProperty().get();
         LocalDateTime selectedDateTimeEnd = DTPickerEnd.dateTimeProperty().get();
 
+        // Extract date portion from LocalDateTime
         LocalDate startDate = selectedDateTimeStart.toLocalDate();
         LocalDate endDate = selectedDateTimeEnd.toLocalDate();
 
-        // Extract time portion from LocalDateTime
+        // Extract time portion from LocalDateTime and convert to Time objects
         LocalTime startTime = selectedDateTimeStart.toLocalTime();
         LocalTime endTime = selectedDateTimeEnd.toLocalTime();
-
-        // Convert LocalTime to Time
         Time startTimeSql = Time.valueOf(startTime);
         Time endTimeSql = Time.valueOf(endTime);
 
+        // Check if editing an existing event
         if (eventToEdit != null) {
-
+            // Update existing event with new data
             eventToEdit.setTitle(title);
             eventToEdit.setLocation(location);
             eventToEdit.setDescription(description);
@@ -114,24 +116,29 @@ public class CreateEventController implements Initializable{
             eventToEdit.setStartTime(startTimeSql);
             eventToEdit.setEndTime(endTimeSql);
 
+            // Update event in the model
             eventModel.updateEvent(eventToEdit);
-
         } else {
+            // Create a new event with the provided data
             eventModel.createEvent(title, location, startDate, endDate,
                     startTimeSql, endTimeSql, description);
         }
 
+        // Navigate back to the main event view
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
         mainViewController.lblMenuTitle.setText("Events");
     }
 
+    // Method to clear input fields
     private void clearFields() {
         eventTitleField.clear();
         eventLocationField.clear();
         eventDescriptionField.clear();
     }
 
+    // Method to handle cancel button click event
     public void onClickCancel(ActionEvent event) throws IOException {
+        // Navigate back to the main event view when cancel button is clicked
         mainViewController.setCenterView("/View/ActiveEvent.fxml");
         mainViewController.lblMenuTitle.setText("Events");
     }

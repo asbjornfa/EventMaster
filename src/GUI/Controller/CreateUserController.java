@@ -191,18 +191,28 @@ public class CreateUserController implements Initializable {
 
     // Method to handle position selection
     private void handlePositionSelection(Positions position) {
+        // Update the selectedPosition field with the chosen position
         selectedPosition = position;
-        menuButton.setText(position.getPosition()); // Set the MenuButton text to the selected position's name.
+        // Set the text of the MenuButton to the name of the selected position
+        menuButton.setText(position.getPosition());
     }
 
+    // Method to load positions into the MenuButton
     private void loadPositionsIntoMenuButton() {
+        // Retrieve a list of positions from the position model
         ObservableList<Positions> positions = positionModel.getObservablePositions();
+        // Iterate through each position
         for (Positions position : positions) {
+            // Get the name of the position
             String positionName = position.getPosition();
+            // Create a MenuItem with the position name
             MenuItem item = new MenuItem(positionName);
+            // Set an action for the MenuItem when clicked
             item.setOnAction(event -> {
-                handlePositionSelection(position); // Call handlePositionSelection method when position is selected.
+                // Call handlePositionSelection method when a position is selected
+                handlePositionSelection(position);
             });
+            // Add the MenuItem to the MenuButton's list of items
             menuButton.getItems().add(item);
         }
     }
