@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainBorderPane" prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;" stylesheets="@../Css/MyCss.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainViewController">
+<BorderPane fx:id="mainBorderPane" prefHeight="650.0" prefWidth="910.0" style="-fx-background-color: #373737;" stylesheets="@../Css/MyCss.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainViewController">
    <top>
       <AnchorPane prefHeight="118.0" prefWidth="910.0" BorderPane.alignment="CENTER">
          <children>
@@ -26,7 +26,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="253.0">
                            <children>
-                              <MenuBar prefHeight="46.0" prefWidth="61.0" style="-fx-background-color: #FBBB2C;">
+                              <MenuBar prefHeight="0.0" prefWidth="61.0" style="-fx-background-color: #FBBB2C;">
                                 <menus>
                                   <Menu fx:id="menuIcon" mnemonicParsing="false" text="☰">
                                     <items>
