@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="logInView" maxHeight="650.0" maxWidth="910.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.LoginViewController">
+<AnchorPane fx:id="logInView" maxHeight="650.0" maxWidth="910.0" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.LoginViewController">
    <children>
       <BorderPane fx:id="loginBorderPane" prefHeight="650.0" prefWidth="910.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="534.0" prefWidth="910.0" style="-fx-background-color: #373737;;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" layoutX="277.0" layoutY="127.0" prefHeight="170.0" prefWidth="357.0" spacing="30.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="277.0" AnchorPane.rightAnchor="276.0" AnchorPane.topAnchor="127.0">
+                  <VBox alignment="CENTER" layoutX="276.0" layoutY="71.0" prefHeight="170.0" prefWidth="357.0" spacing="30.0" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="277.0" AnchorPane.topAnchor="71.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="92.0" prefWidth="358.0">
                            <children>
