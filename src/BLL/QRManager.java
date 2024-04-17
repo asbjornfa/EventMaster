@@ -43,7 +43,7 @@ public class QRManager {
 
     public static File saveImage(BufferedImage image, String fileName) {
         // Define the directory path to save the image
-        String directoryPath = "Resources/PDF/";
+        String directoryPath = "Resources/Qrcodes/";
         // Create a File object for the output image
         File output = new File(directoryPath + fileName);
 
